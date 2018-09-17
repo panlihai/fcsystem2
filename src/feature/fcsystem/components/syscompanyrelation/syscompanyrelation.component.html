@@ -1,0 +1,32 @@
+<!-- 单位维度关系 -->
+<fc-layoutpanel class="templatetreelists" [fcFull]="true">
+    <fc-layoutcol fcSpans="2,7" fccontent class="tree-style">
+        <fc-layoutrow fcSpan="60" fccontent1>
+            <fc-any fccontent1 [fcShowLabel]="'N'" fcAppid="SYSDEPARTMENTDIM" fcFieldCode="SDIM_NAME" [(ngModel)]="departmentdimAny"
+                (ngModelChange)="changeDepartmentdim($event)" fcLabelCode="SDIM_NAME" fcValueCode="SDIM_CODE" name="SDIM_NAME"
+                fccontent1 class="treesearch-width"></fc-any>
+            <fc-tree fccontent2 [(ngModel)]="treeSelectObj" [fcOption]="treeOptions" (fcEvent)=" treeEvent($event);"></fc-tree>
+        </fc-layoutrow>
+        <fc-layoutrow fccontent2 fcSpan="50">
+            <!-- 测试按钮 -->
+            <fc-button fcLabel="添加所选行政单位" (click)="add()" fccontent1></fc-button>
+            <fc-button fcLabel="转移" (click)="transfer()" fccontent1></fc-button>
+            <fc-button fcLabel="删除" (click)="detele()" fccontent1></fc-button>
+            <fc-button fcLabel="刷新" (click)="refresh()" fccontent1></fc-button>
+            <fc-layoutrow fccontent2 fcSpan="50">
+                <fc-any fccontent [fcShowLabel]="'N'" fcAppid="SYSDEPARTMENTDIM" fcFieldCode="SDIM_NAME" [(ngModel)]="departmentdimAny"
+                    (ngModelChange)="changeDepartmentdim($event)" fcLabelCode="SDIM_NAME" fcValueCode="SDIM_CODE" name="SDIM_NAME"
+                    fccontent1 class="treesearch-width"></fc-any>
+                <fc-tree fccontent2 [(ngModel)]="treeSelectObj" [fcOption]="treeOptions" (fcEvent)=" treeEvent($event);"></fc-tree>
+            </fc-layoutrow>
+        </fc-layoutrow>
+    </fc-layoutcol>
+</fc-layoutpanel>
+<!--  转移弹窗-->
+<fc-modalcard [fcToken]="token1">
+    <companyrelationtransferdialog fccontent></companyrelationtransferdialog>
+</fc-modalcard>
+<!-- 撤销弹窗 -->
+<fc-modalcard [fcToken]="token2">
+    <departmentcanceldialog fccontent></departmentcanceldialog>
+</fc-modalcard>

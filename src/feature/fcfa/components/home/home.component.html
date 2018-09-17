@@ -1,0 +1,136 @@
+<!-- 首页模板 -->
+<fc-layoutpanel class="sys-card-pannel sys-wizard">
+    <fc-layoutcol fcSpans="7,3" fccontent>
+        <div fccontent1>
+            <div nz-row nzGutter="10" fccontent>
+                <!-- 个人信息 -->
+                <div nz-col nzSpan="24" class="sys-wizard-card">
+                    <nz-card>
+                        <div class="sys-basic-info">
+                            <div class="sys-info-user">
+                                <img src="assets/img/author.jpg" alt="我的头像">
+                                <div class="sys-info-text">
+                                    <p class="sys-info-title">早安，{{userInfo.USERNAME}}，祝你开心每一天！</p>
+                                    <p class="sys-info-smarks">设计师|FCCORE-平台技术-基础平台部</p>
+                                </div>
+                            </div>
+                            <ul class="sys-info-count">
+                                <li class="sys-info-count-every">
+                                    <span class="sys-count-text">
+                                        项目总数
+                                    </span>
+                                    <span class="sys-count-number">
+                                        56
+                                    </span>
+                                </li>
+                                <li class="sys-info-count-every">
+                                    <span class="sys-count-text">
+                                        在库比例
+                                    </span>
+                                    <span class="sys-count-number">
+                                        8/24
+                                    </span>
+                                </li>
+                                <li class="sys-info-count-every">
+                                    <span class="sys-count-text">
+                                        项目总金额(万元)
+                                    </span>
+                                    <span class="sys-count-number">
+                                        2223999
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </nz-card>
+                </div>
+                <!-- 柱状图 -->
+                <div nz-col nzSpan="24" class="sys-wizard-card">
+                    <nz-card>
+                        <fc-title fcLabel="各军种各年度费用图（单位万元）" fcBorder="bottom"></fc-title>
+                        <!-- 图表是根据父级的宽高自适应的，如果设置fcView可以设置图表本身的宽高，不继承父级的。
+                            因为父级的宽度没有撑开，这里宽度写100%不生效，就写死了，如果宽度不合适自己调 -->
+                        <div style="width:100%;height:300px;overflow: auto;">
+                            <fc-chartbar style="width:100%;height:90%;display: flex;
+                            justify-content: center;"
+                                [fcView]="barView" [fcData]="_groupBarData" fcGroupPadding="40" fcType="groupedVertical"
+                                [fcScheme]="barScheme" (fcEvent)="chartbarEvent($event)"></fc-chartbar>
+                        </div>
+                    </nz-card>
+                </div>
+                <!-- 进行中的服务 -->
+                <div nz-col nzSpan="24" class="sys-wizard-card">
+                    <nz-card>
+                        <fc-title fcLabel="进行中的项目" fcBorder="bottom"></fc-title>
+                        <a class="sys-title-right">全部的项目</a>
+                        <div nz-row nzGutter="10" style="height:452px;overflow: auto;">
+                            <!-- 进行中的服务列表循环 -->
+                            <div nz-col nzSpan="8" class="sys-card sys-card-small" *ngFor="let item of projectList">
+                                <nz-card>
+                                    <div class="sys-card-content">
+                                        <span class="sys-card-mark">
+                                            <fc-icon fcIcon="fc-icon-definition" fcColor="#ffffff"></fc-icon>
+                                        </span>
+                                        <div class="sys-card-text">
+                                            <div class="sys-card-title">
+                                                {{item.AREANAME}}-{{item.COUNTRY}}
+                                            </div>
+                                            <p class="sys-card-smarks">军种:{{item.SERVICES}},装备类别:{{item.CATAGORY}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="sys-card-footer">
+                                        <span style="font-size: 14px;"> 计划年度</span>
+                                        <span style="font-size: 12px;">{{item.PLANYEAR}}</span>
+                                    </div>
+                                </nz-card>
+                            </div>
+                        </div>
+                    </nz-card>
+                </div>
+            </div>
+        </div>
+        <div fccontent2 class="sys-wizard-content2">
+            <div nz-row nzGutter="10" fccontent>
+                <!-- 饼图 -->
+                <div nz-col nzSpan="24" class="sys-wizard-card sys-wizard-navlink">
+                    <nz-card>
+                        <fc-title fcLabel="各军种所占比费用(万元)" fcBorder="bottom"></fc-title>
+                        <div style="width:100%;height:320px;">
+                            <fc-chartpie [fcData]="_pieData" style="position: absolute;
+                                                                    left: 50%;
+                                                                    margin-left: -167px;"
+                                class="chartpie" [fcView]="pieView" [fcScheme]="pieScheme" (fcEvent)="chartpieEvent($event)"></fc-chartpie>
+                        </div>
+                    </nz-card>
+                </div>
+                <!-- 线形图 -->
+                <div nz-col nzSpan="24" class="sys-wizard-card">
+                    <nz-card>
+                        <fc-title fcLabel="各年度个装备类别金额线形图" fcBorder="bottom"></fc-title>
+                        <div style="width:100%;
+                                    height:300px;
+                                    position: relative;">
+                            <fc-chartline class="chartline" style="position: absolute;
+                                                                left:50%;
+                                                                margin-left:-220px;"
+                                [fcData]="_lineData" [fcView]="lineView" fcLegendTitle="装备类别" [fcScheme]="lineScheme"
+                                (fcEvent)="chartlineEvent($event)">
+                            </fc-chartline>
+                        </div>
+                    </nz-card>
+                </div>
+                <!-- 团队 -->
+                <div nz-col nzSpan="24" class="sys-wizard-card">
+                    <nz-card>
+                        <fc-title fcLabel="洲别国家" fcBorder="bottom"></fc-title>
+                        <ul class="sys-team" style="height:200px;overflow:auto;">
+                            <li *ngFor="let item of bcareaList">
+                                <img src="assets/img/author.jpg" alt="我的头像" />
+                                <span>{{item.DICVALUE}}-{{item.BUSTYPE}}</span>
+                            </li>
+                        </ul>
+                    </nz-card>
+                </div>
+            </div>
+        </div>
+    </fc-layoutcol>
+</fc-layoutpanel>

@@ -1,0 +1,30 @@
+<fc-layoutpanel *ngIf="false" class="templatetreelists" [fcFull]="true">
+    <fc-layoutrow fcSpan="50" fccontent>
+        <fc-tlblist [fcAppid]="appId" (fcEvent)="tlblistEvent($event)" fccontent1></fc-tlblist>
+        <fc-layoutcol fcSpans="2,7" fccontent2 class="tree-style">
+            <fc-layoutrow fcSpan="70" fccontent1>
+                <div fccontent1>
+                    <fc-date fccontent fcLabel="失效日期" [fcShowLabel]="'N'" fcFormat="YYYYMMDD" [(ngModel)]="sendDate"
+                        (ngModelChange)="changeSendDate($event)" name="SEND_DATE" class="treesearch-width"></fc-date>
+                    <fc-any fccontent fcLabel="维度" [fcShowLabel]="'N'" fcAppid="SYSCOMPANYDIM" fcFieldCode="SDIM_NAME"
+                        [(ngModel)]="companydimAny" (ngModelChange)="changeCompanydim($event)" fcLabelCode="SDIM_NAME"
+                        fcValueCode="SDIM_CODE" name="SDIM_NAME" class="treesearch-width"></fc-any>
+                </div>
+                <fc-tree fccontent2 [(ngModel)]="treeSelectObj" [fcOption]="treeOptions" (fcEvent)=" treeEvent($event);"></fc-tree>
+            </fc-layoutrow>
+            <fc-layoutrow fccontent2 fcSpan="0">
+                <fc-listdata fccontent2 fcAppid="SYSTBVORGCURORG" (fcEvent)="listdataEvent($event)" [fcOption]="listOptions"
+                    [fcCondition]="condition">
+                </fc-listdata>
+            </fc-layoutrow>
+        </fc-layoutcol>
+    </fc-layoutrow>
+</fc-layoutpanel>
+<!-- 单位调整-转移弹窗 -->
+<fc-modalcard [fcToken]="token1">
+    <syscompanytransferdialog fccontent></syscompanytransferdialog>
+</fc-modalcard>
+<!-- 单位调整-撤销弹窗 -->
+<fc-modalcard [fcToken]="token2">
+    <syscompanycanceldialog fccontent></syscompanycanceldialog>
+</fc-modalcard>

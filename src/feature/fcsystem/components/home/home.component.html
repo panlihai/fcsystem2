@@ -1,0 +1,158 @@
+<!-- 首页模板 -->
+<fc-layoutpanel class="templatehome">
+    <fc-layoutcol fcSpans="7,3" fccontent>
+        <!--  公告开始 -->
+        <fc-layoutpanel fccontent1 class="separated-lefttop">
+            <div fccontent class="messages-notices">
+                <fc-badge fcStatus="error" fcStatusMode="CIRCLE" fcText="急需"></fc-badge>
+                <fc-badge fcStatus="warning" fcStatusMode="CIRCLE" fcText="特急"></fc-badge>
+                <fc-badge fcStatus="processing" fcStatusMode="CIRCLE" fcText="待办"></fc-badge>
+            </div>
+            <fc-title fcLabel="公告" fcheader fcBorder="bottom"></fc-title>
+            <fc-layoutcol fccontent class="all" fcSpans="1,9" class="tabmain-width">
+                <div fccontent1>
+                    <fc-icon fcIcon="fc-icon-notice" fcColor="#69d389" fccontent1 class="first-icon"></fc-icon>
+                </div>
+                <div fccontent2 *ngFor="let notify of notifys" class="link-overflow">
+                    <span>
+                        <fc-badge [fcStatus]="notify.CATAGORY" fcStatusMode="CIRCLE" fcText=""></fc-badge>
+                    </span>
+                    <span>{{notify.PUBLISHTIME}}</span>
+                    <span style="display: inline-block;">
+                        <fc-link [fcLabel]="notify.CONTENT" class="viewdetail" (click)="announcementEvent(notify.ID,notify.CATAGORY,notify.PUBLISHUSER,notify.CONTENT)"></fc-link>
+                    </span>
+                </div>
+            </fc-layoutcol>
+        </fc-layoutpanel>
+        <!-- 公告结束 -->
+        <!--  数据统计开始 -->
+        <fc-layoutpanel fccontent1 class="separated-left">
+            <fc-title fcLabel="数据统计" fcheader fcBorder="bottom"></fc-title>
+            <fc-layoutcol fcSpans="6,4" fccontent>
+                <div fccontent1>
+                    <fc-title fcLabel="柱状图" fcHasLine="false"></fc-title>
+                    <div style="width:80%;height:500px;">
+                        <div style="width:80%;height:500px;">
+                            <fc-chartbar [fcData]="_groupBarData" fcType="groupedVertical" [fcScheme]="scheme" (fcEvent)="chartbarEvent($event)"></fc-chartbar>
+                        </div>
+                    </div>
+                </div>
+                <div fccontent2>
+                    <fc-title fcLabel="饼状图" fcHasLine="false"></fc-title>
+                    <div style="width:100%;height:300px;">
+                        <fc-chartpie [fcData]="_pieData" [fcView]="pieView" [fcScheme]="scheme" (fcEvent)="chartpieEvent($event)"></fc-chartpie>
+                    </div>
+                </div>
+            </fc-layoutcol>
+        </fc-layoutpanel>
+        <!--  数据统计结束 -->
+        <fc-layoutpanel fccontent1>
+            <fc-layoutcol fcSpans="1,1" fccontent>
+                <!--  系统版本开始 -->
+                <div fccontent1 class="system-version separated-leftbottom">
+                    <fc-title fcLabel="系统版本" fcBorder="bottom"></fc-title>
+                    <fc-timeline [fcOption]="versionTimeline" (fcEvent)="timelineEvent($event)" fcLabelPosition="left" fcLeft="30%"  fclabelLeft="-30%"></fc-timeline>
+                </div>
+                <!--  系统版本结束 -->
+                <!-- 常用联系人开始 -->
+                <fc-layoutpanel fccontent2 class="separated-leftrightbottom">
+                    <fc-title fcLabel="常用联系人" fcHasLine="false" fcheader fcBorder="bottom"></fc-title>
+                    <div fccontent class="main_contain">
+                        <ul class="contact" *ngFor="let contact of contacts">
+                            <li>
+                                <span>{{contact.USERID}}</span>
+                                <fc-link fcLabel={{contact.TEL}} class="contact_right"></fc-link>
+                                <fc-icon fcIcon="fc-icon-chat" fcColor="#5c92ff" fcSize="default" class="contacticon" (click)="showcontact(contact.USERID)"></fc-icon>
+                            </li>
+                        </ul>
+                    </div>
+                </fc-layoutpanel>
+                <!-- 常用联系人结束 -->
+            </fc-layoutcol>
+        </fc-layoutpanel>
+        <!-- 工作计划开始 -->
+        <fc-layoutpanel fccontent2>
+            <div fccontent class="separated-righttop work-plan">
+                <fc-title fcLabel="工作计划" fccontent fcBorder="bottom"></fc-title>
+                <fc-calendar  fcFullscreen="true" class="home-calendar" fccontent></fc-calendar>
+            </div>
+        </fc-layoutpanel>
+        <!-- 工作计划结束 -->
+        <!-- 待办任务开始 -->
+        <fc-layoutpanel fccontent2 class="separated-rightcenter todo-tasks">
+            <fc-title fcLabel="待办任务" fcheader fcBorder="bottom">
+                <div fcextra style="cursor:pointer;">
+                    <fc-badge fcStatus="processing" fcStatusMode="CIRCLE" fcText="历史" (click)="assignmentHistory()"></fc-badge>
+                </div>
+            </fc-title>
+            <div class="home-list" fccontent>
+                <div fccontent *ngFor="let wait of waits" class="link-overflow">
+                    <span>{{wait.CREATETIME}}</span>
+                    <span style="display: inline-block;">
+                        <fc-link [fcLabel]="wait.TASKNAME" class="viewdetail" (click)="assignmentEvent(wait)"></fc-link>
+                    </span>
+                </div>
+                <!-- <fc-list fccontent fcAppid="SYSASSIGNMENT" [fcFieldCode]="'TASKNAME'"  (fcEvent)="listEvent($event)"></fc-list>            -->
+            </div>
+        </fc-layoutpanel>
+        <!--  待办任务结束 -->
+        <!-- 快速导航开始 -->
+        <fc-layoutpanel fccontent2 class="separated-rightbottom quick-navigation">
+            <fc-title fcLabel="快速开始/便捷导航" fcHasLine="false" fcheader fcBorder="bottom"></fc-title>
+            <div fccontent class="fastcontent" *ngFor="let navLink of navLinks">
+                <fc-tag fcClose="true" class="fastcontenttext" [fcLabel]="navLink.LABEL" (fcEvent)="navLinkEvent($event,navLink)"></fc-tag>
+            </div>
+            <fc-button fccontent fcLabel="+ 添加" [fcSize]="'small'" [fcType]="'dashed'" (click)="addNavLinkTag(contentTpl_navLink,footerTpl_navLink)"
+                class="add"></fc-button>
+        </fc-layoutpanel>
+        <!-- 快速导航结束 -->
+    </fc-layoutcol>
+</fc-layoutpanel>
+<div class="chat-wrap" [ngClass]="{'chat-show-wrap':showchat}">
+    <!-- <fc-button [fcType]="'primary'" [fcIconPositon]="'left'" [fcShape]="'circle'" [fcIcon]="'fc-icon-dialogue'" class="chatButton"
+        (click)="showchat=true;"></fc-button> -->
+    <!-- 聊天面板 -->
+    <div class="fc-chatbox ">
+        <div class="fc-chatouter" ngDraggable>
+            <div class="fc-chattop">
+                <i class="iconfont fc-icon-line fc-userimg"></i>
+                <div class="fc-username">{{contactname}}</div>
+                <i class="iconfont fc-icon-shut fc-close" (click)="closeChat(contactname);"></i>
+            </div>
+            <div class="fc-chatcontent">
+                <div (click)="seeMore()" class="seeMore">
+                    <span>查看更多</span>
+                </div>
+                <div *ngFor="let contactmessage of contactMessages">
+                    <div class="fc-chattime">{{contactmessage.TS}}</div>
+                    <div class="fc-chatleft" *ngIf="contactmessage.POSTUSERID===contactname">
+                        {{contactmessage.CONTENT}}
+                    </div>
+                    <div class="fc-chatinnerright" *ngIf="contactmessage.POSTUSERID!==contactname">
+                        <div class="fc-chatright">
+                            {{contactmessage.CONTENT}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="fc-chatbottom ">
+                <div class="fc-chatsend">
+                    <input type="text" PlaceHolder="消息" class="fc-chattext" [(ngModel)]="sendMassage" />
+                    <span class="fc-chatsendbutton" (click)="sendChat()">发送</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #contentTpl_navLink>
+    <div style="height:400px;width:100%">
+        <fc-listdata #navLink_listdata fcAppid="SYSCHILDMENU" [fcCondition]="navLinkListCondition" [fcOption]="mainService.navLinkService.listOptions"
+            (fcEvent)="navLinkListEvent($event)"></fc-listdata>
+    </div>
+</ng-template>
+<ng-template #footerTpl_navLink>
+    <div>
+        <fc-button (click)="handleAddNavLink_cancel(navLink_listdata)" fcLabel="取消"></fc-button>
+        <fc-button [fcType]="'primary'" (click)="handleAddNavLink_ok($event)" fcLabel="确定"></fc-button>
+    </div>
+</ng-template>

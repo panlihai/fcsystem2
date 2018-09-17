@@ -1,0 +1,51 @@
+<fc-layoutrow [ngClass]="{'fc-layout-tab':productObj.DISPLAYMODE==='TAB','fc-layout-menu':productObj.DISPLAYMODE==='MENU','fc-theme-blue':theme==='blue','fc-theme-dark':theme==='dark','fc-theme-default':theme==='default'}">
+    <!-- 顶部工具栏 fc-navbar-->
+    <fc-navbar fccontent1 [fcTitle]="productObj.PNAME" fcFull="true" fcIcon="icon iconfont icon-logo" fcSwitchTheme="N"
+        fcSwitchLayout="Y" (fcEvent)="navbarEvent($event)" [fcStatus]="_navbarStatus" [ngClass]="{'sys-navbar':productObj.DISPLAYMODE==='TAB'}"></fc-navbar>
+    <fc-layoutcol fccontent2 [fcSpans]="_layoutSpans" fcFull="true" class="content-wrap" [ngClass]="{'sys-content-wrap':productObj.DISPLAYMODE==='TAB','has-navsubtab':_childMenus&&_childMenus.length!==0}">
+        <!-- 菜单模式开始****************************************************************************** -->
+        <!-- 菜单导航 fc-navmenu-->
+        <fc-navmenu *ngIf="productObj.DISPLAYMODE==='MENU'" fccontent1 #fcnavmenu fcTheme="blue" [fcOption]="_menuOptions"
+            [fcMenus]="_menus" [fcSelected]="_navmenuSelected" (fcEvent)="navmenuEvent($event);" fcFull="true">
+        </fc-navmenu>
+        <!-- 子选项卡导航 -->
+        <fc-navtab *ngIf="productObj.DISPLAYMODE==='MENU'" class="nav-tab" #fcnavtab fccontent2 (fcEvent)="navtabEvent($event)" 
+            fcShowPagination="true"></fc-navtab>
+        <!-- 菜单模式结束****************************************************************************** -->
+        <!-- 选项卡模式结束****************************************************************************** -->
+        <!-- 父选项卡导航 -->
+        <nz-tabset nzTabPosition="top" *ngIf="productObj.DISPLAYMODE==='TAB'" class="sys-nav-tabmain" [nzType]="'line'"
+            fccontent2>
+            <nz-tab *ngFor="let menu of  _menus" [nzTitle]="titleTemplate" (nzClick)="selectedtabmain(menu)">
+                <ng-template #titleTemplate>
+                    {{menu.MENUNAME}}
+                </ng-template>
+            </nz-tab>
+        </nz-tabset>
+        <nz-tabset *ngIf="productObj.DISPLAYMODE==='TAB'&&_childMenus.length!==0" nzTabPosition="top" [(nzSelectedIndex)]="childTabSelectedIndex"
+            class="sys-nav-tabsub" [nzType]="'line'" fccontent2>
+            <nz-tab *ngFor="let menu of  _childMenus" [nzTitle]="titleTemplate" (nzClick)="selectedtabsub(menu)">
+                <ng-template #titleTemplate>
+                    {{menu.MENUNAME}}
+                </ng-template>
+            </nz-tab>
+        </nz-tabset>
+        <!-- 选项卡模式结束****************************************************************************** -->
+        <!-- 路由入口 -->
+        <div class="content-main" fccontent2>
+            <router-outlet [ngStyle]="{'height':'100%'}"></router-outlet>
+        </div>
+    </fc-layoutcol>
+</fc-layoutrow>
+<!-- 消息侧边栏 fc-navside-->
+<fc-navside [fcOption]="_navSideOption" [fcStatus]="_navbarStatus" (fcEvent)="navsideEvent($event)"></fc-navside>
+<!-- 让表单样式生效 -->
+<fc-adform [hidden]="true" fcAppid="SYSAPP" [fcOption]="{}"></fc-adform>
+<!-- <fc-modalconfirm [fcTitle]="'操作提示'" [fcContent]="'是否确定删除本行数据？'" #confirmmodal></fc-modalconfirm> -->
+<!-- 加载条 -->
+<div class="layout-progress-wrap" *ngIf="1!=1">
+    <div class="layout-progress-out">
+        <fc-progresscircle class="layout-progress-inner" fcModel="50" [fcSize]="'large'"></fc-progresscircle>
+    </div>
+</div>
+<!-- <div [ngClass]="{'body-mask':_providers.msgService.loadingid!==''}"></div> -->

@@ -1,0 +1,41 @@
+<!-- 单位变更审批 -->
+<fc-layoutpanel fcFull="true">
+    <!-- 工具栏弹窗按钮 -->
+    <!-- <fc-tlblist fccontent [fcAppid]="appId" (fcEvent)="tlblistEvent($event)"></fc-tlblist> -->
+    <!-- 自定义按钮弹出弹窗 -->
+    <div fccontent style="text-align:left">
+        <!-- 设立弹窗 -->
+        <fc-modalcard fcEvent="modalEvent($event)" fcWidth="60%">
+            <syssetupdialog fccontent></syssetupdialog>
+            <fc-button fcLabel="明细" fcType="default" (click)="setup()" fcopen></fc-button>
+        </fc-modalcard>
+        <!-- 调整弹窗 -->
+        <fc-modalcard fcEvent="modalEvent($event)" fcWidth="60%">
+            <sysadjustdialog fccontent></sysadjustdialog>
+            <fc-button fcLabel="通过审批" fcType="default" (click)="adjust()" fcopen></fc-button>
+        </fc-modalcard>
+        <!-- 撤销弹窗 -->
+        <fc-modalcard fcEvent="modalEvent($event)" fcWidth="60%">
+            <syscanceldialog fccontent></syscanceldialog>
+            <fc-button fcLabel="退回" fcType="default" (click)="cancel()" fcopen></fc-button>
+        </fc-modalcard>
+        <!-- 转移弹窗 -->
+        <fc-modalcard fcEvent="modalEvent($event)" fcWidth="60%">
+            <systansferdialog fccontent></systansferdialog>
+            <fc-button fcLabel="刷新" fcType="default" (click)="transfer()" fcopen></fc-button>
+        </fc-modalcard>
+    </div>
+    <!-- <fc-layoutcol fccontent>
+        <fc-button fcLabel="设立" (click)="add()" fccontent></fc-button>
+        <fc-button fcLabel="调整" (click)="transfer()" fccontent></fc-button>
+        <fc-button fcLabel="撤销" (click)="detele()" fccontent></fc-button>
+        <fc-button fcLabel="转移" (click)="refresh()" fccontent></fc-button>
+    </fc-layoutcol> -->
+    <fc-layoutrow fcSpan="70" fccontent>
+        <fc-layoutcol fcSpans="4,6" fccontent1>
+            <fc-any fccontent1 fcLabel="变更类型" fcAppid="SYSCOMPANYDIM" fcFieldCode="SDIM_NAME" [(ngModel)]="companydimAny" (ngModelChange)="changeCompanydim($event)"
+                fcLabelCode="SDIM_NAME" fcValueCode="SDIM_CODE" name="SDIM_NAME" class="treesearch-width"></fc-any>
+        </fc-layoutcol>
+        <fc-listdata fccontent2 [fcAppid]="appId" [fcOption]="listOptions" (fcEvent)="componentEvents('listdataEvent',$event)"></fc-listdata>
+    </fc-layoutrow>
+</fc-layoutpanel>

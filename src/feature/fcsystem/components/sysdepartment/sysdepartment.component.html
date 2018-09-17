@@ -1,0 +1,33 @@
+<!-- 部门 -->
+<fc-layoutpanel class="templatetreelists" [fcFull]="true">
+    <fc-layoutrow fcSpan="50" fccontent>
+        <fc-tlblist [fcAppid]="appId" (fcEvent)="tlblistEvent($event)" fccontent1></fc-tlblist>
+        <fc-layoutcol fcSpans="2,7" fccontent2 class="tree-style">
+            <fc-layoutrow fcSpan="60" fccontent1>
+                <fc-date [fcShowLabel]="'N'" fcFormat="YYYYMMDD" [(ngModel)]="sendDate" (ngModelChange)="changeSendDate($event)" name="SEND_DATE"
+                    fccontent1 class="treesearch-width"></fc-date>
+                <fc-any fccontent1 [fcShowLabel]="'N'" fcAppid="SYSDEPARTMENTDIM" fcFieldCode="SDIM_NAME" [(ngModel)]="departmentdimAny"
+                    (ngModelChange)="changeDepartmentdim($event)" fcLabelCode="SDIM_NAME" fcValueCode="SDIM_CODE" name="SDIM_NAME"
+                    fccontent1 class="treesearch-width"></fc-any>
+                <fc-tree fccontent2 [(ngModel)]="treeSelectObj" [fcOption]="departmentTreeOptions" (fcEvent)=" treeEvent($event);"></fc-tree>
+            </fc-layoutrow>
+            <fc-layoutrow fccontent2 fcSpan="30">
+                <!-- 测试按钮 -->
+                <fc-button fcLabel="查看" (click)="view()" fccontent1></fc-button>
+                <fc-button fcLabel="新增" (click)="add()" fccontent1></fc-button>
+                <fc-button fcLabel="修改" (click)="edit()" fccontent1></fc-button>
+                <fc-button fcLabel="转移" (click)="transfer()" fccontent1></fc-button>
+                <fc-button fcLabel="撤销" (click)="undo()" fccontent1></fc-button>
+                <fc-listdata fccontent2 fcAppid="SYSTBVDEPTCURORG" (fcEvent)="listdataEvent($event)" [fcOption]="listOptions" [fcCondition]="condition"></fc-listdata>
+            </fc-layoutrow>
+        </fc-layoutcol>
+    </fc-layoutrow>
+</fc-layoutpanel>
+<!--  转移弹窗-->
+<fc-modalcard [fcToken]="token1">
+    <departmenttransferdialog fccontent></departmenttransferdialog>
+</fc-modalcard>
+<!-- 撤销弹窗 -->
+<fc-modalcard [fcToken]="token2">
+    <departmentcanceldialog fccontent></departmentcanceldialog>
+</fc-modalcard>

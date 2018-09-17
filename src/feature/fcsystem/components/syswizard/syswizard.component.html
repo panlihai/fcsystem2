@@ -1,0 +1,132 @@
+<!-- 概况-产品卡片 -->
+<fc-layoutpanel class="sys-card-pannel sys-wizard">
+    <fc-layoutcol fcSpans="7,3" fccontent>
+        <div fccontent1>
+            <div nz-row nzGutter="10" fccontent>
+                <!-- 个人信息 -->
+                <div nz-col nzSpan="24" class="sys-wizard-card">
+                    <nz-card>
+                        <div class="sys-basic-info">
+                            <div class="sys-info-user">
+                                <img src="assets/img/author.jpg" alt="我的头像">
+                                <div class="sys-info-text">
+                                    <p class="sys-info-title">早安，{{userInfo.USERNAME}}，祝你开心每一天！</p>
+                                    <p class="sys-info-smarks">前端设计师|FCCORE-平台技术-基础平台部</p>
+                                </div>
+                            </div> 
+                            <ul class="sys-info-count">
+                                <li class="sys-info-count-every">
+                                    <span class="sys-count-text">
+                                        项目访问
+                                    </span>
+                                    <span class="sys-count-number">
+                                        56
+                                    </span>
+                                </li>
+                                <li class="sys-info-count-every">
+                                    <span class="sys-count-text">
+                                        团队内排名
+                                    </span>
+                                    <span class="sys-count-number">
+                                        8/24
+                                    </span>
+                                </li>
+                                <li class="sys-info-count-every">
+                                    <span class="sys-count-text">
+                                        项目访问
+                                    </span>
+                                    <span class="sys-count-number">
+                                        2223
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </nz-card>
+                </div>
+                <!-- 进行中的服务 -->
+                <div nz-col nzSpan="24" class="sys-wizard-card">
+                    <nz-card (click)="navAdd({ refresh: 'Y' });">
+                        <fc-title fcLabel="进行中的项目" fcBorder="bottom"></fc-title>
+                        <a class="sys-title-right">全部的服务</a>
+                        <div nz-row nzGutter="10">
+                            <!-- 进行中的服务列表循环 -->
+                            <div nz-col nzSpan="8" class="sys-card sys-card-small" *ngFor="let item of serviceList">
+                                <nz-card (click)="onSelect(item);">
+                                    <div class="sys-card-content">
+                                        <span class="sys-card-mark">
+                                            <fc-icon fcIcon="fc-icon-definition" fcColor="#ffffff"></fc-icon>
+                                        </span>
+                                        <div class="sys-card-text">
+                                            <div class="sys-card-title">
+                                                {{item.SERVICEID}}-{{item.SERVICENAME}}
+                                            </div>
+                                            <p class="sys-card-smarks">{{item.REMARK}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="sys-card-footer">
+                                        <span style="font-size: 14px;">程序员日常</span>
+                                        <span style="font-size: 12px;">5小时前</span>
+                                    </div>
+                                </nz-card>
+                            </div>
+                        </div>
+                    </nz-card>
+                </div>
+                <!-- 动态 -->
+                <div nz-col nzSpan="24" class="sys-wizard-card">
+                    <nz-card (click)="navAdd({ refresh: 'Y' });">
+                        <fc-title fcLabel="动态" fcBorder="bottom"></fc-title>
+                        <div nz-row nzGutter="8" fccontent>
+                            <!-- 进行中的项目列表循环 -->
+                            <fc-list fcAppid="SYSASSIGNMENT" [fcFieldCode]="'TASKNAME'" fcIcon="fc-icon-picture"
+                                fcSubTitleCode="CREATETIME" fcStatusCode='STATUS' [fcCheckValue]="{'processing':'processing','warning':'warning','error':'error','default':'default'}"
+                                (fcEvent)="fclistEvent($event)"></fc-list>
+                        </div>
+                    </nz-card>
+                </div>
+            </div>
+        </div>
+        <div fccontent2 class="sys-wizard-content2">
+            <div nz-row nzGutter="10" fccontent>
+                <!-- 快速开始 -->
+                <div nz-col nzSpan="24" class="sys-wizard-card sys-wizard-navlink">
+                    <nz-card>
+                        <fc-title fcLabel="快速开始/便捷导航" fcBorder="bottom"></fc-title>
+                        <div class="fastcontent" style="display: flex;
+                            flex-wrap: wrap;
+                            padding-left: 10px;
+                            padding-top: 10px;
+                            height: 117px;
+                            overflow: auto;">
+                            <fc-tag fcClose="true" *ngFor="let navLink of navLinks" style="margin-right: 20px;margin-bottom: 10px;"
+                                [fcLabel]="navLink.LABEL" (fcEvent)="navLinkEvent($event,navLink)"></fc-tag>
+                            <fc-button fcLabel="+ 添加" [fcSize]="'small'" [fcType]="'dashed'" (click)="addNavLinkTag(contentTpl_navLink,footerTpl_navLink)"
+                                class="add fastnav-add"></fc-button>
+                        </div>
+                    </nz-card>
+                </div>
+                <!-- 访问指数 -->
+                <div nz-col nzSpan="24" class="sys-wizard-card">
+                    <nz-card>
+                        <fc-title fcLabel="访问指数" fcBorder="bottom"></fc-title>
+                        <div style="width:100%;height:500px;">
+
+                        </div>
+                    </nz-card>
+                </div>
+                <!-- 团队 -->
+                <div nz-col nzSpan="24" class="sys-wizard-card">
+                    <nz-card>
+                        <fc-title fcLabel="团队" fcBorder="bottom"></fc-title>
+                        <ul class="sys-team">
+                            <li *ngFor="let item of serviceList">
+                                <img src="assets/img/author.jpg" alt="我的头像" />
+                                <span>{{item.SERVICENAME}}</span>
+                            </li>
+                        </ul>
+                    </nz-card>
+                </div>
+            </div>
+        </div>
+    </fc-layoutcol>
+</fc-layoutpanel>

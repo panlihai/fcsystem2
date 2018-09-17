@@ -1,0 +1,625 @@
+/* 基础服务平台 */
+
+@fc-navbar-background: #001529;
+// Bakground color for `<body>`
+@body-background : #F0F2F5;
+@font-size-base: 14px;
+@font-size-lg: 16px;
+@font-size-sm: 12px;
+@card-shadow: 0px 4px 24px rgba(22, 24, 51, 0.4);
+@component-background : #fff;
+// fc自定义变量
+@card-shadow-hover: 0px 4px 24px rgba(24, 144, 255, 0.8);
+/* 卡片新增 */
+
+.sys-card-pannel .fc-layoutpanel {
+    background-color: #F0F2F5 !important;
+}
+
+.sys-card {
+    height: 170px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.sys-card .ant-card {
+    height: 100%;
+    border-radius: 6px;
+}
+
+.sys-card .ant-card:not(.ant-card-no-hovering):hover {
+    border-color: #e9e9e9;
+    border-radius: 6px;
+}
+
+.sys-card-pannel-header {
+    position: relative;
+    background-color: #ffffff;
+    margin-bottom: 10px;
+    padding: 10px 20px 5px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    box-shadow: @card-shadow;
+}
+
+.sys-card-pannel-header .sys-card-pannel-title .fc-title {
+    padding-left: 0;
+    margin-left: 0;
+}
+
+/* 卡片 */
+
+.sys-pagelist-card {
+    height: 100%;
+    position: relative;
+}
+
+.sys-card-pannel-header .sys-card-pannel-smarks {
+    width: calc(~"100% - 187px");
+    color: #999999;
+}
+
+.sys-card-bg {
+    width: 48px;
+    height: 48px;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+
+.sys-card-bg .iconfont {
+    color: #1890ff !important;
+    font-size: 90px !important;
+}
+
+.sys-card-add {
+    text-align: center;
+}
+
+.sys-card-add .ant-card {
+    height: 100%;
+    text-align: center;
+    background: #F0F2F5;
+}
+
+.sys-card-add .ant-card-bordered {
+    border: 2px dashed#9FA0A0;
+}
+
+.sys-card-add .sys-card-addicon {
+    margin-top: 48px;
+    display: inline-block;
+}
+
+.sys-card-add .sys-card-addicon .iconfont {
+    font-size: 16px !important;
+    color: #333 !important;
+}
+
+.sys-card-add .sys-card-addtext {
+    display: inline-block;
+    font-size: 16px;
+    color: #333333;
+}
+
+.sys-card-add .sys-card-addtext:hover {
+    color: #009DFF;
+}
+
+.sys-card-fast {
+    width: 100%;
+    white-space: nowrap;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.sys-fast-right {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.sys-fast-list::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.sys-fast-byword {
+    float: right;
+    margin-left: 10px;
+}
+
+.sys-fast-byword span {
+    padding: 4px 4px;
+    font-size: 12px;
+    cursor: pointer;
+    border-top: 1px solid #ebedf0;
+    border-bottom: 1px solid #ebedf0;
+    position: relative;
+}
+
+.sys-fast-byword span::after {
+    content: '';
+    width: 1px;
+    height: calc(~"100% + 2px");
+    background: #009dff;
+    position: absolute;
+    right: 0;
+    top: -1px;
+    visibility: hidden;
+}
+
+.sys-fast-byword span::before {
+    content: '';
+    width: 1px;
+    height: calc(~"100% + 2px");
+    background: #009dff;
+    position: absolute;
+    left: 0;
+    top: -1px;
+    visibility: hidden;
+}
+
+.sys-fast-byword span:last-child::after,
+.sys-fast-byword span:first-child::before {
+    width: 0;
+}
+
+.sys-fast-byword span:first-child {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    border-left: 1px solid #ebedf0;
+}
+
+.sys-fast-byword span:last-child {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-right: 1px solid #ebedf0;
+}
+
+.sys-fast-byword span.active,
+.sys-fast-byword span:hover {
+    color: #009dff;
+    border-top: 1px solid #009dff;
+    border-bottom: 1px solid #009dff;
+    background: #009dff;
+    color: #fff;
+}
+
+.sys-fast-byword span:hover::after,
+.sys-fast-byword span:hover::before,
+.sys-fast-byword span.active::after,
+.sys-fast-byword span.active::before {
+    visibility: visible;
+}
+
+.sys-fast-byword span:first-child:hover,
+.sys-fast-byword span:first-child.active {
+    border-left: 1px solid #009dff;
+}
+
+.sys-fast-byword span:last-child:hover,
+.sys-fast-byword span:last-child.active {
+    border-right: 1px solid #009dff;
+}
+
+.sys-fast-list li {
+    float: left;
+    color: #009DFF;
+    margin-right: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.sys-fast-list .sys-fast-list-icon .iconfont,
+.sys-fast-list li .iconfont {
+    color: #1890ff;
+    font-size: 24px;
+    line-height: 26px;
+    height: 24px;
+    display: inline-block;
+}
+
+.sys-fast-list .sys-fast-list-text {
+    margin-left: 5px;
+}
+
+.sys-fast-list .sys-fast-list-import {
+    float: right;
+    color: #1890ff;
+}
+
+.sys-fast-select {
+    margin-right: 15px;
+    min-width: 160px;
+}
+
+.sys-fast-select-min {
+    width: 160px;
+}
+
+.sys-fast-select-max {
+    width: 302px;
+}
+
+/* 卡片内容区 */
+
+.sys-card-big {
+    height: 230px;
+}
+
+.sys-card-add.sys-card-big .sys-card-addicon {
+    margin-top: 79px;
+}
+
+.sys-card-btn {
+    text-align: center;
+    background: #F8F8F8;
+    border-top: 1px solid #e9e9e9;
+    white-space: nowrap;
+    width: 25%;
+}
+
+.sys-card-btn-max {
+    width: 30%;
+}
+
+.sys-card-btn-min {
+    width: 20%;
+}
+
+.sys-card-big .sys-card-btn {
+    height: 40px;
+    line-height: 40px;
+}
+
+.sys-card-small .sys-card-btn {
+    height: 40px;
+    line-height: 40px;
+}
+
+.sys-card-btn fc-icon {
+    display: inline-block;
+}
+
+.sys-card-btn .iconfont {
+    font-size: 18px !important;
+}
+
+.sys-card-btn:hover,
+.sys-card-btn:hover .iconfont {
+    color: #1890ff;
+}
+
+.sys-card-btn-after {
+    position: relative;
+}
+
+.sys-card-btn-after::after {
+    content: '';
+    width: 1px;
+    height: 20px;
+    background-color: #e9e9e9;
+    position: absolute;
+    right: 0;
+    top: 10px;
+}
+
+.sys-card-small .sys-card-text {
+    padding-left: 10px;
+}
+
+.sys-card-small .sys-card-btn-after::after {
+    height: 15px;
+    top: 11px;
+}
+
+.sys-card-small .sys-card-btn .iconfont {
+    font-size: 12px !important;
+}
+
+.sys-card-small .sys-card-btn span {
+    font-size: 12px;
+}
+
+.sys-card-content {
+    display: flex;
+}
+
+.sys-card-content .sys-card-help {
+    position: absolute;
+    right: -15px;
+    top: -20px;
+}
+
+.sys-card-text {
+    flex: 1;
+    padding-left: 15px;
+    padding-top: 5px;
+    overflow: hidden;
+}
+
+.sys-card-content .sys-card-title {
+    font-size: 14px;
+    color: #333;
+    font-weight: 700;
+}
+
+.sys-card-content .sys-card-smarks {
+    margin-top: 5px;
+    overflow: hidden;
+    font-size: 16px;
+    color: #999999;
+}
+
+.sys-card-mark {
+    text-align: center;
+    border-radius: 50%;
+    border: 2px solid #1890ff;
+}
+
+.sys-card-big .sys-card-mark .iconfont {
+    font-size: 30px !important;
+    color: #ffffff;
+}
+
+.sys-card-small .sys-card-content .sys-card-smarks {
+    height: 45px;
+}
+
+.sys-card-small .sys-card-mark {
+    width: 30px;
+    min-width: 30px;
+    height: 30px;
+    line-height: 30px;
+    background-color: #1890ff;
+    color: #ffffff;
+    font-size: 18px;
+    border: none;
+    margin-top: 5px;
+}
+
+.sys-card-small .ant-card-body,
+.sys-card-big .ant-card-body {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.sys-card-big .sys-card-mark {
+    width: 60px;
+    height: 60px;
+    line-height: 55px;
+    color: #fff;
+    background: #1890ff;
+}
+
+/* 卡片按钮 */
+
+.sys-card-tbl {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.sys-card-tbl .iconfont {
+    color: #cccccc;
+    font-size: 12px !important;
+}
+
+.sys-card-tbl .iconfont:hover {
+    color: #333333;
+}
+
+/* 两个按钮 */
+
+.sys-card-tbl .sys-card-tbl-every {
+    margin-left: 7px;
+}
+
+/* 更多的按钮 */
+
+.sys-card-tbl .sys-card-tbl-more {
+    margin-left: 10px;
+}
+
+.sys-card-tbl .sys-card-tbl-more .ant-dropdown-menu {}
+
+/* 卡片底部 */
+
+.sys-card-footer {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* 表单 */
+
+.sys-card-pannel .fc-content .sys-card-pannel-edit {
+    background: #ffffff;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.sys-card-pannel .fc-content .sys-card-pannel-edit .fc-title {
+    width: 25% !important;
+    text-align: right;
+    padding-right: 20px;
+}
+
+.sys-card-pannel .fc-content .sys-card-pannel-edit .fc-layoutcol {
+    padding: 10px 100px;
+    border-bottom: 1px solid #ebedf0;
+}
+
+.sys-card-pannel .fc-content .sys-card-pannel-edit .noBottomLine .fc-layoutcol {
+    border-bottom: none;
+}
+
+.sys-card-pannel .fc-content .sys-card-pannel-edit .notitleLine .fc-layoutcol {
+    border-bottom: none;
+    margin-bottom: -12px;
+}
+
+.sys-card-pannel .fc-content .sys-card-pannel-edit .sys-notitleLine .fc-layoutcol {
+    border-bottom: none;
+}
+
+.sys-card-pannel .ant-input,
+.sys-card-pannel .ant-select-selection,
+.sys-card-pannel .ant-input-number {
+    border-color: #ebedf0 !important;
+}
+
+.sys-button {
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+}
+
+/* 没有查询数据 */
+
+.sys-noresult {
+    width: 100%;
+    height: 60px;
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 16px;
+    position: absolute;
+    top: 50%;
+    margin-top: -40px;
+}
+
+.sys-noresult .noResult-title {
+    font-size: 16px;
+    font-weight: 600;
+    display: block;
+}
+
+.sys-noresult .noResult-smarks {
+    color: #BDC5D1;
+    display: block;
+}
+
+/* 弹窗整体向上移动*/
+
+.ant-modal-content {
+    position: relative;
+    background-color: #fff;
+    border: 0;
+    border-radius: 4px;
+    background-clip: padding-box;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    top: -34px;
+}
+
+/* 卡片列表，分页，内容区父元数据100%-头部-分页部分的剩余高度超出部分滚动条 */
+
+.sys-pagelist>.fc-layoutpanel {
+    height: 100%;
+    display: flex !important;
+    flex-direction: column;
+}
+
+.sys-pagelist>.fc-layoutpanel>.fc-content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* 卡片列表选择 */
+
+.sys-fast-select-every {}
+
+.fc-icon-import {
+    color: #1890ff;
+}
+
+/**************less*******************/
+
+/* 导航子选项卡 */
+
+.sys-nav-tabsub {
+    background: #F0F2F5;
+}
+
+.ant-card {
+    box-shadow: @card-shadow;
+    &:hover {
+        box-shadow: @card-shadow-hover;
+    }
+}
+
+/* fc-navbar */
+
+:host ::ng-deep .fc-navbar {
+    background-color: @fc-navbar-background;
+}
+
+/* fc-layoutpanel */
+
+:host ::ng-deep .fc-layoutpanel {
+    background-color: @component-background;
+}
+
+.sys-content-wrap .content-main {
+    background-color: @body-background;
+}
+
+/*  组织机构*/
+
+/* 表格样式 */
+
+.fc-table {
+    width: 96%;
+    text-align: center;
+    margin: 20px 0px;
+}
+
+.fc-table th {
+    background-color: #ECF6FD;
+    height: 30px;
+}
+
+.fc-table td {
+    height: 30px;
+}
+
+.save-button .fc-content1 {
+    text-align: center;
+}
+
+/* 文本框占一整列*/
+.line-col nz-form-label.ant-col-xs-24.ant-col-sm-6.ant-form-item-label {
+    width: 12.5%;
+}
+
+.line-col nz-form-control.ant-col-xs-24.ant-col-sm-16.ant-form-item-control-wrapper {
+    width: 83.3%;
+}
+/* 附件文本框 */
+.attachment nz-form-label.ant-col-xs-24.ant-col-sm-6.ant-form-item-label{
+    width: 14.2%;
+}
+.attachment nz-form-control.fuzzy-dropdown.form-explain.ant-col-xs-24.ant-col-sm-16.ant-form-item-control-wrapper{
+    width: 85.8%;
+}
+/* 附件上传按钮的样式 */
+.sys-choose-icon-upload{
+    padding-top: 3px;
+}
+.attachment-btn .ant-upload {
+    width: 81%;
+}
+.attachment-btn .ant-upload .ant-btn {
+    width: 100%;
+}

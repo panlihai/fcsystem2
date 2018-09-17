@@ -1,0 +1,302 @@
+<fc-layoutpanel class="sys-card-pannel">
+    <div class="sys-card-pannel-header" fcheader>
+        <fc-title fcLabel="模型&元数据" class="sys-card-pannel-title" fcHasLine="N"></fc-title>
+        <P class="sys-card-pannel-smarks">
+            说明：FC开发设计平台，快速开发应用模型，此功能实现模型定义（属性、事件、接口、关系），实现数据库表及视图新增、修改、删除、同步。 </P>
+        <div class="sys-card-fast">
+            <ul class="sys-fast-list">
+                <li class="sys-fast-list-icon">
+                    <fc-icon fcIcon="fc-icon-gongzuodaohang" fcColor="#009DFF"></fc-icon>
+                    <span class="sys-fast-list-text">快速开始</span> </li>
+                <li class="sys-fast-list-icon" (click)="seeAll($event)" *ngIf="isShow===true">
+                    <fc-icon fcIcon="fc-icon-physicaltable" fcColor="#009DFF"></fc-icon>
+                    <span class="sys-fast-list-text">创建物理表</span></li>
+                <li class="sys-fast-list-icon" (click)="backList($event)">
+                    <fc-icon fcIcon="fc-icon-seeall" fcColor="#009DFF"></fc-icon>
+                    <span class="sys-fast-list-text">查看所有</span></li>
+            </ul>
+        </div>
+        <fc-icon class="sys-card-bg" [fcSvg]="routerParam.MENUICON" fcWidth="48" fcHeight="48"></fc-icon>
+    </div>
+    <div class="sys-card-pannel-edit sys-app" fccontent>
+        <fc-title fcLabel="基本信息" class="sys-card-pannel-title" fcHasLine="N" fccontent></fc-title>
+        <fc-layoutcol fcSpans="1,1" class="noBorder noBottomLine">
+            <fc-combo fccontent1 [fcLabel]="'产品'" [fcOption]="productOption" [(ngModel)]="mainObj.APPMODEL" [fcAppid]="appId" fcPlaceHolder="请选择产品">
+            </fc-combo>
+            <fc-combo fccontent2 [fcLabel]="'数据源'" [fcOption]="datasourceOption" [(ngModel)]="mainObj.DATASOURCE" [fcAppid]="appId" fcPlaceHolder="请选择数据源">
+            </fc-combo>
+            <fc-text fccontent1 [fcAppid]="appId" fcFieldCode="APPID" [fcValid]="mainValid.APPID"  [fcLabel]="'模型编码'" [(ngModel)]="mainObj.APPID" 
+            fcPlaceHolder="请输入模型编码"></fc-text>
+            <fc-text fccontent2 [fcAppid]="appId" fcFieldCode="APPNAME" [fcValid]="mainValid.APPNAME"  [fcLabel]="'模型名称'"fcHelp="中文描述，物理表备注名称" [(ngModel)]="mainObj.APPNAME" fcPlaceHolder="请输入模型"
+                fcHelp="中文描述，物理表备注名称"></fc-text>
+            <fc-radio fccontent1 [fcAppid]="appId" [fcValid]="mainValid.APPTYPE"  [fcLabel]="'适用场景'" [(ngModel)]="mainObj.APPTYPE" 
+            fcFieldCode="APPTYPE" fcLabelCode="DICDESC"  fcValueCode="DICVALUE" fcHelp="通用模型对开发者开放，字典模型及数据模型对最终用户">
+            </fc-radio>
+            <fc-layoutcol fccontent2 fcSpans="1,1" class="noBottomLine">
+                <fc-radio fccontent1 [fcLabel]="'模型类型'" [fcAppid]="appId" fcFieldCode="TABLETYPE" [fcValid]="mainValid.TABLETYPE" [(ngModel)]="mainObj.TABLETYPE"  fcFieldCode="TABLETYPE" fcLabelCode="DICDESC"
+                    fcValueCode="DICVALUE" fcHelp="默认为表"></fc-radio>
+                <fc-long fccontent2 [fcLabel]="'查询偏移量'" [fcAppid]="appId" fcFieldCode="PSIZE" [fcValid]="mainValid.PSIZE" [(ngModel)]="mainObj.PSIZE" fcPlaceHolder="请输入模型" fcHelp="默认分页大小，每页返回数据"></fc-long>
+            </fc-layoutcol>
+            <fc-text fccontent1 [fcLabel]="'指定表或视图名称'" [fcAppid]="appId" fcFieldCode="MAINTABLE" [fcValid]="mainValid.MAINTABLE" [(ngModel)]="mainObj.MAINTABLE" fcPlaceHolder="请输入物理表名" fcHelp="默认采用与模型编码相同，物理表名或视图名"></fc-text>
+            <fc-text fccontent2 [fcLabel]="'默认排序字段'" [fcAppid]="appId" fcFieldCode="SORTBY"  [(ngModel)]="mainObj.SORTBY" fcHelp="按此指定的排序条件排序，默认按照倒序排序"  name="SYSAPP.SORTBY"></fc-text>
+        </fc-layoutcol>
+        <fc-tlbform fccontent1 fcType="primary" [fcAppid]="appId" fcLayout="center" (fcEvent)="tlbformEvent($event)" class="basicTlb"></fc-tlbform>
+    </div> 
+</fc-layoutpanel>
+<!-- 模型-属性入口-->
+<fc-layoutpanel class="sys-card-pannel" *ngIf="isShow===true">
+    <div class="sys-card-pannel-header" fcheader>
+        <fc-title fcLabel="模型-属性" class="sys-card-pannel-title" fcHasLine="N"></fc-title>
+        <P class="sys-card-pannel-smarks">
+            模型属性：描述模型中的属性，与事件、接口关系形成模型
+        </P>
+        <div class="sys-card-fast">
+            <ul class="sys-fast-list">
+                <li class="sys-fast-list-icon" (click)="selectAttributeByModel()">
+                    <fc-icon fcIcon="fc-icon-selectionmodel" fcColor="#009DFF"></fc-icon>
+                    <span class="sys-fast-list-text">从模型中导入</span>
+                </li>
+                <li class="sys-fast-list-icon" (click)="selectAttributeByTable()">
+                    <fc-icon fcIcon="fc-icon-Importproperties" fcColor="#009DFF"></fc-icon>
+                    <span class="sys-fast-list-text">从表中导入</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div fccontent class="clearFloat">
+        <div class="attributeLeft" *ngIf="displayModel===true">
+            <div>请选择模型，拖拽至属性字段</div>
+            <fc-any fcShowLabel="N" fcPlaceHolder="请选择模型，支持多选" [fcOption]="modelOption" fcLabelCode="APPNAME" [(ngModel)]="modelValue"
+                fcValueCode="MAINTABLE" (ngModelChange)="modelEvents($event)">
+            </fc-any>
+            <div class="showSelectModel">
+                <div class="SelectModelTop">备选属性</div>
+                <ul class="sys-modellist">
+                    <li *ngFor="let model of models">
+                        <span>{{model.FIELDCODE}}-{{model.FIELDNAME}}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="attributeLeft" *ngIf="displayTable===true">
+            <div>请选择表，拖拽至属性字段</div>
+            <fc-any fcShowLabel="N" fcPlaceHolder="请选择表，支持多选" [fcOption]="tableOption" fcLabelCode="APPNAME" fcValueCode="APPID"  [(ngModel)]="tableValue888"
+                 fcValueCode="MAINTABLE" (ngModelChange)="tableEvents($event)" name="tableOption1"></fc-any>
+            <div class="showSelectModel">
+                <div class="SelectModelTop">备选字段</div>
+                <ul class="sys-modellist">
+                    <li *ngFor="let table of tables">
+                        <span>{{table.FIELDCODE}}-{{table.FIELDNAME}}</span> 
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="widthCovered" [ngClass]="{'attributeRight':displayModel===true||displayTable===true}">
+            <fc-modalcard fcEvent="modalEvent($event)" fcWidth="80%" [fcFooter]="null">
+                <sysattributeeditdialog fccontent [fcattributeObj]="dialogObj"></sysattributeeditdialog>
+                <div class="addAttribute" (click)="attributeAddEvent(null,mainObj.APPID+'-模型')" fcopen>+添加</div>
+            </fc-modalcard>
+             <fc-list fcAppid="SYSAPPFIELDS" [fcFieldCode]="'FIELDCODE'" [fcCondition]="condition" fcIcon="fc-icon-picture" fcSubTitleCode="FIELDNAME"
+                    fcStatusCode='FIELDNAME' [fcCheckValue]="{'processing':'processing','warning':'warning','error':'error','default':'default'}"
+                    (fcEvent)="listEvent($event,mainObj.APPID+'-模型')">
+             </fc-list>
+        </div>
+    </div>
+</fc-layoutpanel>
+<fc-modalcard fcEvent="modalEvent($event)" fcWidth="60%" [fcFooter]="null" [fcToken]=appFieldDailogToken>
+    <sysattributeeditdialog fccontent [fcattributeObj]="dialogObj"></sysattributeeditdialog>
+</fc-modalcard>
+<!-- 模型-事件入口-卡x片-->
+<fc-layoutpanel class="sys-card-pannel" *ngIf="isShow===true">
+    <div class="sys-card-pannel-header" fcheader>
+        <fc-title fcLabel="模型-事件" class="sys-card-pannel-title" fcHasLine="N"></fc-title>
+        <P class="sys-card-pannel-smarks">
+            模型事件：描述模型中的事件操作，与属性、接口关系形成模型
+        </P>
+        <div class="sys-card-fast">
+            <ul class="sys-fast-list">
+                <li class="sys-fast-list-icon" (click)="createStandardEvent()">
+                    <fc-icon fcIcon="fc-icon-standard" fcColor="#009DFF"></fc-icon>
+                    <span class="sys-fast-list-text">生成标准事件</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div nz-row [nzGutter]="10" fccontent>
+        <!-- 新增卡片操作 -->
+        <fc-modalcard fcEvent="modalEvent($event)" fcWidth="60%" [fcFooter]="null">
+            <sysappmodaleventdialog fccontent [fceventObj]='dialogObj'></sysappmodaleventdialog>
+            <div nz-col [nzSpan]="4" class="sys-card sys-card-add sys-card-small" fcopen>
+                <nz-card (click)="editModelEvent(null,mainObj.APPID+'-'+mainObj.APPNAME);">
+                    <fc-icon fcIcon="fc-icon-add" class="sys-card-addicon"></fc-icon>
+                    <p class="sys-card-addtext">新增模型事件</p>
+                </nz-card>
+            </div>
+        </fc-modalcard>
+        <!-- 模型事件循环 -->
+        <fc-modalcard fcEvent="modalEvent($event)" fcWidth="60%" [fcFooter]="null">
+            <sysappmodaleventdialog fccontent [fceventObj]='dialogObj'></sysappmodaleventdialog>
+            <div nz-col [nzSpan]="4" class="sys-card sys-card-small" *ngFor="let event of sysEvents" fcopen>
+                <nz-card (click)="editModelEvent(event,mainObj.APPID+'-'+mainObj.APPNAME);">
+                    <div class="sys-card-content">
+                        <!-- 操作按钮 -->
+                        <div class="sys-card-tbl">
+                            <!-- 默认显示两个 -->
+                            <fc-tooltip class="sys-card-tbl-every" fcTitle="{{btn.BTNNAME}}" *ngFor="let btn of eventListButtons">
+                                <fc-icon [fcIcon]="btn.BTNICON" (click)="btnCardEvent(btn.BTNCODE)" fcFontSize="18px" fccontent></fc-icon>
+                            </fc-tooltip>
+                        </div>
+                        <span class="sys-card-mark">
+                            {{event.APPID|slice:0:1}}
+                        </span>
+                        <div class="sys-card-text">
+                            <div class="sys-card-title">
+                                {{event.BTNNAME}}
+                                <span *ngIf="event.BTNTYPE==='CARD'" class="butType">-表单按钮</span>
+                                <span *ngIf="event.BTNTYPE==='LISTONE'" class="butType">-列表明细按钮</span>
+                                <span *ngIf="event.BTNTYPE==='LIST'" class="butType">-列表按钮</span>
+                            </div>
+                            <p class="sys-card-smarks">{{event.BTNCODE}}</p>
+                        </div>
+                    </div>
+                    <div class="sys-card-footer">
+                        <fc-tooltip class="sys-card-btn sys-card-btn-after" (click)="thumbUp()" fcTitle="点赞">
+                            <fc-icon fcIcon="fc-icon-dianzan2" fccontent></fc-icon>
+                            <span fccontent></span>
+                        </fc-tooltip>
+                        <fc-tooltip class="sys-card-btn sys-card-btn-after" (click)="download()" fcTitle="下载zip">
+                            <fc-icon fcIcon="fc-icon-daochu" fccontent></fc-icon>
+                        </fc-tooltip>
+                        <fc-tooltip class="sys-card-btn sys-card-btn-after" (click)="evaluate()" fcTitle="评价">
+                            <fc-icon fcIcon="fc-icon-pinglun1" fccontent></fc-icon>
+                            <span fccontent></span>
+                        </fc-tooltip>
+                        <fc-tooltip class="sys-card-btn" (click)="count()" fcTitle="统计图">
+                            <fc-icon fcIcon="fc-icon-shujufenxi" fccontent></fc-icon>
+                        </fc-tooltip>
+                    </div>
+                </nz-card>
+            </div>
+        </fc-modalcard>
+    </div>
+</fc-layoutpanel>
+<!-- 模型接口入口-模型接口卡片 -->
+<fc-layoutpanel class="sys-card-pannel" *ngIf="isShow===true">
+    <div class="sys-card-pannel-header" fcheader>
+        <fc-title fcLabel="模型接口注册" class="sys-card-pannel-title" fcHasLine="N"></fc-title>
+        <P class="sys-card-pannel-smarks">
+            注册接口：描述此模型提供的标准接口或自定义接口，与属性、事件及关系构成模型
+        </P>
+    </div>
+    <div nz-row [nzGutter]="10" fccontent>
+        <!-- 新增卡片操作 -->
+        <div nz-col [nzSpan]="4" class="sys-card sys-card-add sys-card-small">
+            <nz-card (click)="addModelInterface();">
+                <fc-icon fcIcon="fc-icon-add" class="sys-card-addicon"></fc-icon>
+                <p class="sys-card-addtext">新增模型接口</p>
+            </nz-card>
+        </div>
+        <!-- 模型事件循环 -->
+        <div nz-col [nzSpan]="4" class="sys-card sys-card-small" *ngFor="let interface of sysInterfaces">
+            <nz-card (click)="editModelInterface(interface);">
+                <div class="sys-card-content">
+                    <!-- 操作按钮 -->
+                    <div class="sys-card-tbl">
+                        <!-- 默认显示两个 -->
+                        <fc-tooltip class="sys-card-tbl-every" fcTitle="{{btn.BTNNAME}}" *ngFor="let btn of interfaceListButtons">
+                            <fc-icon [fcIcon]="btn.BTNICON" (click)="btnCardEvent(btn.BTNCODE)" fcFontSize="18px" fccontent></fc-icon>
+                        </fc-tooltip>
+                    </div>
+                    <span class="sys-card-mark">
+                        {{interface.APPID|slice:0:1}}
+                    </span>
+                    <div class="sys-card-text">
+                        <div class="sys-card-title">
+                            {{interface.REQTYPE}}-{{interface.IMPLNAME}}
+                        </div>
+                        <p class="sys-card-smarks">路径：{{interface.PID}}/{{interface.APPID}}/{{interface.REQURL}}</p>
+                    </div>
+                </div>
+                <div class="sys-card-footer">
+                    <fc-tooltip class="sys-card-btn sys-card-btn-after" (click)="thumbUp()" fcTitle="点赞">
+                        <fc-icon fcIcon="fc-icon-dianzan2" fccontent></fc-icon>
+                        <span fccontent></span>
+                    </fc-tooltip>
+                    <fc-tooltip class="sys-card-btn sys-card-btn-after" (click)="download()" fcTitle="下载zip">
+                        <fc-icon fcIcon="fc-icon-daochu" fccontent></fc-icon>
+                    </fc-tooltip>
+                    <fc-tooltip class="sys-card-btn sys-card-btn-after" (click)="evaluate()" fcTitle="评价">
+                        <fc-icon fcIcon="fc-icon-pinglun1" fccontent></fc-icon>
+                        <span fccontent></span>
+                    </fc-tooltip>
+                    <fc-tooltip class="sys-card-btn" (click)="count()" fcTitle="统计图">
+                        <fc-icon fcIcon="fc-icon-shujufenxi" fccontent></fc-icon>
+                    </fc-tooltip>
+                </div>
+            </nz-card>
+        </div>
+    </div>
+</fc-layoutpanel>
+<!-- 与其他模型关系 -->
+<fc-layoutpanel class="sys-card-pannel" *ngIf="isShow===true">
+    <div class="sys-card-pannel-header" fcheader>
+        <fc-title fcLabel="与其它模型关系" class="sys-card-pannel-title" fcHasLine="N"></fc-title>
+        <P class="sys-card-pannel-smarks">
+            关系：描述模型与模型之间，数据与数据之间的联系，与属性、事件及关系构成模型
+        </P>
+    </div>
+    <div nz-row [nzGutter]="10" fccontent>
+        <!-- 新增卡片操作 -->
+        <fc-modalcard fcEvent="modalEvent($event)" fcWidth="60%" [fcFooter]="null">
+            <sysappmodalrelationdialog fccontent [fcrelationObj]="dialogObj"></sysappmodalrelationdialog>
+            <div nz-col [nzSpan]="4" class="sys-card sys-card-add sys-card-small" fcopen>
+                <nz-card (click)="editModelRelation(null,mainObj.APPID+'-'+mainObj.APPNAME);">
+                    <fc-icon fcIcon="fc-icon-add" class="sys-card-addicon"></fc-icon>
+                    <p class="sys-card-addtext">新增模型关系</p>
+                </nz-card>
+            </div>
+        </fc-modalcard>
+        <!-- 模型事件循环 -->
+        <fc-modalcard fcEvent="modalEvent($event)" fcWidth="60%" [fcFooter]="null">
+            <sysappmodalrelationdialog fccontent [fcrelationObj]="dialogObj"></sysappmodalrelationdialog>
+            <div nz-col [nzSpan]="4" class="sys-card sys-card-small" *ngFor="let link of sysLinks" fcopen>
+                <nz-card (click)="editModelRelation(link,mainObj.APPID+'-'+mainObj.APPNAME);">
+                    <div class="sys-card-content">
+                        <!-- 操作按钮 -->
+                        <div class="sys-card-tbl">
+                            <!-- 默认显示两个 -->
+                            <fc-tooltip class="sys-card-tbl-every" fcTitle="{{btn.BTNNAME}}" *ngFor="let btn of linkListButtons">
+                                <fc-icon [fcIcon]="btn.BTNICON" (click)="btnCardEvent(btn.BTNCODE)" fcFontSize="18px" fccontent></fc-icon>
+                            </fc-tooltip>
+                        </div>
+                        <span class="sys-card-mark">
+                            {{link.MAINAPP|slice:0:1}}
+                        </span>
+                        <div class="sys-card-text">
+                            <div class="sys-card-title">
+                                {{link.ITEMAPP}}-{{link.LINKNAME}}
+                            </div>
+                            <p class="sys-card-smarks">{{link.LINKFILTER}}</p>
+                        </div>
+                    </div>
+                    <div class="sys-card-footer">
+                        <fc-tooltip class="sys-card-btn sys-card-btn-after" (click)="thumbUp()" fcTitle="点赞">
+                            <fc-icon fcIcon="fc-icon-dianzan2" fccontent></fc-icon>
+                            <span fccontent></span>
+                        </fc-tooltip>
+                        <fc-tooltip class="sys-card-btn sys-card-btn-after" (click)="download()" fcTitle="下载zip">
+                            <fc-icon fcIcon="fc-icon-daochu" fccontent></fc-icon>
+                        </fc-tooltip>
+                        <fc-tooltip class="sys-card-btn sys-card-btn-after" (click)="evaluate()" fcTitle="评价">
+                            <fc-icon fcIcon="fc-icon-pinglun1" fccontent></fc-icon>
+                            <span fccontent></span>
+                        </fc-tooltip>
+                        <fc-tooltip class="sys-card-btn" (click)="count()" fcTitle="统计图">
+                            <fc-icon fcIcon="fc-icon-shujufenxi" fccontent></fc-icon>
+                        </fc-tooltip>
+                    </div>
+                </nz-card>
+            </div>
+        </fc-modalcard>
+    </div>
+</fc-layoutpanel>

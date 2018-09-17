@@ -1,0 +1,99 @@
+<!-- 模型和元数据入口 -->
+<fc-layoutpanel class="sys-card-pannel sys-pagelist">
+    <div class="sys-card-pannel-header" fcheader>
+        <fc-title fcLabel="模型&元数据" class="sys-card-pannel-title" fcHasLine="N"></fc-title>
+        <P class="sys-card-pannel-smarks">
+            说明：FC开发设计平台，快速开发应用模型，此功能实现模型定义，实现数据库表及视图的新增、修改、删除 、同步。
+        </P>
+        <div class="sys-card-fast">
+            <ul class="sys-fast-list">
+                <li class="sys-fast-list-icon" (click)="quickstart($event)">
+                    <fc-icon fcIcon="fc-icon-gongzuodaohang"></fc-icon>
+                    <span class="sys-fast-list-text">快速开始</span>
+                </li>
+                <li class="sys-fast-list-icon">
+                    <nz-upload [(nzFileList)]="fileList" (click)="import()" style="cursor: pointer;">
+                        <fc-icon fcIcon="fc-icon-import"></fc-icon>
+                        <span class="sys-fast-list-text  sys-fast-list-import">导入</span>
+                    </nz-upload>
+                </li>
+                <li class="sys-fast-list-icon">
+                    <fc-icon fcIcon="fc-icon-seehelp"></fc-icon>
+                    <span class="sys-fast-list-text">帮助</span>
+                </li>
+            </ul>
+            <div class="sys-fast-right">
+                <div class="sys-fast-byword">
+                    <span *ngFor="let item of productList" [ngClass]="{'active':searchObj.APPMODEL===item.PID}" (click)="searchByPid(item)">{{item.PNAME}}</span>
+                </div>
+                <div class="sys-fast-byword">
+                    <span *ngFor="let item of datasourceList" [ngClass]="{'active':searchObj.DATASOURCE===item.DSID}"
+                        (click)="searchByDsid(item)">{{item.DSNAME}}</span>
+                </div>
+                <div class="sys-fast-byword">
+                    <span *ngFor="let item of fastsearchWords" [ngClass]="{'active':searchObj.APPID===(item.ACTCODE+'%')}"
+                        (click)="searchByWord(item)">{{item.BTNNAME}}</span>
+                </div>
+            </div>
+        </div>
+        <fc-icon class="sys-card-bg" [fcSvg]="routerParam.MENUICON" fcWidth="48" fcHeight="48"></fc-icon>
+    </div>
+    <div nz-row [nzGutter]="10" fccontent class="sys-pagelist-card">
+        <div *ngIf="pageList&&pageList.length===0" class="sys-noresult">
+            <fc-icon fcIcon="fc-icon-bgsearch" fcColor="#BDC5D1" fcFontSize="30px"></fc-icon>
+            <span class="noResult-title">没有任何数据</span>
+            <span class="noResult-smarks">
+                请选择产品和数据源过滤元数据!
+            </span>
+        </div>
+        <!-- 新增卡片操作 -->
+        <div nz-col [nzSpan]="4" class="sys-card sys-card-add sys-card-small" *ngIf="pageList&&pageList.length!==0">
+            <nz-card (click)="listAdd($event);">
+                <fc-icon fcIcon="fc-icon-add" class="sys-card-addicon"></fc-icon>
+                <p class="sys-card-addtext">新增</p>
+            </nz-card>
+        </div>
+        <!-- 元数据列表循环 -->
+        <div nz-col [nzSpan]="4" class="sys-card sys-card-small" *ngFor="let sysapp of pageList">
+            <nz-card (click)="listEdit(sysapp);$event.stopPropagation();">
+                <!-- 操作按钮 -->
+                <div class="sys-card-tbl">
+                    <!-- 默认显示两个 -->
+                    <fc-icon class="sys-card-tbl-every" *ngFor="let btn of mainListButtons" [fcIcon]="btn.BTNICON"
+                        title="{{btn.BTNNAME}}" (click)="listdataEvent({eventName:btn.ACTCODE,param:sysapp})">
+                    </fc-icon>
+                </div>
+                <div class="sys-card-content">
+                    <span class="sys-card-mark">
+                        {{sysapp.APPID.substring(0,1)}}
+                    </span>
+                    <div class="sys-card-text">
+                        <div class="sys-card-title">
+                            {{sysapp.APPID}}-{{sysapp.APPNAME}}
+                        </div>
+                        <p class="sys-card-smarks" title="{{sysapp.REMARK}}">
+                            {{sysapp.REMARK}}</p>
+                    </div>
+                    <div class="sys-card-footer">
+                        <fc-tooltip class="sys-card-btn sys-card-btn-after" (click)="thumbUp($event)" fcTitle="点赞">
+                            <fc-icon fcIcon="fc-icon-dianzan2" fccontent></fc-icon>
+                            <span fccontent></span>
+                        </fc-tooltip>
+                        <fc-tooltip class="sys-card-btn sys-card-btn-after" (click)="download($event)" fcTitle="下载zip">
+                            <fc-icon fcIcon="fc-icon-daochu" fccontent></fc-icon>
+                        </fc-tooltip>
+                        <fc-tooltip class="sys-card-btn sys-card-btn-after" (click)="evaluate($event)" fcTitle="评价">
+                            <fc-icon fcIcon="fc-icon-pinglun1" fccontent></fc-icon>
+                            <span fccontent></span>
+                        </fc-tooltip>
+                        <fc-tooltip class="sys-card-btn" (click)="count()" fcTitle="统计图">
+                            <fc-icon fcIcon="fc-icon-shujufenxi" fccontent></fc-icon>
+                        </fc-tooltip>
+                    </div>
+                </div>
+            </nz-card>
+        </div>
+    </div>
+    <fc-pagination *ngIf="pageList&&pageList.length!==0" [fcTotal]="pageTotal" fcfooter [fcPageIndex]="pageNum"
+        [fcPageSize]="pageSize" (fcEvent)="pageQuery($event)"></fc-pagination>
+</fc-layoutpanel>

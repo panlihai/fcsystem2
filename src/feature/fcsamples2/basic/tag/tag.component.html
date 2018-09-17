@@ -1,0 +1,106 @@
+<!-- 标签 fc-tag -->
+<fc-layoutpanel class="templatefastposition samples">
+    <!-- 快速定位 -->
+<fc-layoutcol fcSpans="9,1" fccontent>
+    <fc-title fcLabel="标签" fccontent1 fcSubtitle="进行标记和分类的小标签"    ></fc-title>
+    <fc-title fcLabel="何时使用" fccontent1 fcSubtitle="用于标记事物的属性和维度。"    ></fc-title>
+    <fc-title fcLabel="代码演示" fcheader    ></fc-title>
+    <fc-layoutpanel fccontent1>
+    <!-- 组件内容开始 -->
+        <fc-layoutpanel fccontent>
+            <fc-title fcLabel="属性" fcheader     fcSize="small"></fc-title>
+            <fc-layoutcol fccontent fcSpans="1,1">
+                <fc-layoutgroup id="basic" fcTitle="基本" fccontent1>
+                    <div fccontent>
+                        <fc-tag fcLabel="元数据管理"  (click)="navTo('sysappList')" fcColor="blue" fcIcon="fc-icon-reset"></fc-tag>
+                    </div>
+                    <fc-adcode fcfooter fcTitle="描述" fcRemark="最基本的用法。"
+                    fcview='<fc-tag fcTitle="管理员" fcColor="blue" fcIcon="fc-icon-reset"></fc-tag>'
+                    [fccode]="basicjs">
+                    </fc-adcode>
+                </fc-layoutgroup>
+                <fc-layoutgroup id="size" fcTitle="大小" fccontent2>
+                    <div fccontent>
+                        <fc-tag fcLabel="元数据管理" fcColor="blue" fcSize="small" fcIcon="fc-icon-reset"></fc-tag>
+                        <fc-tag fcLabel="元数据管理" fcColor="blue" fcSize="default" fcIcon="fc-icon-reset"></fc-tag>
+                        <fc-tag fcLabel="元数据管理" fcColor="blue" fcSize="small" fcIcon="fc-icon-reset"></fc-tag>
+                    </div>
+                    <fc-adcode fcfooter fcTitle="描述" fcRemark="最基本的用法。"
+                    fcview='<fc-tag fcTitle="管理员" fcColor="blue" fcIcon="fc-icon-reset"></fc-tag>'
+                    [fccode]="basicjs">
+                    </fc-adcode>
+                </fc-layoutgroup>
+                <fc-layoutgroup id="icon" fcTitle="加图标" fccontent1>
+                    <div fccontent>
+                        <fc-tag fcSize="small" fcIcon="fc-icon-reset"></fc-tag>
+                    </div>
+                    <fc-adcode fcfooter fcTitle="描述" fcRemark="标签加图标"
+                    fcview='<fc-tag  fcColor="blue" fcIcon="fc-icon-method" fcSize="large"></fc-tag>'
+                    [fccode]="basicjs">
+                    </fc-adcode>
+                </fc-layoutgroup>
+                <fc-layoutgroup id="icon" fcTitle="颜色" fccontent2>
+                    <div fccontent>
+                        <fc-tag fcSize="default" fcColor="red"  fcLabel="red"></fc-tag>
+                        <fc-tag fcSize="default" fcColor="volcano" fcLabel="volcano"></fc-tag>
+                        <fc-tag fcSize="default" fcColor="orange" fcLabel="orange"></fc-tag>
+                        <fc-tag fcSize="default" fcColor="gold" fcLabel="gold"></fc-tag>
+                    </div>
+                    <fc-adcode fcfooter fcTitle="描述" fcRemark="标签加图标"
+                    fcview='<fc-tag  fcColor="blue" fcIcon="fc-icon-method" fcSize="large"></fc-tag>'
+                    [fccode]="basicjs">
+                    </fc-adcode>
+                </fc-layoutgroup>
+                <fc-layoutgroup id="close" fcTitle="标签可关闭" fccontent1>
+                    <div fccontent>
+                        <fc-tag fcSize="default" fcColor="red" fcLabel="red" fcMode = "closeable"></fc-tag>
+                        <fc-tag fcSize="default" fcColor="volcano" fcLabel="volcano" fcMode = "closeable"></fc-tag>
+                    </div>
+                    <fc-adcode fcfooter fcTitle="描述" fcRemark="标签可关闭"
+                    [fcview]='closeview'
+                    [fccode]="closejs">
+                    </fc-adcode>
+                </fc-layoutgroup>
+                <fc-layoutgroup id="check" fcTitle="可选择" fccontent2>
+                    <div fccontent>
+                        <fc-tag fcSize="default" fcLabel="red" fcMode = "checkable" [fcChecked]="Y"></fc-tag>
+                        <fc-tag fcSize="default" fcLabel="red" fcMode = "checkable" [fcChecked]="Y"></fc-tag>
+                        <fc-tag fcSize="default" fcLabel="red" fcMode = "checkable" [fcChecked]="Y"></fc-tag>
+                    </div>
+                    <fc-adcode fcfooter fcTitle="描述" fcRemark="标签可关闭"
+                    [fcview]='checkview'
+                    [fccode]="checkjs">
+                    </fc-adcode>
+                </fc-layoutgroup>
+            </fc-layoutcol>
+        </fc-layoutpanel>
+        <!-- API -->
+        <fc-layoutpanel fccontent>
+                <fc-title id="attributesAPI" fcLabel="属性" fcheader></fc-title>
+                <div style="height:450px;" fccontent>
+                    <fc-listdata [fcAppid]="'FCFIELDS'" [fcOption]="fcOption" [fcCondition]="fcCondition"></fc-listdata>
+                </div>
+        </fc-layoutpanel>
+        <fc-layoutpanel fccontent>
+                <fc-title id="eventAPI" fcLabel="事件" fcheader></fc-title>
+                <div style="height:450px;" fccontent>
+                    <fc-listdata [fcAppid]="'FCEVENT'" [fcOption]="fcOption" [fcCondition]="fcCondition"></fc-listdata>
+                </div>
+        </fc-layoutpanel>
+    <!-- 组件内容结束 -->
+    </fc-layoutpanel>
+    <div class="fastposition-content" fccontent2>
+            <fc-fastposition [fcLinks]="
+            [
+            {href:'basic','label':'基本'},
+            {href:'icon','label':'加图标'},
+            {href:'close','label':'可关闭'},
+            {href:'check','label':'可选择'},
+            {href:'attributesAPI','label':'属性API'},
+            {href:'eventAPI','label':'事件API'}
+            ]">
+    </fc-fastposition>
+    </div>
+    </fc-layoutcol>
+        <!-- 快速定位结束 --> 
+</fc-layoutpanel>

@@ -1,0 +1,7 @@
+<!-- 组织维度 -->
+<fc-layoutpanel fcFull="true">·
+    <fc-layoutrow fcSpan="50"  fccontent>
+      <fc-tlblist fccontent1 [fcAppid]="appId" (fcEvent)="tlblistEvent($event)"></fc-tlblist>
+      <fc-listdata fccontent2 [fcAppid]="appId" (fcEvent)="componentEvents('listdataEvent',$event)"></fc-listdata>
+    </fc-layoutrow>
+</fc-layoutpanel>

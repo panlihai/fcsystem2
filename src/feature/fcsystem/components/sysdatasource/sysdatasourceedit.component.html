@@ -1,0 +1,111 @@
+<!-- 模型数据源模型事件弹窗-->
+<fc-layoutpanel class="sys-card-pannel">
+    <div class="sys-card-pannel-header" fcheader>
+        <fc-title fcLabel="数据源" class="sys-card-pannel-title"></fc-title>
+        <P class="sys-card-pannel-smarks">
+            数据源：FC基础服务平台的功能单元，开发者提供给终端用户的服务；与产品是多对一的关系；服务中包含接口、视图，默认模型 
+            提供跨越设计与开发的体验解决方案。
+        <div class="sys-card-fast">
+            <ul class="sys-fast-list">
+                <li  (click)="event('servicelistEvent')"  *ngIf="mainObj.DSID !== ''">
+                        <fc-icon fcIcon="fc-icon-checkservice" fcColor="#009DFF"></fc-icon>查看服务</li>
+                <li (click)="event('applistEvent')" *ngIf="mainObj.DSID !== ''">
+                        <fc-icon fcIcon="fc-icon-seemodel" fcColor="#009DFF"  ></fc-icon>查看模型</li>
+                <li  (click)="event('backToList')">
+                    <fc-icon fcIcon="fc-icon-developlist" fcColor="#009DFF"></fc-icon>返回列表</li>   
+            </ul>
+        </div>
+        <fc-icon class="sys-card-bg" [fcSvg]="routerParam.MENUICON"   fcWidth="48" fcHeight="48"></fc-icon>
+    </div>
+    <div class="sys-card-pannel-edit" fccontent>
+         <!-- 基本信息标题 -->
+         <fc-layoutcol fcSpans="4,6" class="notitleLine">
+            <fc-title fccontent1 fcLabel="基本信息"></fc-title>
+        </fc-layoutcol>
+        <!-- 基本信息 -->
+        <fc-layoutcol fcSpans="7,3">
+            <fc-combo  fccontent1 fcLabel="产品名称"  [fcOption]="relyDatasourceList"  [(ngModel)]="mainObj.PID"
+            name="PID"  (ngModelChange)="componentEvents('ruleaddEvent',$event)" ></fc-combo>
+            <div fccontent1 class="sys-buttonpid">
+                <fc-text  [fcAppid]="appId" fcFieldCode="DSID" [fcValid]="mainValid.DSID" fcAddOnBefore={{mainObj.PID}} fcPlaceHolder="请输入编码"fcLabel="数据源id" [(ngModel)]="mainObj.DSID" [fcValid]="mainValid.DSID" name="SYSDATASOURCE.DSID"></fc-text>                    
+            </div>
+            <fc-text fccontent1   [fcAppid]="appId" fcFieldCode="DSNAME" [fcValid]="mainValid.DSNAME" fcLabel="数据源名称" fcPlaceHolder="请输入中文" fcHelp="中文，配合id识别不同数据源" [(ngModel)]="mainObj.DSNAME"  name="SYSDATASOURCE.DSNAME"></fc-text>
+            <fc-layoutcol fccontent1 fcSpans="1,1"  class="noBottomLine">
+                <div fccontent1 class="sys-radio">
+                    <fc-long [fcAppid]="appId" fcFieldCode="SORT" [fcValid]="mainValid.SORT" [(ngModel)]="mainObj.SORT" fcLabel="排序" fcPlaceHolder="请输入整数" name="SORT"></fc-long>
+                </div>
+                <div fccontent2 class="sys-num">
+                    <fc-radio [fcAppid]="appId" fcFieldCode="ENABLE" [fcValid]="mainValid.ENABLE"  [(ngModel)]="mainObj.ENABLE" fcLabel="是否启用" [fcAppid]="appId" fcFieldCode="ENABLE" fcLabelCode="DICDESC"
+                    fcValueCode="DICVALUE" name="ENABLE" (ngModelChange)="componentEvents('enableEvent',$event)"></fc-radio>
+                </div>
+            </fc-layoutcol>
+            <fc-textarea fccontent1 fcLabel="备注" fcPlaceHolder="请输入备注" fcHelp="请输入少于200字" [(ngModel)]="mainObj.REMARK" name="SYSDATASOURCE.REMARK"></fc-textarea>
+        </fc-layoutcol>
+         <!-- 数据源信息标题 -->
+         <fc-layoutcol fcSpans="1,1" class="notitleLine">
+             <div fccontent1 style="margin-left:-3%;">
+                <fc-title   fcWidth="96%"  fcLabel="数据源信息"></fc-title>
+             </div>
+        </fc-layoutcol>
+        <!-- 数据源信息结束 -->
+        <!-- 数据源信息 -->
+        <fc-layoutcol fcSpans="7,3">
+            <fc-any fccontent1 [fcAppid]="appId" fcFieldCode="DSTYPE" [fcValid]="mainValid.DSTYPE" fcLabel="数据源类型" fcPlaceHolder="请选择"  (ngModelChange)="componentEvents('ruletypeEvent',$event)"
+             [fcAppid]="appId" fcFieldCode="DSTYPE" [(ngModel)]="mainObj.DSTYPE" fcLabelCode="DICDESC"
+             fcValueCode="DICVALUE" name="SYSPRODUCT.DSTYPE" fcHelp="仅限关系型数据库"></fc-any>
+            <fc-text fccontent1  [fcAppid]="appId" fcFieldCode="URL" [fcValid]="mainValid.URL" fcLabel="请url" fcPlaceHolder="请输入链接地址" [(ngModel)]="mainObj.URL" name="SYSDATASOURCE.URL" fcHelp="如：jdbc:oracle:thin:@127.0.0.1:1521:orcl"></fc-text>
+            <!-- <div fccontent1 class="sys-tab">如：jdbc:oracle:thin:@127.0.0.1:1521:orcl</div>-->
+            <fc-text fccontent1 [fcAppid]="appId" fcFieldCode="USERNAME" [fcValid]="mainValid.USERNAME"  fcLabel="数据源用户名" fcPlaceHolder="请输入中文" [(ngModel)]="mainObj.USERNAME" name="SYSDATASOURCE.USERNAME"></fc-text>
+            <fc-layoutcol fcSpans="8,2" fccontent1 class="noBottomLine">
+                <div fccontent1  *ngIf = "passwordVisable" style="margin-left: 9%;">
+                    <fc-text [fcAppid]="appId" fcFieldCode="PASSWORD" [fcValid]="mainValid.PASSWORD"  fcLabel="数据源密码" fcPlaceHolder="请输入密码"  fcHelp="点击查看密码将记录日志，填写查看人的用户名密码查看；"  [fcType]="'password'" [(ngModel)]="mainObj.PASSWORD" name="SYSDATASOURCE.PASSWORD"></fc-text>
+                </div>
+                <div fccontent1  *ngIf = "!passwordVisable"  style="margin-left: 9%;">
+                    <fc-text [fcAppid]="appId" fcFieldCode="PASSWORD" [fcValid]="mainValid.PASSWORD"  fcLabel="数据源密码"  fcHelp="点击查看密码将记录日志，填写查看人的用户名密码查看；" fcPlaceHolder="请输入密码" [(ngModel)]="mainObj.PASSWORD" name="SYSDATASOURCE.PASSWORD"></fc-text>
+                </div>
+                <div fccontent2 (click)="event('passwordEvent')" style="margin-top:5%;cursor:pointer;margin-left:-20%;"
+                fcHelp="点击查看密码将记录日志，填写查看人的用户名密码查看；">
+                    <fc-tooltip fcTitle="查看密码">
+                        <fc-icon fccontent fcIcon="fc-icon-preview" fcPosition="right" ></fc-icon>
+                    </fc-tooltip>
+                </div>
+            </fc-layoutcol>
+        </fc-layoutcol>
+        <!-- 其他信息标题 -->
+        <fc-layoutcol fcSpans="4,6"  class="notitleLine">
+            <fc-title fccontent1 fcLabel="其它信息"></fc-title>
+        </fc-layoutcol>
+        <!-- 其它信息 -->
+        <fc-layoutcol fcSpans="7,3" class="notitleLine">
+            <div class="sys-choose-icon" fccontent1>
+                <fc-title fccontent1 fcLabel="数据源图标"></fc-title>
+                 <!-- 弹窗 -->
+                 <fc-modalcard fcEvent="modalEvent($event)" fcWidth="60%">
+                        <sysicondialog  fccontent></sysicondialog>
+                        <div class="sys-choose-icon-box" (click)="selectIcon()" fcopen>
+                            <fc-icon [fcIcon]="mainObj.ICON" fcFontSize="30px" fcHelp="请选择一个字体图标"></fc-icon>
+                            <div *ngIf="mainObj.ICON===''" class="sys-uploadall">
+                                <span class="sys-icon-upload"><fc-icon fcIcon="fc-icon-add"></fc-icon></span>
+                                <span>选择图标</span>
+                            </div>
+                            <span class="sys-deleticon" (click)="mainObj.ICON = '';$event.stopPropagation();">x</span>
+                        </div>
+                  </fc-modalcard>
+            </div>
+        </fc-layoutcol>
+        <fc-layoutcol fcSpans="1,0">
+            <div fccontent1 style="padding-top:20px;padding-bottom:20px ; text-align:center;">
+                <div fccontent class="sys-button">
+                    <span fccontent style="margin-right: 15px;">
+                        <fc-button  [fcType]="'primary'" fcLabel="保存" (click)="cardSave('cardSave')">
+                        </fc-button>
+                    </span>
+                    <span fccontent  *ngIf = "topbutton">
+                        <fc-button [fcType]="'default'" fcLabel="+模型"  (click)="event('btnCardAddModel')">
+                        </fc-button>
+                    </span>
+                </div> 
+            </div>
+        </fc-layoutcol>
+    </div>
+</fc-layoutpanel>

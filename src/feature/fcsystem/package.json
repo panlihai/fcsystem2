@@ -1,0 +1,20 @@
+{
+    "name": "fcsystem",
+    "version": "0.0.2",
+    "license": "MIT",
+    "scripts": {
+      "ng": "ng",
+      "start": "ng serve --proxy-config proxy.config.json --host=0.0.0.0 --port=8210",
+      "build": "ng build --prod",
+      "test": "ng test",
+      "lint": "ng lint",
+      "e2e": "ng e2e"
+    },
+    "private": false,
+    "dependencies": {
+      
+    },
+    "devDependencies": {
+    }
+  }
+  

@@ -1,0 +1,58 @@
+<fc-layoutpanel class="sys-card-pannel">
+    <div class="sys-card-pannel-header" fcheader>
+        <fc-title fcLabel="功能-视图编辑" class="sys-card-pannel-title" fcHasLine="N"></fc-title>
+        <P class="sys-card-pannel-smarks">
+            视图：FC基础服务平台的功能单元，开发者提供给终端用户的组件界面样式服务；与功能是多对一的关系；支持多个类型的视图，包含栏目视图、查询视图、 卡片视图、自定义视图等
+        </P>
+        <div class="sys-card-fast">
+            <ul class="sys-fast-list">
+                <li class="sys-icon-btn" (click)="event('backToFuncEdit')">
+                    <fc-icon fcIcon="fc-icon-developservice" fcColor="#009DFF"></fc-icon>返回服务
+                </li>
+            </ul>
+        </div>
+        <fc-icon class="sys-card-bg" [fcSvg]="routerParam.MENUICON" fcWidth="48" fcHeight="48"></fc-icon>
+    </div>
+    <div class="sys-card-pannel-edit" fccontent>
+        <fc-layoutcol fcSpans="6,4" fccontent>
+            <fc-title fccontent1 fcLabel="基本信息" fcHasLine="N"></fc-title>
+            <fc-layoutcol fcSpans="9,1" fccontent1>
+                <fc-text fccontent1 fcLabel="视图编码" [(ngModel)]="mainObj.VIEWID" [fcAppid]="appId" fcFieldCode="VIEWID" [fcValid]="mainValid.VIEWID"  name="VIEWID"></fc-text>
+                <fc-text fccontent1 fcLabel="视图名称" [(ngModel)]="mainObj.VIEWNAME" [fcAppid]="appId" fcFieldCode="VIEWNAME" [fcValid]="mainValid.VIEWNAME" name="VIEWNAME"></fc-text>
+                <fc-radio fccontent1 [(ngModel)]="mainObj.CATAGORY" [fcAppid]="appId" fcFieldCode="CATAGORY" [fcValid]="mainValid.CATAGORY"  fcLabelCode="DICDESC" fcValueCode="DICVALUE"
+                    name="CATAGORY"></fc-radio>
+                <fc-radio fccontent1 [(ngModel)]="mainObj.ISDEFAULT" [fcAppid]="appId" fcFieldCode="ISDEFAULT"  [fcValid]="mainValid.ISDEFAULT" fcLabelCode="DICDESC" fcValueCode="DICVALUE"
+                    name="ISDEFAULT"></fc-radio>
+            </fc-layoutcol>
+        </fc-layoutcol>
+        <fc-tlbform fcLayout="center" fcType="primary" [fcAppid]="appId" (fcEvent)="tlbformEvent($event)"></fc-tlbform>
+        <fc-layoutcol fcSpans="6,4" *ngIf="routerParam.ID" fccontent>
+            <fc-title fccontent1 fcLabel="元素编辑" fcHasLine="N"></fc-title>
+            <h2>请选择模型，拖拽至属性字段</h2>
+        </fc-layoutcol>
+        <!-- <fc-layoutcol fcSpans="3,7" *ngIf="routerParam.ID" fccontent>
+            <fc-many fccontent1 [ngModel]="selectedApp" (ngModelChange)="event('selectApp',$event)" [fcShowSearch]="true" [fcShowLabel]="false" fcPlaceHolder="请选择模型，支持多选" [fcOption]="sysApps" fcLabelCode="APPNAME" fcValueCode="APPID"></fc-many>
+            <div fccontent2 class="btnAdd-dragable-area" (click)="event('editViewElement',{})" app-droppable [dropTags]="['selectedField', 'selectedApp']" [dragEnterClass]="'drag-enter'" (dropped)="event('handleDropped',$event)">+ 添加</div>
+            <div fccontent1 class="selectList-tree-area">
+                <div class="selectList-title-area">备选模型&字段</div>
+                <div class="selectList-content-area">
+                    <ul class="selectList-element-container" [app-draggable]="true" [dragTag]="'selectedApp'" [draggedClass]="'drag-start'" [dragData]="selectedApp" *ngFor="let selectedApp of selectedApps;trackBy: trackByIndex">
+                        <li class="selectList-element-area">
+                            <div class="selectList-element-header">
+                                <span class="selectList-element-icon-open" *ngIf="!selectedApp.open" (click)="selectedApp.open=!selectedApp.open">+</span>
+                                <span class="selectList-element-icon-close" *ngIf="selectedApp.open" (click)="selectedApp.open=!selectedApp.open">-</span>
+                                <span class="selectList-element-text-main"> {{selectedApp.TABLETYPE==='TABLE'?'T':'V'}} : {{selectedApp.APPNAME}} - {{selectedApp.MAINTABLE}} </span>
+                            </div>
+                            <ul class="selectList-child-area" *ngIf="selectedApp.open">
+                                <li class="selectList-child-text" *ngFor="let selectedField of selectedApp.P_APPFIELDS;trackBy: trackByIndex" [app-draggable]="true" [dragTag]="'selectedField'" [draggedClass]="'drag-start'" [dragData]="selectedField"> {{selectedField.FIELDCODE}} - {{selectedField.FIELDNAME}} </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div fccontent2 class="selectList-list-area">
+                <fc-list fcAppid="SYSVIEWELEMENT" fcFieldCode="ELEMENTID" fcLabelCode="ELEMENTNAME" fcValueCode="ELEMENTID" [fcCondition]="listCondition" fcIcon="fc-icon-picture" fcSubTitleCode="HELP" fcStatusCode='ELEMENTNAME' [fcCheckValue]="{'processing':'processing','warning':'warning','error':'error','default':'default'}" (fcEvent)="event('selectElementToEdit',$event)">></fc-list>
+            </div>
+        </fc-layoutcol> -->
+    </div>
+</fc-layoutpanel>

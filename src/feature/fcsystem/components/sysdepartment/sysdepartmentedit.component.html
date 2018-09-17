@@ -1,0 +1,73 @@
+<!--部门修改  -->
+<fc-layoutpanel class="templatefastposition ">
+    <fc-layoutrow fcSpan="30" fccontent>
+        <fc-tlbform fcAppid="appId" fccontent1></fc-tlbform>
+        <fc-layoutcol fcSpans="9,1" fccontent2>
+            <fc-layoutpanel fccontent1>
+                <form fccontent>
+                    <fc-layoutpanel fccontent id="basic-information">
+                        <fc-title fcLabel="基本信息" fcBorder="bottom" fcWidth="96%" fcheader></fc-title>
+                        <fc-layoutcol fcSpans="1,1" fccontent>
+                            <div fccontent1>
+                                <fc-text [fcLabel]="'部门代码'" name="textname"></fc-text>
+                                <fc-check [fcLabel]="'虚拟部门'" [(ngModel)]="checkValue" [fcOption]="checkOptions" name="checkname"></fc-check>
+                                <fc-combo [fcLabel]="'业务单元'" [(ngModel)]="comboValue" [fcOption]="comboOptions" name="comboname"></fc-combo>
+                                <fc-combo [fcLabel]="'维度'" [(ngModel)]="comboValue" [fcOption]="comboOptions" name="comboname"></fc-combo>
+                                <fc-date [fcLabel]="'生效日期'" name="datename"></fc-date>
+                                <fc-text [fcLabel]="'联系电话'" name="textname"></fc-text>
+                                <fc-text [fcLabel]="'邮政编码'" name="textname"></fc-text>
+                                <fc-text [fcLabel]="'地址'" name="textname"></fc-text>
+                            </div>
+                            <div fccontent2>
+                                <fc-text [fcLabel]="'部门名称'" name="textname"></fc-text>
+                                <fc-combo [fcLabel]="'层级'" [(ngModel)]="comboValue" [fcOption]="comboOptions" name="comboname"></fc-combo>
+                                <fc-combo [fcLabel]="'业务类型'" [(ngModel)]="comboValue" [fcOption]="comboOptions" name="comboname"></fc-combo>
+                                <fc-date [fcLabel]="'成立日期'" name="datename"></fc-date>
+                                <fc-date [fcLabel]="'注销日期'" name="datename"></fc-date>
+                                <fc-text [fcLabel]="'传真'" name="textname"></fc-text>
+                                <fc-textarea [fcLabel]="'部门职责'" name="textareaname" [fcRow]="'2'"></fc-textarea>
+                            </div>
+                        </fc-layoutcol>
+                        <fc-layoutcol fcSpans="1,0" fccontent class="save-button">
+                            <fc-button fcLabel="保存" fccontent1 fcType="primary"></fc-button>
+                        </fc-layoutcol>
+                    </fc-layoutpanel>
+                    <fc-layoutpanel fccontent id="higher-unit">
+                        <fc-title fcLabel="上级单位" fcBorder="bottom" fcheader fcWidth="96%"></fc-title>
+                        <table border="1" fccontent class="fc-table">
+                            <thead>
+                                <tr>
+                                    <th>上级</th>
+                                    <th>生效日期</th>
+                                    <th>失效日期</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </fc-layoutpanel>
+                    <fc-layoutpanel fccontent id="head-information">
+                        <fc-title fcLabel="负责人信息" fcBorder="bottom" fcheader fcWidth="96%"></fc-title>
+                        <fc-layoutcol fcSpans="1,1" fccontent>
+                            <fc-combo fccontent1 [fcLabel]="'负责人类型'" [(ngModel)]="comboValue" [fcOption]="comboOptions" name="comboname"></fc-combo>
+                            <fc-combo fccontent2 [fcLabel]="'负责人'" [(ngModel)]="comboValue" [fcOption]="comboOptions" name="comboname"></fc-combo>
+                        </fc-layoutcol>
+                        <fc-layoutcol fcSpans="1,0" fccontent class="save-button">
+                            <fc-button fcLabel="保存" fccontent1 fcType="primary"></fc-button>
+                        </fc-layoutcol>
+                    </fc-layoutpanel>
+                </form>
+            </fc-layoutpanel>
+            <div class="fastposition-content" fccontent2>
+                <div>
+                    <fc-fastposition fccontent [fcLinks]="[{href:'basic-information','label':'基本信息'},{href:'higher-unit','label':'上级单位'},{href:'head-information','label':'负责人信息'}]"></fc-fastposition>
+                </div>
+            </div>
+        </fc-layoutcol>
+    </fc-layoutrow>
+</fc-layoutpanel>
