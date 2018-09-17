@@ -16,10 +16,6 @@ export const AppRoutes: Routes = [
                 component: ErrorComponent
             },
             {
-                path: '',//例子
-                loadChildren: 'fcfa/index.module#FcfaModule'
-            },
-            {
                 path: 'system',//平台功能
                 loadChildren: 'fcsystem/index.module#SystemModule'
             }
