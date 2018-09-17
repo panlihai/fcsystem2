@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  pid: "FCFA",
+  pid: "SYSTEM",
   projectName: "FC快速开发平台",
   systemurl: "/server/",
   apiurl: "/server/api/",
