@@ -29,7 +29,7 @@ export default class SysdepartmentBusiness extends ParentBusiness {
     * @param companyCode 
     */
   static getCompanyEndDate(companyCode) {
-    return this.appService.findWithQuery('SYSCOMPANY', { where: "{SCOMPANY_CODE:{eq:'`+${companyCode}+`'}}" })
+    return SysdepartmentBusiness.appService.findWithQuery('SYSCOMPANY', { where: "{SCOMPANY_CODE:{eq:'`+${companyCode}+`'}}" })
   }
   /** 
     * 保存前进行的部门员工信息处理
@@ -53,13 +53,13 @@ export default class SysdepartmentBusiness extends ParentBusiness {
       el['SMODIFIER'] = SysdepartmentBusiness.getUserinfo().USERCODE;
       el['SMODIFI_TIME'] = CommonService.getDate('');
       el['SCOMPANY_CODE'] = mainObj['SCOMPANY_CODE']
-      this.appService.updateObject("SYSEMPLOYEE", el).subscribe(res => {
+      SysdepartmentBusiness.appService.updateObject("SYSEMPLOYEE", el).subscribe(res => {
         if (res.CODE === '0') {
           if (!msgCountOne) {
             SysdepartmentBusiness.msgService.success("职员信息更新成功");
             msgCountOne = true;
             success = true;
-            this.updateEmployeeSubject.next(success);
+            SysdepartmentBusiness.updateEmployeeSubject.next(success);
           }
         } else {
           if (!msgCountOne) {
@@ -85,7 +85,7 @@ export default class SysdepartmentBusiness extends ParentBusiness {
       })
     }
     if (ids && ids.length !== 0) {
-      let s = this.arrayToSqlString(ids)
+      let s = SysdepartmentBusiness.arrayToSqlString(ids)
       return { WHERE: `ID NOT IN (${s})` }
     }
   }
@@ -157,7 +157,7 @@ export default class SysdepartmentBusiness extends ParentBusiness {
   * @param dialogListArgs 
   */
   openDialog(dialogListArgs: DialogListArgs) {
-    // return this.nzModal.open({
+    // return SysdepartmentBusiness.nzModal.open({
     //   title: dialogListArgs.configInterface.title ? dialogListArgs.configInterface.title : '',
     //   content: dialogListArgs.configInterface.content ? dialogListArgs.configInterface.content : DialogListComponent,
     //   onOk() { },
@@ -176,7 +176,7 @@ export default class SysdepartmentBusiness extends ParentBusiness {
     * @param id 
     */
   static getDefaultDataById(param: any): Observable<any> {
-    // return this.initMainObj(param);
+    // return SysdepartmentBusiness.initMainObj(param);
     return;
   }
   /** 
@@ -184,14 +184,14 @@ export default class SysdepartmentBusiness extends ParentBusiness {
     * @param id 
     */
   static getModifyDepartmentRelationData(param: any): Observable<any> {
-    // return this.appService.initMainObj(param);
+    // return SysdepartmentBusiness.appService.initMainObj(param);
     return
   }
   /** 
     * 获取部门隶属关系的字段
     */
   static getSysdepartmentrelationField() {
-    this.appService.getFormFieldsByAppid("SYSCOMPANYRELATION").forEach(item => {
+    SysdepartmentBusiness.appService.getFormFieldsByAppid("SYSCOMPANYRELATION").forEach(item => {
       return item;
     });
   }
@@ -238,18 +238,18 @@ export default class SysdepartmentBusiness extends ParentBusiness {
   static cloneTreeObj(dim: string, sendDate: string) {
     //改变值
     let cloneObj: any = {};
-    cloneObj = CommonService.cloneObj(this.departmentTreeOptions);
+    cloneObj = CommonService.cloneObj(SysdepartmentBusiness.departmentTreeOptions);
     //根节点条件
     cloneObj.fcTopWhere = "{or:[{SPARENT_CODE:{is:'null'}},{SPARENT_CODE:''}],SDIM_CODE:{eq:'" + dim + "'},SBEGIN_DATE:{lte:'" + sendDate + "'},SEND_DATE:{gte:'" + sendDate + "'}}";
     //展开条件
     cloneObj.fcExpWhere = "{SPARENT_CODE:{eq:'#{SDEPT_CODE}#'},SDIM_CODE:{eq:'" + dim + "'},SBEGIN_DATE:{lte:'" + sendDate + "'},SEND_DATE:{gte:'" + sendDate + "'}}",
-      this.departmentTreeOptions = cloneObj;
+      SysdepartmentBusiness.departmentTreeOptions = cloneObj;
   }
   /** 
     * 获取组织机构视图数据
     */
   // static getDeptData(): Observable<any> {
-  //   return this.systbvdeptcurorgService.findWithQueryAll({
+  //   return SysdepartmentBusiness.systbvdeptcurorgService.findWithQueryAll({
   //   });
   // }
   /** 
@@ -257,7 +257,7 @@ export default class SysdepartmentBusiness extends ParentBusiness {
     * @param mainObj 
     */
   static beforeSave(mainObj: any) {
-    mainObj = this.buildScratorInfo(mainObj)
+    mainObj = SysdepartmentBusiness.buildScratorInfo(mainObj)
     return mainObj;
   }
   /** 

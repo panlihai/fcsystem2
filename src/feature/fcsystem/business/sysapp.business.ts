@@ -37,12 +37,12 @@ export class SysappBusiness extends ParentBusiness {
    * 修改元数据的名称
    */
   static modifyAppFieldsName(): void {
-    let ob = this.daoService.getFromApi("SYSTEM/SYSAPP/modifyFieldsName", {});
+    let ob = SysappBusiness.daoService.getFromApi("SYSTEM/SYSAPP/modifyFieldsName", {});
     ob.subscribe(result => {
       if (result.CODE === '0') {
-        this.logService.debug(result);
+        SysappBusiness.logService.debug(result);
       } else {
-        this.logService.error(result.MSG);
+        SysappBusiness.logService.error(result.MSG);
       }
     });
   }
@@ -52,19 +52,19 @@ export class SysappBusiness extends ParentBusiness {
    * @param appId 
    */
   static findAppFieldsByAppid(appId: string): Observable<any> {
-    return this.appService.findWithQuery("SYSAPPFIELDS", { WHERE: "{APPID:{eq:'" + appId + "'}}" });
+    return SysappBusiness.appService.findWithQuery("SYSAPPFIELDS", { WHERE: "{APPID:{eq:'" + appId + "'}}" });
   }
   /**
    * 获取产品
    */
   static getproduct(): Observable<any> {
-    return this.appService.findWithQuery("SYSPRODUCT", {});
+    return SysappBusiness.appService.findWithQuery("SYSPRODUCT", {});
   }
   /**
    * 获取数据源
    */
   static getdatasource(): Observable<any> {
-    return this.appService.findWithQuery("SYSDATASOURCE", {});
+    return SysappBusiness.appService.findWithQuery("SYSDATASOURCE", {});
   }
   /**
   * 根据appid和appname获取当前元数据的ID
@@ -72,42 +72,42 @@ export class SysappBusiness extends ParentBusiness {
   * @param appname 
   */
   static getID(appid, appname): Observable<any> {
-    return this.appService.findWithQuery("SYSAPP", { WHERE: "{APPID:{eq:'" + appid + "'},{APPNAME:{eq:'" + appname + "'}" })
+    return SysappBusiness.appService.findWithQuery("SYSAPP", { WHERE: "{APPID:{eq:'" + appid + "'},{APPNAME:{eq:'" + appname + "'}" })
   }
   /**
   * 根据appid获取模型属性数据
   * @param appid 
   */
   static getSysAttributes(appid): Observable<any> {
-    return this.appService.findWithQuery('SYSAPPFIELDS', { WHERE: "{APPID:{eq:'" + appid + "'}}" });
+    return SysappBusiness.appService.findWithQuery('SYSAPPFIELDS', { WHERE: "{APPID:{eq:'" + appid + "'}}" });
   }
   /**
   * 根据appid获取模型事件数据
   * @param appid 
   */
   static getSysEvents(appid): Observable<any> {
-    return this.appService.findWithQuery('SYSAPPBUTTONS', { WHERE: "{APPID:{eq:'" + appid + "'}}" });
+    return SysappBusiness.appService.findWithQuery('SYSAPPBUTTONS', { WHERE: "{APPID:{eq:'" + appid + "'}}" });
   }
   /**
    * 根据appid获取模型接口数据
    * @param appid 
    */
   static getSysInterfaces(appid): Observable<any> {
-    return this.appService.findWithQuery('SYSINTERFACE', { WHERE: "{APPID:{eq:'" + appid + "'}}" })
+    return SysappBusiness.appService.findWithQuery('SYSINTERFACE', { WHERE: "{APPID:{eq:'" + appid + "'}}" })
   }
   /**
    * 根据appid获取与其它模型关系数据
    * @param appid 
    */
   static getSysLinks(appid): Observable<any> {
-    return this.appService.findWithQuery('SYSAPPLINKS', { WHERE: "{MAINAPP:{eq:'" + appid + "'}}" })
+    return SysappBusiness.appService.findWithQuery('SYSAPPLINKS', { WHERE: "{MAINAPP:{eq:'" + appid + "'}}" })
   }
   /**
   * 获取模型配置
   * @param dsid 
   */
   static getTableOption(dsid: string, pid: string) :Observable<any> {
-    return this.daoService.getFromApi(CommonService.getUrlBy("SYSTEM", 'SYSMODEL', "findTableViewByDsid"), { DSID: dsid, PRODUCTID: pid })
+    return SysappBusiness.daoService.getFromApi(CommonService.getUrlBy("SYSTEM", 'SYSMODEL', "findTableViewByDsid"), { DSID: dsid, PRODUCTID: pid })
 
   }
   /**
@@ -116,7 +116,7 @@ export class SysappBusiness extends ParentBusiness {
    * @param dsid 
    */
   static getModelField(tableNames: string, dsid: string, pid: string): Observable<any> {
-    return this.daoService.getFromApi(CommonService.getUrlBy("SYSTEM", 'SYSMODEL', "findFieldByTablenames"), { DSID: dsid, PRODUCTID:pid, TABLENAMES: tableNames })
+    return SysappBusiness.daoService.getFromApi(CommonService.getUrlBy("SYSTEM", 'SYSMODEL', "findFieldByTablenames"), { DSID: dsid, PRODUCTID:pid, TABLENAMES: tableNames })
   }
   /**
   * 一键生成
@@ -124,7 +124,7 @@ export class SysappBusiness extends ParentBusiness {
   */
   static createSysappsByTableNames(dsid:string,data: any[]): Observable<any> {
     let param = {DSID:dsid,TABLENAMES:data.join(',')}
-    return this.daoService.getFromApi(CommonService.getUrlBy('SYSTEM','SYSMODEL','createSysappsByTableNames'),param);
+    return SysappBusiness.daoService.getFromApi(CommonService.getUrlBy('SYSTEM','SYSMODEL','createSysappsByTableNames'),param);
   }
   /** 
     *弹窗事件
@@ -138,10 +138,10 @@ export class SysappBusiness extends ParentBusiness {
       title: title,
       content: content,
       okFunc: (result) => {
-        this.logService.debug("ok");
+        SysappBusiness.logService.debug("ok");
       },
       cancelFunc: (result) => {
-        this.logService.debug("ok");
+        SysappBusiness.logService.debug("ok");
       },
       // footer?: any;
       token: token
@@ -165,11 +165,11 @@ export class SysappBusiness extends ParentBusiness {
       title: title,
       content: content,
       okFunc: (result) => {
-        this.logService.debug("ok");
+        SysappBusiness.logService.debug("ok");
 
       },
       cancelFunc: (result) => {
-        this.logService.debug("ok");
+        SysappBusiness.logService.debug("ok");
       },
       // footer?: any;
       token: token
@@ -182,7 +182,7 @@ export class SysappBusiness extends ParentBusiness {
    * @param condition 
    */
   static _findWithQuery(appId, condition) {
-    return this.appService.findWithQuery(appId, condition);
+    return SysappBusiness.appService.findWithQuery(appId, condition);
   }
   /**模型-事件弹窗
   * YM
@@ -190,25 +190,25 @@ export class SysappBusiness extends ParentBusiness {
   * @param app 
   */
   static initObjDefaultValue(app) {
-    return this.appService.initObjDefaultValue(app);
+    return SysappBusiness.appService.initObjDefaultValue(app);
   }
   /**模型-关系弹窗
    *  获取APPLINKS所有数据
    * @param event  
    */
   static applinksall() {
-    return this.appService.findWithQuery('SYSAPP', {})
+    return SysappBusiness.appService.findWithQuery('SYSAPP', {})
   }
   /**模型-关系弹窗
    * 保存appbuttons表
    * @param obj
    */
-  static childrensave(obj) {
-    return this.appService.saveObject('SYSAPPLINKS', obj).subscribe(res => {
+  static childrensave(obj):void {
+     SysappBusiness.appService.saveObject('SYSAPPLINKS', obj).subscribe(res => {
       if (res.CODE = '0') {
-        this.msgService.success('保存成功');
+        SysappBusiness.msgService.success('保存成功');
       } else if (res.CODE = '1') {
-        this.msgService.error('保存失败')
+        SysappBusiness.msgService.error('保存失败')
       }
     })
   }
@@ -216,12 +216,12 @@ export class SysappBusiness extends ParentBusiness {
    * 修改子表数据
    * @param obj
    */
-  static childrenupdate(obj) {
-    return this.appService.updateObject('SYSAPPLINKS', obj).subscribe(res => {
+  static childrenupdate(obj):void {
+     SysappBusiness.appService.updateObject('SYSAPPLINKS', obj).subscribe(res => {
       if (res.CODE = '0') {
-        this.msgService.success('保存成功');
+        SysappBusiness.msgService.success('保存成功');
       } else if (res.CODE = '1') {
-        this.msgService.error('保存失败')
+        SysappBusiness.msgService.error('保存失败')
       }
     })
   }
@@ -230,14 +230,14 @@ export class SysappBusiness extends ParentBusiness {
    * @param dialogArgs 
    */
   static getGroup() {
-    return this.appService.findWithQuery('SYSAPPFLDGROUP', {})
+    return SysappBusiness.appService.findWithQuery('SYSAPPFLDGROUP', {})
   }
   /** YM
   * 打开窗口的函数方法
   * @param dialogArgs 
   */
   // openDialog(dialogArgs: DialogListArgs) {
-  //   return this.nzModal.open({
+  //   return SysappBusiness.nzModal.open({
   //     title: dialogArgs.configInterface.title ? dialogArgs.configInterface.title : '',
   //     content: dialogArgs.configInterface.content ? dialogArgs.configInterface.content : DialogListComponent,
   //     onOk() { },
@@ -255,7 +255,7 @@ export class SysappBusiness extends ParentBusiness {
    * @param appId 
    */
   static getFieldOptionByAppId(appId) {
-    let fields = this.appService.getFieldsByAppid(appId, 'APPID', appId);
+    let fields = SysappBusiness.appService.getFieldsByAppid(appId, 'APPID', appId);
     let arr: Array<{ [key: string]: any }> = [];
     fields.forEach(el => {
       arr.push({ label: el.FIELDNAME, value: el.FIELDCODE });
@@ -289,6 +289,6 @@ export class SysappBusiness extends ParentBusiness {
  * @param appid 模型id
  */
   static createStandardEvent(appid: string): Observable<any> {
-    return this.daoService.postFromApi(CommonService.getUrlBy("SYSTEM", 'SYSMODEL', "createStandardEvent"),{}, { AID: appid });
+    return SysappBusiness.daoService.postFromApi(CommonService.getUrlBy("SYSTEM", 'SYSMODEL', "createStandardEvent"),{}, { AID: appid });
   }
 }

@@ -44,9 +44,9 @@ export class SysroleBusiness extends ParentBusiness {
       obj.SORT = CommonService.getTimestamp();
       obj.ROLEID = CommonService.getTimestamp();
       obj.PID = SysroleBusiness.appService.moduleId;
-      return this.appService.saveObject("SYSROLE", obj)
+      return SysroleBusiness.appService.saveObject("SYSROLE", obj)
     } else {
-      return this.appService.updateObject("SYSROLE", obj)
+      return SysroleBusiness.appService.updateObject("SYSROLE", obj)
     }
   }
 
@@ -54,7 +54,7 @@ export class SysroleBusiness extends ParentBusiness {
    * 得到所有的菜单内容并转化成树形结构
    */
   static getAllMenu(): any[] {
-    return this.menuToTree(this.menuService.menus);
+    return SysroleBusiness.menuToTree(SysroleBusiness.menuService.menus);
   }
   /**
    * 把菜单结构转成树形结构
@@ -76,7 +76,7 @@ export class SysroleBusiness extends ParentBusiness {
             DATA: menu
           };
           if (menu.P_CHILDMENUS && menu.P_CHILDMENUS.length !== 0) {
-            node.children = this.menuToTree(menu.P_CHILDMENUS);
+            node.children = SysroleBusiness.menuToTree(menu.P_CHILDMENUS);
             node.hasChildren = true;
           }
           nodes.push(node);
@@ -91,7 +91,7 @@ export class SysroleBusiness extends ParentBusiness {
    * @param authList 权限集合
    */
   static getAuthMenu(nodes: any[], authList: any[]) {
-    if (authList && authList.length > 0) this.treeToAuthTree(nodes, authList);
+    if (authList && authList.length > 0) SysroleBusiness.treeToAuthTree(nodes, authList);
   }
   /**
    * 根据权限在菜单中显示是否选中，有权限则选中或半选中状态，回调实现子节点的权限显示
@@ -109,7 +109,7 @@ export class SysroleBusiness extends ParentBusiness {
           }
         }
         if (node.hasChildren) {
-          this.treeToAuthTree(node.children, authList);
+          SysroleBusiness.treeToAuthTree(node.children, authList);
         }
       });
     }
@@ -123,15 +123,15 @@ export class SysroleBusiness extends ParentBusiness {
     let where = {
       WHERE: "AND USERCODE not in (select USERID from Sys_roleuser t where t.ROLEID='" + roleId + "')"
     }
-    this.userCondition = JSON.stringify(where);
+    SysroleBusiness.userCondition = JSON.stringify(where);
   }
   /**
    * 根据角色id获取用户的权限信息
    * @param roleId 角色id      
    */    
   static getAuthByRoleid(roleId: string): Observable<any> {
-    // return this.appService.findAppWithQuery({ ROLEID: roleId })
-    return this.appService.findWithQuery("SYSROLEAUTH",{ where: "{ROLEID:{eq:'`+${roleId}+`'}}" });
+    // return SysroleBusiness.appService.findAppWithQuery({ ROLEID: roleId })
+    return SysroleBusiness.appService.findWithQuery("SYSROLEAUTH",{ where: "{ROLEID:{eq:'`+${roleId}+`'}}" });
   }
   /**
   * 根据角色id获取用户信息
@@ -139,9 +139,9 @@ export class SysroleBusiness extends ParentBusiness {
   */
   static getUserByRoleid(roleId: string): Observable<any> {
     // let where = "AND usercode in (select userid from sys_roleuser where roleid='" + roleId + "')";
-    // return this.appService.findWithQuery('SYSUSER', { WHERE: where });
-    // return  this.appService.findWithQuery('SYSUSER',{ where: "{ROLEID:{eq:'`+${roleId}+`'}}" });
-    return  this.appService.findWithQuery('SYSUSER',{});
+    // return SysroleBusiness.appService.findWithQuery('SYSUSER', { WHERE: where });
+    // return  SysroleBusiness.appService.findWithQuery('SYSUSER',{ where: "{ROLEID:{eq:'`+${roleId}+`'}}" });
+    return  SysroleBusiness.appService.findWithQuery('SYSUSER',{});
   }
   /**
    * 删除当前角色下的用户
@@ -167,7 +167,7 @@ export class SysroleBusiness extends ParentBusiness {
         PID: role.PID
       });
     });
-    // this.sysroleuserService.saveList(roleUserList).subscribe(result => {
+    // SysroleBusiness.sysroleuserService.saveList(roleUserList).subscribe(result => {
     //   if (result.CODE === '0') {
 
     //   } else {
@@ -181,15 +181,15 @@ export class SysroleBusiness extends ParentBusiness {
    * @param 选中的角色
    */
   static postAuthToRole(roleId: string, param: any, authList: any[]): any {
-    let datas: any[] = this.getRoleauthByChildNode(roleId, param.node.data);
+    let datas: any[] = SysroleBusiness.getRoleauthByChildNode(roleId, param.node.data);
     // 增加权限
     if (param.checked) {
-      datas = datas.concat(this.getRoleauthByParentNode(roleId, param.node, authList));
-      // return this.sysroleauthService.saveList(datas);
+      datas = datas.concat(SysroleBusiness.getRoleauthByParentNode(roleId, param.node, authList));
+      // return SysroleBusiness.sysroleauthService.saveList(datas);
       return
     } else {
       // 删除权限
-      // return this.sysroleauthService.delete(datas);
+      // return SysroleBusiness.sysroleauthService.delete(datas);
       return;
     }
   }
@@ -216,7 +216,7 @@ export class SysroleBusiness extends ParentBusiness {
       if (auths.length === 0) {
         datas.push(data);
       }
-      let ds = this.getRoleauthByParentNode(roleId, node.parent, authList);
+      let ds = SysroleBusiness.getRoleauthByParentNode(roleId, node.parent, authList);
       datas = datas.concat(ds);
     }
     return datas;
@@ -241,7 +241,7 @@ export class SysroleBusiness extends ParentBusiness {
     });
     if (data.hasChildren) {
       data.children.forEach(d => {
-        let ds = this.getRoleauthByChildNode(roleId, d);
+        let ds = SysroleBusiness.getRoleauthByChildNode(roleId, d);
         datas = datas.concat(ds);
       });
     }

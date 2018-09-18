@@ -13,7 +13,7 @@ export class SysmenuBusiness extends ParentBusiness {
   	* 根据产品名称获取PID
   	*/
 	static getPid(pname): Observable<any> {
-		return this.appService.findWithQuery('SYSPRODUCT', { PNAME: pname })
+		return SystemBusiness.appService.findWithQuery('SYSPRODUCT', { PNAME: pname })
 	}
 	/**
 	* 获取所有菜单
@@ -21,7 +21,7 @@ export class SysmenuBusiness extends ParentBusiness {
 	* @description 查詢
 	*/
 	static getMenu(): Observable<any> {
-		return this.menuService.findAllMenu("");
+		return SystemBusiness.menuService.findAllMenu("");
 	}
 	/**
     * 两个对象交换排序
@@ -40,7 +40,7 @@ export class SysmenuBusiness extends ParentBusiness {
 		menu2.SORT = sort;
 		menu1.WHERE = "{ID:{eq:'" + menu1.ID + "'}}";
 		menu2.WHERE = "{ID:{eq:'" + menu2.ID + "'}}";
-		return this.appService.updateObject('SYSMENU', [menu1, menu2]);
+		return SystemBusiness.appService.updateObject('SYSMENU', [menu1, menu2]);
 	}
 }
 

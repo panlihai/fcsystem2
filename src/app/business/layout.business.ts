@@ -13,7 +13,7 @@ export default class LayoutBusiness extends ParentBusiness {
       */
     //远程消息接收
     static getRealMessage():Observable<any> {
-        return this.daoService.connectionWs(this.userService.getUserInfo().USERCODE);
+        return LayoutBusiness.daoService.connectionWs(LayoutBusiness.userService.getUserInfo().USERCODE);
     }
     /**
      * 获取默认的消息对象。
@@ -35,10 +35,10 @@ export default class LayoutBusiness extends ParentBusiness {
      * 获取后端已读未读消息
      * */
     static getMessage(): Observable<any> {
-        let user = this.userService.getUserInfo();
+        let user = LayoutBusiness.userService.getUserInfo();
         return CommonService.createObservableJoin([
-            this.appService.findWithQuery("SYSMESSAGE",{ NOTIFICATIONUSERID: user.USERCODE, PAGESIZE: 1000, ORDER: "TS desc" }),
-            this.appService.findWithQuery("SYSMESSAGE",{ NOTIFICATIONUSERID: user.USERCODE, PAGESIZE: 1000, ISREAD: 'N', ORDER: "TS desc" })
+            LayoutBusiness.appService.findWithQuery("SYSMESSAGE",{ NOTIFICATIONUSERID: user.USERCODE, PAGESIZE: 1000, ORDER: "TS desc" }),
+            LayoutBusiness.appService.findWithQuery("SYSMESSAGE",{ NOTIFICATIONUSERID: user.USERCODE, PAGESIZE: 1000, ISREAD: 'N', ORDER: "TS desc" })
         ])
     }
 
@@ -59,7 +59,7 @@ export default class LayoutBusiness extends ParentBusiness {
                 menu = item;
                 break;
             } else if (item.P_CHILDMENUS && item.P_CHILDMENUS.length !== 0) {
-                menu = this.findMenuByRouter(item.P_CHILDMENUS, router);
+                menu = LayoutBusiness.findMenuByRouter(item.P_CHILDMENUS, router);
                 if (menu) {
                     break;
                 }
@@ -79,32 +79,32 @@ export default class LayoutBusiness extends ParentBusiness {
         }
         if (menu.MENUTYPE === 'APP') {
             // 开启加载条
-            this.msgService.startAntLoading();
-            this.router.navigate(["/" + menu.PID.toLowerCase() + "/" + menu.ROUTER], {
+            LayoutBusiness.msgService.startAntLoading();
+            LayoutBusiness.router.navigate(["/" + menu.PID.toLowerCase() + "/" + menu.ROUTER], {
                 queryParams: {
                     refresh: refresh, ID: menu.ID, MENUID: menu.MENUID, MENUNAME: menu.MENUNAME, MENUTYPE: menu.MENUTYPE,
                     ROUTER: menu.ROUTER, PID: menu.PID, APPID: menu.APPID, PARAM: menu.param
                 }
             }).then(() => {
-                this.msgService.endAntLoading();
+                LayoutBusiness.msgService.endAntLoading();
             }).catch((error) => {
                 console.log(error);
-                this.msgService.endAntLoading();
-                this.router.navigate(['/error']);
+                LayoutBusiness.msgService.endAntLoading();
+                LayoutBusiness.router.navigate(['/error']);
             });
         } else if (menu.MENUTYPE === 'INURL') {
             // 开启加载条
-            this.msgService.startAntLoading();
-            this.router.navigate(["/" + menu.PID.toLowerCase() + "/" + menu.ROUTER], {
+            LayoutBusiness.msgService.startAntLoading();
+            LayoutBusiness.router.navigate(["/" + menu.PID.toLowerCase() + "/" + menu.ROUTER], {
                 queryParams: {
                     refresh: refresh, ID: menu.ID, MENUID: menu.MENUID, MENUNAME: menu.MENUNAME, MENUTYPE: menu.MENUTYPE,
                     ROUTER: menu.ROUTER, PID: menu.PID, APPID: menu.APPID, PARAM: menu.param
                 }
             }).then(() => {
-                this.msgService.endAntLoading();
+                LayoutBusiness.msgService.endAntLoading();
             }).catch((error) => {
                 console.log(error);
-                this.msgService.endAntLoading();
+                LayoutBusiness.msgService.endAntLoading();
             });
         } else {
             window.open(menu.MENUURL);
@@ -118,7 +118,7 @@ export default class LayoutBusiness extends ParentBusiness {
      */
    static navMessage( msg: Sysmessage):void{
         let sourceAid = msg.SOURCEAID ? msg.SOURCEAID : '';
-        let menu:any = this.findMenuByRouter(this.menuService.menus, sourceAid.toLowerCase() + 'Detail');
+        let menu:any = LayoutBusiness.findMenuByRouter(LayoutBusiness.menuService.menus, sourceAid.toLowerCase() + 'Detail');
         if (menu) {
             menu['param'] = msg.ID;
             CommonService.event("selectedMenu", menu);
@@ -152,11 +152,11 @@ export default class LayoutBusiness extends ParentBusiness {
      * @param menu 关闭的路由菜单
      */
     static navToByMenuId( menuId: string) {
-        let menu = this.findMenuByRouter(this.menuService.menus, menuId);
+        let menu = LayoutBusiness.findMenuByRouter(LayoutBusiness.menuService.menus, menuId);
         if (menu) {
             CommonService.event("selectedMenu", menu);
         } else {
-            this.msgService.error(menuId + '不存在...');
+            LayoutBusiness.msgService.error(menuId + '不存在...');
         }
     }
    
@@ -177,7 +177,7 @@ export default class LayoutBusiness extends ParentBusiness {
                 menu = item;
                 break;
             } else if (item.P_CHILDMENUS && item.P_CHILDMENUS.length !== 0) {
-                menu = this.findMenuByRouter(item.P_CHILDMENUS, router);
+                menu = LayoutBusiness.findMenuByRouter(item.P_CHILDMENUS, router);
                 if (menu) {
                     item.open = true;
                     menu.select = true;

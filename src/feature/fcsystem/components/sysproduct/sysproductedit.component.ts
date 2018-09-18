@@ -1,12 +1,8 @@
 
 import { Component, AfterViewInit } from '@angular/core';
 import { ParentEditComponent } from 'fccomponent2';
-import SysproductBusiness from '../../business/sysproduct.business';
-import { SysicondialogComponent } from '../dialog/sysicondialog.component';
-import SystemBusiness from 'fccore2/classes/system.business';
-import { SysappBusiness } from '../../business/sysapp.business';
-import { FcEvent } from '../../../fcsamples2/business/fcsample.business';
-import { FCEVENT } from 'fccomponent2/fc';
+import SysproductBusiness from '../../business/sysproduct.business'; 
+import SystemBusiness from 'fccore2/classes/system.business'; 
 import { CommonService } from 'fccore2/common/common';
 @Component({
   selector: 'sysproductedit',
