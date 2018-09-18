@@ -4,8 +4,7 @@ import { CommonService } from "fccore2/common/common";
 import { TreeOptions } from "fccomponent2";
 import ParentBusiness from "fccore2/classes/parent.business";
 import { FcModalConfig } from "fccomponent2/business/fcmodel.business";
-import FccomponentEvent from "fccomponent2/business/fccomponet.event";
-import { ComponentService } from "../../fcsamples2/services/component.service";
+import FccomponentEvent from "fccomponent2/business/fccomponet.event"; 
 export class SysappBusiness extends ParentBusiness {
   //树配置
   static treeOptions: TreeOptions = {

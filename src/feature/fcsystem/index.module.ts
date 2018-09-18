@@ -137,6 +137,6 @@ import { CompanyrelationdeletedialogComponent } from './components/dialog/compan
     SysmessageService
   ]
 })
-export class SystemModule {
+export class FcsystemModule {
 
 }

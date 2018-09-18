@@ -17,7 +17,7 @@ export const AppRoutes: Routes = [
             },
             {
                 path: 'system',//平台功能
-                loadChildren: 'fcsystem/index.module#SystemModule'
+                loadChildren: '../feature/fcsystem/index.module#FcsystemModule'
             }
         ]
     }
