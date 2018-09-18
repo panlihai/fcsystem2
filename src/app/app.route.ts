@@ -18,6 +18,10 @@ export const AppRoutes: Routes = [
             {
                 path: 'system',//平台功能
                 loadChildren: '../feature/fcsystem/index.module#FcsystemModule'
+            },
+            {
+                path: '',//平台sample
+                loadChildren: '../feature/fcsamples/index.module#FcsamplesModule'
             }
         ]
     }

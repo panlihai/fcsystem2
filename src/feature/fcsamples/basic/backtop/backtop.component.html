@@ -1,0 +1,51 @@
+<!-- 快速定位 fc-fastposition -->
+<!-- 快速定位 -->
+<fc-layoutcol fcSpans="9,1" fccontent>
+    <fc-title fcLabel="回到顶部" fccontent1 fcSubtitle="用于跳转到页面顶部位置。"></fc-title>
+    <fc-title fcLabel="何时使用" fccontent1 fcSubtitle="需要展现当前页面上可供跳转的锚点链接，以及快速跳到顶部。" fcHasline="false"></fc-title>
+    <fc-title fcLabel="代码演示" fcheader ></fc-title>
+    <fc-layoutpanel fccontent1>
+    <fc-title fcLabel="属性" fcheader fcHasLine="false" fcSize="small"></fc-title>       
+    <!-- 组件内容开始 -->
+        <fc-layoutcol fccontent fcSpans="1" id="id0">   
+            <fc-layoutgroup id="id0" fcTitle="第一部分" fccontent1  class="blue">
+                <div fccontent>
+                    <fc-backtop>
+                        <div fccontent>
+                            这是回到顶部组件
+                        </div>
+                    </fc-backtop>
+                </div>
+            </fc-layoutgroup>
+            <fc-adcode fcfooter fccontent1 fcTitle="描述"
+             fcRemark="最基本的用法。" 
+             [fcview]="basicview" [fcstyle]="basicstyle" [fccode]="basicjs">
+            </fc-adcode>
+        </fc-layoutcol>
+        <fc-layoutcol fccontent fcSpans="1" id="id1">   
+                <fc-layoutgroup id="id0" fcTitle="超出高度出现图标" fccontent1  class="blue">
+                    <div fccontent>
+                        <fc-backtop fcVisibilityHeight="200">
+                            <div fccontent>
+                                这是回到顶部组件
+                            </div>
+                        </fc-backtop>
+                    </div>
+                </fc-layoutgroup>
+                <fc-adcode fcfooter fccontent1 fcTitle="描述"
+                 fcRemark="最基本的用法。" 
+                 [fcview]="basicview" [fcstyle]="basicstyle" [fccode]="basicjs">
+                </fc-adcode>
+        </fc-layoutcol>
+    <!-- 组件内容结束 -->
+    </fc-layoutpanel>
+    <div class="fastposition-content" fccontent2>
+    <fc-fastposition [fcLinks]="
+    [
+    {href:'id0','label':'回到顶部'},
+    {href:'id1','label':'超出高度'}
+    ]">
+    </fc-fastposition>
+    </div>
+</fc-layoutcol>
+<!-- 快速定位结束 -->
