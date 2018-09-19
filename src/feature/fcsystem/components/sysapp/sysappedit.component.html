@@ -13,7 +13,7 @@
                     <span class="sys-fast-list-text">创建物理表</span></li>
                 <li class="sys-fast-list-icon" (click)="backList($event)">
                     <fc-icon fcIcon="fc-icon-seeall" fcColor="#009DFF"></fc-icon>
-                    <span class="sys-fast-list-text">查看所有</span></li>
+                    <span class="sys-fast-list-text">返回列表</span></li>
             </ul>
         </div>
         <fc-icon class="sys-card-bg" [fcSvg]="routerParam.MENUICON" fcWidth="48" fcHeight="48"></fc-icon>
@@ -21,9 +21,9 @@
     <div class="sys-card-pannel-edit sys-app" fccontent>
         <fc-title fcLabel="基本信息" class="sys-card-pannel-title" fcHasLine="N" fccontent></fc-title>
         <fc-layoutcol fcSpans="1,1" class="noBorder noBottomLine">
-            <fc-combo fccontent1 [fcLabel]="'产品'" [fcOption]="productOption" [(ngModel)]="mainObj.APPMODEL" [fcAppid]="appId" fcPlaceHolder="请选择产品">
+            <fc-combo fccontent1 [fcLabel]="'产品'" [(ngModel)]="mainObj.APPMODEL" fcAppid="SYSPRODUCT" fcFieldCode="PID" fcLabelCode="PNAME" fcValueCode="PID" fcPlaceHolder="请选择产品" (ngModelChange)="event('pidChange',$event)">
             </fc-combo>
-            <fc-combo fccontent2 [fcLabel]="'数据源'" [fcOption]="datasourceOption" [(ngModel)]="mainObj.DATASOURCE" [fcAppid]="appId" fcPlaceHolder="请选择数据源">
+            <fc-combo fccontent2 [fcLabel]="'数据源'" [(ngModel)]="mainObj.DATASOURCE" fcAppid="SYSDATASOURCE" fcFieldCode="DSID" fcLabelCode="DSNAME" fcValueCode="DSID" fcPlaceHolder="请选择数据源" [fcCondition]="dsConditon">
             </fc-combo>
             <fc-text fccontent1 [fcAppid]="appId" fcFieldCode="APPID" [fcValid]="mainValid.APPID"  [fcLabel]="'模型编码'" [(ngModel)]="mainObj.APPID" 
             fcPlaceHolder="请输入模型编码"></fc-text>
