@@ -108,6 +108,8 @@ export class SysdatasourceeditComponent extends ParentEditComponent {
   passwordVisable: boolean = true;
   //依赖产品下拉属性
   relyDatasourceList: any;
+  // 存储数据源id，pid+id
+  dsid:string;
   staticMainObj: any = {};
   /**
    * 初始化模型，产品对应的内容
@@ -125,21 +127,15 @@ export class SysdatasourceeditComponent extends ParentEditComponent {
   * 初始化模型，数据内容
   */
   init(): void {
-    //顶部按钮是否显示
-    this.productDisableds();
     //下拉框显示自己想要动态传入的label和value值 
     this.getProduct();
+    // 修改为默认的id
+    this.dsid=this.mainObj.DSID.replaceAll(this.mainObj.PID,'');
   }
   /**
       * 实现继承与父类的afterSave函数，对cardSave函数进行功能扩展;
       */
   afterSave(): void {
-    this.productDisableds();
-    SysdatasourceBusiness.appService.findWithQuery("SYSDATASOURCE", { WHERE: `{DSNAME:{eq:'" + this.mainObj.DSNAME + "'}` }).subscribe(res => {
-      if (res.CODE === '0') {
-        this.navigate(this.getRouteUrl('Edit'), { ID: res.DATA[0].ID });
-      }
-    });
   }
   /**
   * 获取下拉菜单的值
@@ -183,6 +179,10 @@ export class SysdatasourceeditComponent extends ParentEditComponent {
         break;
     }
   }
+  beforeSave():boolean{
+    this.mainObj.DSID = this.mainObj.PID+this.dsid;
+    return true;
+  }
  /**
     *  点击图标弹出列表方法
     * @param event  
@@ -192,22 +192,6 @@ export class SysdatasourceeditComponent extends ParentEditComponent {
     CommonService.subscribe('selectIcon', (result) => {
       this.mainObj.ICON=result.param;
     });
-  }
-  /**
-    * DSID有值时禁用为关闭
-    * DSID无值时禁用为开启
-    * @param event  
-    */
-  productDisableds(): void {
-    if (this.mainObj.DSID !== "") {
-      //  数据源ID等于PID+DSID
-      this.mainObj.DSID = this.mainObj.PID + this.mainObj.DSID
-      //数据源id  调用PID 和DSID比较方法，比较后修改页面 数据源ID文本框显示 PID和DSID不相等字段
-      // [this.mainObj.PID, this.mainObj.DSID] = (this.mainObj.PID + this.mainObj.DSID).replace(/(.+)(.+)\1/, '$2\n').split('\n')
-    } else {
-      //  数据源ID等于PID+DSID
-      this.mainObj.DSID = this.mainObj.PID + this.mainObj.DSID
-    }
   }
   /**
 * 组件事件收集

@@ -27,7 +27,7 @@
             <fc-combo  fccontent1 fcLabel="产品名称"  [fcOption]="relyDatasourceList"  [(ngModel)]="mainObj.PID"
             name="PID"  (ngModelChange)="componentEvents('ruleaddEvent',$event)" ></fc-combo>
             <div fccontent1 class="sys-buttonpid">
-                <fc-text  [fcAppid]="appId" fcFieldCode="DSID" [fcValid]="mainValid.DSID" fcAddOnBefore={{mainObj.PID}} fcPlaceHolder="请输入编码"fcLabel="数据源id" [(ngModel)]="mainObj.DSID" [fcValid]="mainValid.DSID" name="SYSDATASOURCE.DSID"></fc-text>                    
+                <fc-text  [fcAppid]="appId" fcFieldCode="DSID" [fcValid]="mainValid.DSID" fcAddOnBefore={{mainObj.PID}} fcPlaceHolder="请输入编码" fcLabel="数据源id" [(ngModel)]="dsid" [fcValid]="mainValid.DSID" name="SYSDATASOURCE.DSID"></fc-text>                    
             </div>
             <fc-text fccontent1   [fcAppid]="appId" fcFieldCode="DSNAME" [fcValid]="mainValid.DSNAME" fcLabel="数据源名称" fcPlaceHolder="请输入中文" fcHelp="中文，配合id识别不同数据源" [(ngModel)]="mainObj.DSNAME"  name="SYSDATASOURCE.DSNAME"></fc-text>
             <fc-layoutcol fccontent1 fcSpans="1,1"  class="noBottomLine">
@@ -50,9 +50,9 @@
         <!-- 数据源信息结束 -->
         <!-- 数据源信息 -->
         <fc-layoutcol fcSpans="7,3">
-            <fc-any fccontent1 [fcAppid]="appId" fcFieldCode="DSTYPE" [fcValid]="mainValid.DSTYPE" fcLabel="数据源类型" fcPlaceHolder="请选择"  (ngModelChange)="componentEvents('ruletypeEvent',$event)"
+            <fc-combo fccontent1 [fcAppid]="appId" fcFieldCode="DSTYPE" [fcValid]="mainValid.DSTYPE" fcLabel="数据源类型" fcPlaceHolder="请选择"  (ngModelChange)="componentEvents('ruletypeEvent',$event)"
              [fcAppid]="appId" fcFieldCode="DSTYPE" [(ngModel)]="mainObj.DSTYPE" fcLabelCode="DICDESC"
-             fcValueCode="DICVALUE" name="SYSPRODUCT.DSTYPE" fcHelp="仅限关系型数据库"></fc-any>
+             fcValueCode="DICVALUE" name="SYSPRODUCT.DSTYPE" fcHelp="仅限关系型数据库"></fc-combo>
             <fc-text fccontent1  [fcAppid]="appId" fcFieldCode="URL" [fcValid]="mainValid.URL" fcLabel="请url" fcPlaceHolder="请输入链接地址" [(ngModel)]="mainObj.URL" name="SYSDATASOURCE.URL" fcHelp="如：jdbc:oracle:thin:@127.0.0.1:1521:orcl"></fc-text>
             <!-- <div fccontent1 class="sys-tab">如：jdbc:oracle:thin:@127.0.0.1:1521:orcl</div>-->
             <fc-text fccontent1 [fcAppid]="appId" fcFieldCode="USERNAME" [fcValid]="mainValid.USERNAME"  fcLabel="数据源用户名" fcPlaceHolder="请输入中文" [(ngModel)]="mainObj.USERNAME" name="SYSDATASOURCE.USERNAME"></fc-text>
