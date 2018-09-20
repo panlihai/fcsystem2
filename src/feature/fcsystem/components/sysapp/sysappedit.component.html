@@ -25,9 +25,9 @@
             </fc-combo>
             <fc-combo fccontent2 [fcLabel]="'数据源'" [(ngModel)]="mainObj.DATASOURCE" fcAppid="SYSDATASOURCE" fcFieldCode="DSID" fcLabelCode="DSNAME" fcValueCode="DSID" fcPlaceHolder="请选择数据源" [fcCondition]="dsConditon">
             </fc-combo>
-            <fc-text fccontent1 [fcAppid]="appId" fcFieldCode="APPID" [fcValid]="mainValid.APPID"  [fcLabel]="'模型编码'" [(ngModel)]="mainObj.APPID" 
+            <fc-text fccontent1 [fcValid]="mainValid.APPID"  [fcLabel]="'模型编码'" [(ngModel)]="mainObj.APPID" 
             fcPlaceHolder="请输入模型编码"></fc-text>
-            <fc-text fccontent2 [fcAppid]="appId" fcFieldCode="APPNAME" [fcValid]="mainValid.APPNAME"  [fcLabel]="'模型名称'"fcHelp="中文描述，物理表备注名称" [(ngModel)]="mainObj.APPNAME" fcPlaceHolder="请输入模型"
+            <fc-text fccontent2 [fcValid]="mainValid.APPNAME"  [fcLabel]="'模型名称'"fcHelp="中文描述，物理表备注名称" [(ngModel)]="mainObj.APPNAME" fcPlaceHolder="请输入模型"
                 fcHelp="中文描述，物理表备注名称"></fc-text>
             <fc-radio fccontent1 [fcAppid]="appId" [fcValid]="mainValid.APPTYPE"  [fcLabel]="'适用场景'" [(ngModel)]="mainObj.APPTYPE" 
             fcFieldCode="APPTYPE" fcLabelCode="DICDESC"  fcValueCode="DICVALUE" fcHelp="通用模型对开发者开放，字典模型及数据模型对最终用户">
@@ -35,10 +35,10 @@
             <fc-layoutcol fccontent2 fcSpans="1,1" class="noBottomLine">
                 <fc-radio fccontent1 [fcLabel]="'模型类型'" [fcAppid]="appId" fcFieldCode="TABLETYPE" [fcValid]="mainValid.TABLETYPE" [(ngModel)]="mainObj.TABLETYPE"  fcFieldCode="TABLETYPE" fcLabelCode="DICDESC"
                     fcValueCode="DICVALUE" fcHelp="默认为表"></fc-radio>
-                <fc-long fccontent2 [fcLabel]="'查询偏移量'" [fcAppid]="appId" fcFieldCode="PSIZE" [fcValid]="mainValid.PSIZE" [(ngModel)]="mainObj.PSIZE" fcPlaceHolder="请输入模型" fcHelp="默认分页大小，每页返回数据"></fc-long>
+                <fc-long fccontent2 [fcLabel]="'查询偏移量'" [fcValid]="mainValid.PSIZE" [(ngModel)]="mainObj.PSIZE" fcPlaceHolder="请输入模型" fcHelp="默认分页大小，每页返回数据"></fc-long>
             </fc-layoutcol>
-            <fc-text fccontent1 [fcLabel]="'指定表或视图名称'" [fcAppid]="appId" fcFieldCode="MAINTABLE" [fcValid]="mainValid.MAINTABLE" [(ngModel)]="mainObj.MAINTABLE" fcPlaceHolder="请输入物理表名" fcHelp="默认采用与模型编码相同，物理表名或视图名"></fc-text>
-            <fc-text fccontent2 [fcLabel]="'默认排序字段'" [fcAppid]="appId" fcFieldCode="SORTBY"  [(ngModel)]="mainObj.SORTBY" fcHelp="按此指定的排序条件排序，默认按照倒序排序"  name="SYSAPP.SORTBY"></fc-text>
+            <fc-text fccontent1 [fcLabel]="'指定表或视图名称'" [fcValid]="mainValid.MAINTABLE" [(ngModel)]="mainObj.MAINTABLE" fcPlaceHolder="请输入物理表名" fcHelp="默认采用与模型编码相同，物理表名或视图名"></fc-text>
+            <fc-text fccontent2 [fcLabel]="'默认排序字段'"  [(ngModel)]="mainObj.SORTBY" fcHelp="按此指定的排序条件排序，默认按照倒序排序"  name="SYSAPP.SORTBY"></fc-text>
         </fc-layoutcol>
         <fc-tlbform fccontent1 fcType="primary" [fcAppid]="appId" fcLayout="center" (fcEvent)="tlbformEvent($event)" class="basicTlb"></fc-tlbform>
     </div> 

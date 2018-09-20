@@ -215,7 +215,8 @@ export class SysappeditComponent extends ParentEditComponent {
    * 当选择的产品时，级联查询数据源
    */
   pidChange(pid:string):void{
-    this.dsConditon='{"WHERE":{"PID":{"eq":"'+pid+'"}}}';
+    let con = {WHERE:"{PID:{eq:'"+pid+"'}}"};
+    this.dsConditon=JSON.stringify(con);
   }
   
   /**
