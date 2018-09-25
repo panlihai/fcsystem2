@@ -41,7 +41,7 @@ export class SysappComponent extends ParentlistComponent {
     //分页大小
     this.pageSize = 23;
     // 默认启用自动查询
-    this.enableAuthSearch = true;
+    this.enableAutoSearch = true;
     //查询产品信息
     this.findProduct();
   }
