@@ -17,7 +17,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { SystemService } from './services/services.services';
 import { FccomponentModule } from 'fccomponent2';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';   
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +35,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
     BrowserAnimationsModule,
     RouterModule.forRoot(AppRoutes),
     FccoreModule,
-    FccomponentModule
+    FccomponentModule,
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: FcRouterService },
