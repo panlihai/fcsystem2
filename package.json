@@ -15,6 +15,7 @@
   },
   "private": false,
   "dependencies": {
+    "@swimlane/ngx-charts": "^9.0.0",
     "fccomponent2": "^2.0.15"
   },
   "devDependencies": {
