@@ -9,7 +9,7 @@ export class SyscompanyBusiness extends ParentBusiness {
    * 获取单位隶属关系的字段
    */
   static getSyscompanyrelationField() {
-    return this.appService.getFormFieldsByAppid("SYSCOMPANYRELATION");
+    return SyscompanyBusiness.appService.getFormFieldsByAppid("SYSCOMPANYRELATION");
   }
   //根据当前单位代码过滤单位隶属关系列表
   static companyTreeOptions: TreeOptions = {
@@ -53,12 +53,12 @@ export class SyscompanyBusiness extends ParentBusiness {
   static cloneTreeObj(dim: string, sendDate: string) {
     //改变值
     let cloneObj: any = {};
-    cloneObj = CommonService.cloneObj(this.companyTreeOptions);
+    cloneObj = CommonService.cloneObj(SyscompanyBusiness.companyTreeOptions);
     //根节点条件
     cloneObj.fcTopWhere = "{or:[{SPARENT_CODE:{is:'null'}},{SPARENT_CODE:''}],SDIM_CODE:{eq:'"+dim+"'},SBEGIN_DATE:{lte:'"+sendDate+"'},SEND_DATE:{gte:'"+sendDate+"'}}";    
     //展开条件
     cloneObj.fcExpWhere="{SPARENT_CODE:{eq:'#{SCOMPANY_CODE}#'},SDIM_CODE:{eq:'"+dim+"'},SBEGIN_DATE:{lte:'"+sendDate+"'},SEND_DATE:{gte:'"+sendDate+"'}}",
-    this.companyTreeOptions = cloneObj;
+    SyscompanyBusiness.companyTreeOptions = cloneObj;
   }
   /**
    * 过滤列表单位数据
@@ -80,7 +80,7 @@ export class SyscompanyBusiness extends ParentBusiness {
    * 获取组织机构视图数据
    */
   static getOrgData(): Observable<any> {
-    return this.appService.findWithQuery("SYSTBVORGCURORG", {});
+    return SyscompanyBusiness.appService.findWithQuery("SYSTBVORGCURORG", {});
   }
   /**
    * 保存或者修改单位信息
@@ -118,20 +118,20 @@ export class SyscompanyBusiness extends ParentBusiness {
       SORG_CODE: mainObj.SCOMPANY_CODE,//组织机构代码
       SPARENT_CODE: parentCode,//上级组织机构代码
       SPARENT_PATH: parentCode + ':' + mainObj.SCOMPANY_CODE,//上级组织机构路径
-      SCRATOR: this.userService.getUserInfo().NAME,//创建人
+      SCRATOR: SyscompanyBusiness.userService.getUserInfo().NAME,//创建人
       SCREATE_TIME: CommonService.timestampFormat(CommonService.getTimestamp() * 1000, 'yyyyMMdd'),//创建时间
     }
     if (mainObj.ID === undefined || mainObj.ID === '') {
       // 并行执行多个任务，保存单位表和单位隶属关系表的对象
       return CommonService.createObservableJoin([
-        this.appService.saveObject("SYSCOMPANY", mainObj),
-        this.appService.saveObject("SYSCOMPANYRELATION", relationObj)
+        SyscompanyBusiness.appService.saveObject("SYSCOMPANY", mainObj),
+        SyscompanyBusiness.appService.saveObject("SYSCOMPANYRELATION", relationObj)
       ]);
     } else {
       //修改页面id不为空时是修改页面，更新单位和单位隶属关系修改的数据
       return CommonService.createObservableJoin([
-        this.appService.updateObject("SYSCOMPANY", mainObj),
-        this.appService.updateObject("SYSCOMPANYRELATION", relationObj)
+        SyscompanyBusiness.appService.updateObject("SYSCOMPANY", mainObj),
+        SyscompanyBusiness.appService.updateObject("SYSCOMPANYRELATION", relationObj)
       ]);
     }
   }
@@ -139,7 +139,7 @@ export class SyscompanyBusiness extends ParentBusiness {
    * 获取维度
    */
   static getCompanyDim(): Observable<any> {
-    return this.appService.findWithQuery("SYSCOMPANYDIM", {});
+    return SyscompanyBusiness.appService.findWithQuery("SYSCOMPANYDIM", {});
   }
 
   /**
@@ -148,7 +148,7 @@ export class SyscompanyBusiness extends ParentBusiness {
    */
   static getOrgRelationData(dimCode: string): Observable<any> {
     // 根据维度查询单位隶属关系
-    return this.appService.findWithQuery("SYSCOMPANYRELATION", { SDIM_CODE: dimCode });
+    return SyscompanyBusiness.appService.findWithQuery("SYSCOMPANYRELATION", { SDIM_CODE: dimCode });
   }
   /**
    * 更新单位隶属关系
@@ -164,7 +164,7 @@ export class SyscompanyBusiness extends ParentBusiness {
     beforeObj.WHERE = "{ID:{eq:'" + beforeObj.ID + "'}}";
     afterObj.WHERE = "{ID:{eq:'" + afterObj.ID + "'}}";
     // 并行保存交换序号后的两个对象
-    return this.appService.updateObject(appId, [beforeObj, afterObj])
+    return SyscompanyBusiness.appService.updateObject(appId, [beforeObj, afterObj])
   }
  
 
@@ -178,11 +178,11 @@ export class SyscompanyBusiness extends ParentBusiness {
     let sendDateValid = JSON.parse(mainValid.SEND_DATE);
     // 验证生效日期不能大于注销时间   
     //深拷贝 
-    sbeginDateValid = Object.assign({}, sbeginDateValid, this.compareTime(mainObj.SEST_DATE, mainObj.SBEGIN_DATE, '日期填写正确', '生效日期不能大于成立日期'));
+    sbeginDateValid = Object.assign({}, sbeginDateValid, SyscompanyBusiness.compareTime(mainObj.SEST_DATE, mainObj.SBEGIN_DATE, '日期填写正确', '生效日期不能大于成立日期'));
     mainValid.SBEGIN_DATE = JSON.stringify(sbeginDateValid);
     // 验证注销日期不能大于生效时间
     //深拷贝
-    sendDateValid = Object.assign({}, sendDateValid, this.compareTime(mainObj.SBEGIN_DATE, mainObj.SEND_DATE, '日期填写正确', '注销日期不能大于生效日期'));
+    sendDateValid = Object.assign({}, sendDateValid, SyscompanyBusiness.compareTime(mainObj.SBEGIN_DATE, mainObj.SEND_DATE, '日期填写正确', '注销日期不能大于生效日期'));
     mainValid.SEND_DATE = JSON.stringify(sendDateValid);
   }
   /**
@@ -213,7 +213,7 @@ export class SyscompanyBusiness extends ParentBusiness {
   static cancelCompany(selectedObj: any): Observable<any> {
     if (selectedObj.ID !== '') {
       selectedObj.BSTOP_FLAG = '1';
-      return this.appService.updateObject("SYSCOMPANY", selectedObj);
+      return SyscompanyBusiness.appService.updateObject("SYSCOMPANY", selectedObj);
     }
   }
   //单位列表

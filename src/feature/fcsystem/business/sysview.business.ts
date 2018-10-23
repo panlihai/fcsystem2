@@ -46,14 +46,14 @@ export class SysviewBusiness extends ParentBusiness {
                         break;
                 }
             }
-            // this.appService.saveObject('SYSVIEWELMENT', obj).subscribe(res => {
+            // SysviewBusiness.appService.saveObject('SYSVIEWELMENT', obj).subscribe(res => {
             //     if (res.CODE === '0') {
             //         if (!infoCounted) {
-            //             this.messageService.success('数据已实时生成');
+            //             SysviewBusiness.messageService.success('数据已实时生成');
             //             infoCounted = true;
             //         }
             //     } else {
-            //         this.messageService.error('数据实时生成失败');
+            //         SysviewBusiness.messageService.error('数据实时生成失败');
             //     }
             // })
         });
@@ -70,10 +70,10 @@ export class SysviewBusiness extends ParentBusiness {
     //         title: title,
     //         content: content,
     //         okFunc: (result) => {
-    //             this.logService.debug("ok");
+    //             SysviewBusiness.logService.debug("ok");
     //         },
     //         cancelFunc: (result) => {
-    //             this.logService.debug("ok");
+    //             SysviewBusiness.logService.debug("ok");
     //         },
     //         // footer?: any;
     //         token: token
@@ -81,14 +81,14 @@ export class SysviewBusiness extends ParentBusiness {
     //     CommonService.event(FccomponentEvent.modal.dialog, modal);
     // }
     static getDetailByFieldCode(appId, fieldCode): Observable<any>  {
-        return this.appService.findWithQuery('SYSAPPFIELDS', { APPID: appId, FIELDCODE: fieldCode });
+        return SysviewBusiness.appService.findWithQuery('SYSAPPFIELDS', { APPID: appId, FIELDCODE: fieldCode });
     }
     /** 
    * 打开窗口的函数方法
    * @param dialogCardListArgs 
    */
     static openDialog(dialogCardListArgs: DialogCardListArgs) {
-        // return this.nzModal.open({
+        // return SysviewBusiness.nzModal.open({
         //     title: dialogCardListArgs.configInterface.title ? dialogCardListArgs.configInterface.title : '',
         //     content: dialogCardListArgs.configInterface.content ? dialogCardListArgs.configInterface.content : DialogListComponent,
         //     onOk() { },

@@ -33,7 +33,7 @@ export class SysfuncComponent extends ParentlistComponent {
      //分页大小
      this.pageSize = 23;
      // 默认启用自动查询
-     this.enableAuthSearch = true;
+     this.enableAutoSearch = true;
   }
   /**
   * 显示的时候执行代码

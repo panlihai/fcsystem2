@@ -6,14 +6,14 @@ export class SysserviceBusiness extends ParentBusiness {
     * @param app 
     */
     static getDefaultObj(app):Observable<any>  {
-        return this.appService.initObjDefaultValue(app);
+        return SysserviceBusiness.appService.initObjDefaultValue(app);
     }
     /** 
      * 根据
      * @param resId 
      */
     static getBizCodeByAid(pid: string) :Observable<any> {
-        return this.daoService.getFromApi("SYSTEM/SYSBIZCODERULE", {});;
+        return SysserviceBusiness.daoService.getFromApi("SYSTEM/SYSBIZCODERULE", {});;
     } 
     /**
      * 删除接口

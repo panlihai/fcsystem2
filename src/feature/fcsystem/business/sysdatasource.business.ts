@@ -5,6 +5,6 @@ export default class SysdatasourceBusiness extends ParentBusiness {
    * 获取产品
    */
   static getproduct(): Observable<any>  {
-    return this.appService.findWithQuery("SYSPRODUCT",{});
+    return SysdatasourceBusiness.appService.findWithQuery("SYSPRODUCT",{});
   }
 }

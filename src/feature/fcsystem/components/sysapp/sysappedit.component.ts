@@ -134,10 +134,6 @@ import SystemBusiness from 'fccore2/classes/system.business';
 export class SysappeditComponent extends ParentEditComponent {
   // 字段弹窗token
   appFieldDailogToken = CommonService.guid();
-  //产品下拉选项
-  productOption: any[];
-  //数据源下拉选项
-  datasourceOption: any[];
   //模型事件
   sysEvents: any;
   //模型接口
@@ -174,6 +170,8 @@ export class SysappeditComponent extends ParentEditComponent {
   dialogObj: any;
   //
   tableValue:any;
+  // 数据源条件
+  dsConditon:string;
   /**
    * 初始化模型，产品对应的内容
    */
@@ -181,10 +179,7 @@ export class SysappeditComponent extends ParentEditComponent {
     super('SYSTEM', 'SYSAPP');
   }
   init(): void {
-    //初始化产品
-    this.getproduct();
-    //初始化数据源
-    this.getdatasource();
+     
     //当为编辑页面时初始化模型事件、接口、模型关系
     if (this.mainObj.APPID !== "") {
       this.show();
@@ -211,34 +206,19 @@ export class SysappeditComponent extends ParentEditComponent {
     switch (eventName) {
       case 'addList':
         break;
+      case 'pidChange':
+        this.pidChange(param);
+        break;
     }
   }
   /**
-  * 获取软件产品的产品名称
-  */
-  getproduct():void {
-    SysappBusiness.getproduct().subscribe(res => {
-      this.productOption = [];
-      res.DATA.forEach(element => {
-        //将获得的产品名称添加到下拉框中
-        this.productOption.push({ icon: '', label: element.PNAME, value: element.PID });
-      });
-      return this.productOption;
-    })
+   * 当选择的产品时，级联查询数据源
+   */
+  pidChange(pid:string):void{
+    let con = {WHERE:"{PID:{eq:'"+pid+"'}}"};
+    this.dsConditon=JSON.stringify(con);
   }
-  /**
-  * 获取数据源
-  */
-  getdatasource():void {
-    SysappBusiness.getdatasource().subscribe(result => {
-      this.datasourceOption = [];
-      result.DATA.forEach(element => {
-        //将获得的数据源名称添加到下拉框中
-        this.datasourceOption.push({ icon: '', label: element.DSNAME, value: element.DSID });
-      });
-      return this.datasourceOption;
-    })
-  }
+  
   /**
   * 保存之后
   */

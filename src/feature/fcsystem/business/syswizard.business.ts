@@ -8,6 +8,6 @@ export class SyswizardBusiness extends ParentBusiness {
    * @param param 
    */
   static getService(param?: any): Observable<any> {
-    return this.appService.findWithQuery("SYSSERVICE", param?param:{});
+    return SyswizardBusiness.appService.findWithQuery("SYSSERVICE", param?param:{});
   }
 }

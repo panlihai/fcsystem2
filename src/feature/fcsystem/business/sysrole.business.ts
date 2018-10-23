@@ -148,7 +148,7 @@ export class SysroleBusiness extends ParentBusiness {
     // let where = "AND usercode in (select userid from sys_roleuser where roleid='" + roleId + "')";
     // return SysroleBusiness.appService.findWithQuery('SYSUSER', { WHERE: where });
     // return  SysroleBusiness.appService.findWithQuery('SYSUSER',{ where: "{ROLEID:{eq:'`+${roleId}+`'}}" });
-    return  SysroleBusiness.appService.findWithQuery('SYSROLEUSER',{});
+    return  SysroleBusiness.appService.findWithQuery('SYSUSER',{});
   }
   /**
    * 删除当前角色下的用户
@@ -173,8 +173,15 @@ export class SysroleBusiness extends ParentBusiness {
         ROLEID: roleId,
         PID: user.PID
       });
-    });
-  return  SysroleBusiness.appService.saveObject("SYSROLEUSER",roleUserList);
+    }); 
+  return  SysroleBusiness.appService.saveObject("SYSROLEUSER",roleUserList); 
+    // SysroleBusiness.sysroleuserService.saveList(roleUserList).subscribe(result => {
+    //   if (result.CODE === '0') {
+
+    //   } else {
+
+    //   }
+    // }); 
   }
   /**
    * 授权，选中的节点及子节点或孙子节点的授权或取消授权

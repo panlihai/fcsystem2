@@ -50,7 +50,7 @@ export default class SysemployeeBusiness extends ParentBusiness {
   * @param obj 
   */
  static editEmployeerole(obj) {
-    return SysemployeeBusiness.appService.saveObject('SYSROLEUSER', obj).subscribe(res => {
+   SysemployeeBusiness.appService.saveObject('SYSROLEUSER', obj).subscribe(res => {
       if (res.CODE === '0') {
         SysemployeeBusiness.msgService.success('保存成功');
       } else if (res.CODE === '1') {

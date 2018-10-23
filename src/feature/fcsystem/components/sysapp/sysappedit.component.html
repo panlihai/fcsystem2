@@ -13,7 +13,7 @@
                     <span class="sys-fast-list-text">创建物理表</span></li>
                 <li class="sys-fast-list-icon" (click)="backList($event)">
                     <fc-icon fcIcon="fc-icon-seeall" fcColor="#009DFF"></fc-icon>
-                    <span class="sys-fast-list-text">查看所有</span></li>
+                    <span class="sys-fast-list-text">返回列表</span></li>
             </ul>
         </div>
         <fc-icon class="sys-card-bg" [fcSvg]="routerParam.MENUICON" fcWidth="48" fcHeight="48"></fc-icon>
@@ -21,13 +21,13 @@
     <div class="sys-card-pannel-edit sys-app" fccontent>
         <fc-title fcLabel="基本信息" class="sys-card-pannel-title" fcHasLine="N" fccontent></fc-title>
         <fc-layoutcol fcSpans="1,1" class="noBorder noBottomLine">
-            <fc-combo fccontent1 [fcLabel]="'产品'" [fcOption]="productOption" [(ngModel)]="mainObj.APPMODEL" [fcAppid]="appId" fcPlaceHolder="请选择产品">
+            <fc-combo fccontent1 [fcLabel]="'产品'" [(ngModel)]="mainObj.APPMODEL" fcAppid="SYSPRODUCT" fcFieldCode="PID" fcLabelCode="PNAME" fcValueCode="PID" fcPlaceHolder="请选择产品" (ngModelChange)="event('pidChange',$event)">
             </fc-combo>
-            <fc-combo fccontent2 [fcLabel]="'数据源'" [fcOption]="datasourceOption" [(ngModel)]="mainObj.DATASOURCE" [fcAppid]="appId" fcPlaceHolder="请选择数据源">
+            <fc-combo fccontent2 [fcLabel]="'数据源'" [(ngModel)]="mainObj.DATASOURCE" fcAppid="SYSDATASOURCE" fcFieldCode="DSID" fcLabelCode="DSNAME" fcValueCode="DSID" fcPlaceHolder="请选择数据源" [fcCondition]="dsConditon">
             </fc-combo>
-            <fc-text fccontent1 [fcAppid]="appId" fcFieldCode="APPID" [fcValid]="mainValid.APPID"  [fcLabel]="'模型编码'" [(ngModel)]="mainObj.APPID" 
+            <fc-text fccontent1 [fcValid]="mainValid.APPID"  [fcLabel]="'模型编码'" [(ngModel)]="mainObj.APPID" 
             fcPlaceHolder="请输入模型编码"></fc-text>
-            <fc-text fccontent2 [fcAppid]="appId" fcFieldCode="APPNAME" [fcValid]="mainValid.APPNAME"  [fcLabel]="'模型名称'"fcHelp="中文描述，物理表备注名称" [(ngModel)]="mainObj.APPNAME" fcPlaceHolder="请输入模型"
+            <fc-text fccontent2 [fcValid]="mainValid.APPNAME"  [fcLabel]="'模型名称'"fcHelp="中文描述，物理表备注名称" [(ngModel)]="mainObj.APPNAME" fcPlaceHolder="请输入模型"
                 fcHelp="中文描述，物理表备注名称"></fc-text>
             <fc-radio fccontent1 [fcAppid]="appId" [fcValid]="mainValid.APPTYPE"  [fcLabel]="'适用场景'" [(ngModel)]="mainObj.APPTYPE" 
             fcFieldCode="APPTYPE" fcLabelCode="DICDESC"  fcValueCode="DICVALUE" fcHelp="通用模型对开发者开放，字典模型及数据模型对最终用户">
@@ -35,10 +35,10 @@
             <fc-layoutcol fccontent2 fcSpans="1,1" class="noBottomLine">
                 <fc-radio fccontent1 [fcLabel]="'模型类型'" [fcAppid]="appId" fcFieldCode="TABLETYPE" [fcValid]="mainValid.TABLETYPE" [(ngModel)]="mainObj.TABLETYPE"  fcFieldCode="TABLETYPE" fcLabelCode="DICDESC"
                     fcValueCode="DICVALUE" fcHelp="默认为表"></fc-radio>
-                <fc-long fccontent2 [fcLabel]="'查询偏移量'" [fcAppid]="appId" fcFieldCode="PSIZE" [fcValid]="mainValid.PSIZE" [(ngModel)]="mainObj.PSIZE" fcPlaceHolder="请输入模型" fcHelp="默认分页大小，每页返回数据"></fc-long>
+                <fc-long fccontent2 [fcLabel]="'查询偏移量'" [fcValid]="mainValid.PSIZE" [(ngModel)]="mainObj.PSIZE" fcPlaceHolder="请输入模型" fcHelp="默认分页大小，每页返回数据"></fc-long>
             </fc-layoutcol>
-            <fc-text fccontent1 [fcLabel]="'指定表或视图名称'" [fcAppid]="appId" fcFieldCode="MAINTABLE" [fcValid]="mainValid.MAINTABLE" [(ngModel)]="mainObj.MAINTABLE" fcPlaceHolder="请输入物理表名" fcHelp="默认采用与模型编码相同，物理表名或视图名"></fc-text>
-            <fc-text fccontent2 [fcLabel]="'默认排序字段'" [fcAppid]="appId" fcFieldCode="SORTBY"  [(ngModel)]="mainObj.SORTBY" fcHelp="按此指定的排序条件排序，默认按照倒序排序"  name="SYSAPP.SORTBY"></fc-text>
+            <fc-text fccontent1 [fcLabel]="'指定表或视图名称'" [fcValid]="mainValid.MAINTABLE" [(ngModel)]="mainObj.MAINTABLE" fcPlaceHolder="请输入物理表名" fcHelp="默认采用与模型编码相同，物理表名或视图名"></fc-text>
+            <fc-text fccontent2 [fcLabel]="'默认排序字段'"  [(ngModel)]="mainObj.SORTBY" fcHelp="按此指定的排序条件排序，默认按照倒序排序"  name="SYSAPP.SORTBY"></fc-text>
         </fc-layoutcol>
         <fc-tlbform fccontent1 fcType="primary" [fcAppid]="appId" fcLayout="center" (fcEvent)="tlbformEvent($event)" class="basicTlb"></fc-tlbform>
     </div> 
@@ -180,63 +180,6 @@
         </fc-modalcard>
     </div>
 </fc-layoutpanel>
-<!-- 模型接口入口-模型接口卡片 -->
-<fc-layoutpanel class="sys-card-pannel" *ngIf="isShow===true">
-    <div class="sys-card-pannel-header" fcheader>
-        <fc-title fcLabel="模型接口注册" class="sys-card-pannel-title" fcHasLine="N"></fc-title>
-        <P class="sys-card-pannel-smarks">
-            注册接口：描述此模型提供的标准接口或自定义接口，与属性、事件及关系构成模型
-        </P>
-    </div>
-    <div nz-row [nzGutter]="10" fccontent>
-        <!-- 新增卡片操作 -->
-        <div nz-col [nzSpan]="4" class="sys-card sys-card-add sys-card-small">
-            <nz-card (click)="addModelInterface();">
-                <fc-icon fcIcon="fc-icon-add" class="sys-card-addicon"></fc-icon>
-                <p class="sys-card-addtext">新增模型接口</p>
-            </nz-card>
-        </div>
-        <!-- 模型事件循环 -->
-        <div nz-col [nzSpan]="4" class="sys-card sys-card-small" *ngFor="let interface of sysInterfaces">
-            <nz-card (click)="editModelInterface(interface);">
-                <div class="sys-card-content">
-                    <!-- 操作按钮 -->
-                    <div class="sys-card-tbl">
-                        <!-- 默认显示两个 -->
-                        <fc-tooltip class="sys-card-tbl-every" fcTitle="{{btn.BTNNAME}}" *ngFor="let btn of interfaceListButtons">
-                            <fc-icon [fcIcon]="btn.BTNICON" (click)="btnCardEvent(btn.BTNCODE)" fcFontSize="18px" fccontent></fc-icon>
-                        </fc-tooltip>
-                    </div>
-                    <span class="sys-card-mark">
-                        {{interface.APPID|slice:0:1}}
-                    </span>
-                    <div class="sys-card-text">
-                        <div class="sys-card-title">
-                            {{interface.REQTYPE}}-{{interface.IMPLNAME}}
-                        </div>
-                        <p class="sys-card-smarks">路径：{{interface.PID}}/{{interface.APPID}}/{{interface.REQURL}}</p>
-                    </div>
-                </div>
-                <div class="sys-card-footer">
-                    <fc-tooltip class="sys-card-btn sys-card-btn-after" (click)="thumbUp()" fcTitle="点赞">
-                        <fc-icon fcIcon="fc-icon-dianzan2" fccontent></fc-icon>
-                        <span fccontent></span>
-                    </fc-tooltip>
-                    <fc-tooltip class="sys-card-btn sys-card-btn-after" (click)="download()" fcTitle="下载zip">
-                        <fc-icon fcIcon="fc-icon-daochu" fccontent></fc-icon>
-                    </fc-tooltip>
-                    <fc-tooltip class="sys-card-btn sys-card-btn-after" (click)="evaluate()" fcTitle="评价">
-                        <fc-icon fcIcon="fc-icon-pinglun1" fccontent></fc-icon>
-                        <span fccontent></span>
-                    </fc-tooltip>
-                    <fc-tooltip class="sys-card-btn" (click)="count()" fcTitle="统计图">
-                        <fc-icon fcIcon="fc-icon-shujufenxi" fccontent></fc-icon>
-                    </fc-tooltip>
-                </div>
-            </nz-card>
-        </div>
-    </div>
-</fc-layoutpanel>
 <!-- 与其他模型关系 -->
 <fc-layoutpanel class="sys-card-pannel" *ngIf="isShow===true">
     <div class="sys-card-pannel-header" fcheader>
@@ -300,3 +243,60 @@
         </fc-modalcard>
     </div>
 </fc-layoutpanel>
+<!-- 模型接口入口-模型接口卡片 -->
+<fc-layoutpanel class="sys-card-pannel" *ngIf="isShow===true">
+        <div class="sys-card-pannel-header" fcheader>
+            <fc-title fcLabel="模型接口注册" class="sys-card-pannel-title" fcHasLine="N"></fc-title>
+            <P class="sys-card-pannel-smarks">
+                注册接口：描述此模型提供的标准接口或自定义接口，与属性、事件及关系构成模型
+            </P>
+        </div>
+        <div nz-row [nzGutter]="10" fccontent>
+            <!-- 新增卡片操作 -->
+            <div nz-col [nzSpan]="4" class="sys-card sys-card-add sys-card-small">
+                <nz-card (click)="addModelInterface();">
+                    <fc-icon fcIcon="fc-icon-add" class="sys-card-addicon"></fc-icon>
+                    <p class="sys-card-addtext">新增模型接口</p>
+                </nz-card>
+            </div>
+            <!-- 模型事件循环 -->
+            <div nz-col [nzSpan]="4" class="sys-card sys-card-small" *ngFor="let interface of sysInterfaces">
+                <nz-card (click)="editModelInterface(interface);">
+                    <div class="sys-card-content">
+                        <!-- 操作按钮 -->
+                        <div class="sys-card-tbl">
+                            <!-- 默认显示两个 -->
+                            <fc-tooltip class="sys-card-tbl-every" fcTitle="{{btn.BTNNAME}}" *ngFor="let btn of interfaceListButtons">
+                                <fc-icon [fcIcon]="btn.BTNICON" (click)="btnCardEvent(btn.BTNCODE)" fcFontSize="18px" fccontent></fc-icon>
+                            </fc-tooltip>
+                        </div>
+                        <span class="sys-card-mark">
+                            {{interface.APPID|slice:0:1}}
+                        </span>
+                        <div class="sys-card-text">
+                            <div class="sys-card-title">
+                                {{interface.REQTYPE}}-{{interface.IMPLNAME}}
+                            </div>
+                            <p class="sys-card-smarks">路径：{{interface.PID}}/{{interface.APPID}}/{{interface.REQURL}}</p>
+                        </div>
+                    </div>
+                    <div class="sys-card-footer">
+                        <fc-tooltip class="sys-card-btn sys-card-btn-after" (click)="thumbUp()" fcTitle="点赞">
+                            <fc-icon fcIcon="fc-icon-dianzan2" fccontent></fc-icon>
+                            <span fccontent></span>
+                        </fc-tooltip>
+                        <fc-tooltip class="sys-card-btn sys-card-btn-after" (click)="download()" fcTitle="下载zip">
+                            <fc-icon fcIcon="fc-icon-daochu" fccontent></fc-icon>
+                        </fc-tooltip>
+                        <fc-tooltip class="sys-card-btn sys-card-btn-after" (click)="evaluate()" fcTitle="评价">
+                            <fc-icon fcIcon="fc-icon-pinglun1" fccontent></fc-icon>
+                            <span fccontent></span>
+                        </fc-tooltip>
+                        <fc-tooltip class="sys-card-btn" (click)="count()" fcTitle="统计图">
+                            <fc-icon fcIcon="fc-icon-shujufenxi" fccontent></fc-icon>
+                        </fc-tooltip>
+                    </div>
+                </nz-card>
+            </div>
+        </div>
+    </fc-layoutpanel>

@@ -8,13 +8,13 @@ export class SysfuncBusiness extends ParentBusiness {
      * @param resId 
      */
     static getBizCodeByAid(pid: string): Observable<any>  {
-        return this.daoService.getFromApi("SYSTEM/SYSBIZCODERULE/undefined", {});
+        return SysfuncBusiness.daoService.getFromApi("SYSTEM/SYSBIZCODERULE/undefined", {});
     }
     /** 
      * 获取所有产品
      */
     static getAllProduct() : Observable<any> {
-        return this.appService.findWithQuery('SYSPRODUCT', {})
+        return SysfuncBusiness.appService.findWithQuery('SYSPRODUCT', {})
     }
     // /**
     // * 打开窗口的函数方法

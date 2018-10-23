@@ -2,9 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { Routers } from './index.route';
+import { Routers } from './index.route'; 
 import { FccoreModule } from 'fccore2';
-import { FccomponentModule } from 'fccomponent2';
 import { SysmessageService } from './services/sysmessage.service';
 import { HomeComponent } from './components/home/home.component';
 import { SysroleComponent } from './components/sysrole/sysrole.component';
@@ -62,6 +61,7 @@ import { SyscompanyrelationtransferdialogComponent } from './components/dialog/s
 import { SyscompanyrelationdeletedialogComponent } from './components/dialog/syscompanyrelationdeletedialog.component';
 import { CompanyrelationtransferdialogComponent } from './components/dialog/companyrelationtransferdialog.component';
 import { CompanyrelationdeletedialogComponent } from './components/dialog/companyrelationdeletedialog.component';
+import { FccomponentModule } from 'fccomponent2';
 @NgModule({
   imports: [
     CommonModule,
