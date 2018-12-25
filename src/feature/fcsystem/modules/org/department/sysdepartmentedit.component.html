@@ -1,0 +1,72 @@
+<!--部门修改  -->
+<fc-layoutpanel class="templatefastposition ">
+    <fc-layoutrow fcSpan="30" fccontent>
+        <fc-tlbform [fcAppid]="appId" fccontent1  (fcEvent)="tlbformEvent($event)"></fc-tlbform>
+        <fc-layoutcol fcSpans="9,1" fccontent2>
+            <fc-layoutpanel fccontent1>
+                <form fccontent>
+                    <fc-layoutpanel fccontent id="basic-information">
+                        <fc-title fcLabel="基本信息" fcBorder="bottom" fcWidth="96%" fcheader></fc-title>
+                        <fc-layoutcol fcSpans="1,1" fccontent>
+                            <div fccontent1>
+                                <fc-text [fcLabel]="'部门代码'" [fcAppid]="appId" fcFieldCode="SDEPT_CODE" [fcValid]="mainValid.SDEPT_CODE" [(ngModel)]="mainObj.SDEPT_CODE" name="SDEPT_CODE"></fc-text>
+                                <fc-check [fcLabel]="'虚拟部门'" [(ngModel)]="checkValue" [fcOption]="checkOptions" name="checkname"></fc-check>
+                                <!-- <fc-combo [fcLabel]="'业务单元'"   name="comboname"></fc-combo> -->
+                                <fc-combo [fcLabel]="'业务单元'" [fcAppid]="appId" fcFieldCode="SBUSINESSUNIT" [(ngModel)]="mainObj.SBUSINESSUNIT" fcValueCode='DICVALUE'
+                                fcLabelCode='DICDESC' fcPlaceHolder="业务单元" name="SYSDEPARTMENT.SBUSINESSUNIT" [fcValid]="mainValid.SBUSINESSUNIT"></fc-combo>
+                                <!-- <fc-combo [fcLabel]="'维度'"   name="comboname"></fc-combo> -->
+                                <fc-date [fcLabel]="'生效日期'" [fcAppid]="appId" fcFieldCode="SBEGIN_DATE" fcFormat="YYYYMMDD"
+                                 [(ngModel)]="mainObj.SBEGIN_DATE" fcPlaceHolder="请输入生效日期" name="SYSDEPARTMENT.SBEGIN_DATE" 
+                                 [fcValid]="mainValid.SBEGIN_DATE"></fc-date>
+                                <fc-text [fcLabel]="'联系电话'" [fcAppid]="appId" fcFieldCode="SCONTACT_TEL" [fcValid]="mainValid.SCONTACT_TEL" [(ngModel)]="mainObj.SCONTACT_TEL" name="SCONTACT_TEL"></fc-text>
+                                <fc-text [fcLabel]="'邮政编码'" [fcAppid]="appId" fcFieldCode="SPOST_CODE" [fcValid]="mainValid.SPOST_CODE" [(ngModel)]="mainObj.SPOST_CODE" name="SPOST_CODE"></fc-text>
+                                <!-- <fc-text [fcLabel]="'地址'" name="textname"></fc-text> -->
+                            </div>
+                            <div fccontent2>
+                                <fc-text [fcLabel]="'部门名称'" [fcAppid]="appId" fcFieldCode="SDEPT_NAME" [fcValid]="mainValid.SDEPT_NAME" [(ngModel)]="mainObj.SDEPT_NAME" name="SDEPT_NAME"></fc-text>
+                                <!-- <fc-combo [fcLabel]="'层级'"   name="comboname"></fc-combo> -->
+                                <fc-combo [fcLabel]="'层级'" [fcAppid]="appId" fcFieldCode="ILEVEL" [(ngModel)]="mainObj.ILEVEL" fcValueCode='DICVALUE' fcLabelCode='DICDESC'
+                                fcPlaceHolder="层级" name="SYSDEPARTMENT.ILEVEL" [fcValid]="mainValid.ILEVEL"></fc-combo>
+                                <!-- <fc-combo [fcLabel]="'业务类型'"   name="comboname"></fc-combo> -->
+                                <fc-combo [fcLabel]="'业务类型'" [fcAppid]="appId" fcFieldCode="SBUSINESSTYPE" [(ngModel)]="mainObj.SBUSINESSTYPE" fcValueCode='DICVALUE'
+                                    fcLabelCode='DICDESC' fcPlaceHolder="业务类型" name="SYSDEPARTMENT.SBUSINESSTYPE" [fcValid]="mainValid.SBUSINESSTYPE"></fc-combo>
+                                <fc-date [fcLabel]="'成立日期'" [fcAppid]="appId" fcFieldCode="SEST_DATE" fcFormat="YYYYMMDD" [(ngModel)]="mainObj.SEST_DATE" 
+                                 fcPlaceHolder="请输入成立日期" name="SYSDEPARTMENT.SEST_DATE" [fcValid]="mainValid.SEST_DATE"></fc-date>
+                                <fc-date [fcLabel]="'注销日期'" [fcAppid]="appId" fcFieldCode="SEND_DATE" fcFormat="YYYYMMDD"  [(ngModel)]="mainObj.SEND_DATE"  
+                                 fcPlaceHolder="请输入注销日期" name="SYSDEPARTMENT.SEND_DATE" [fcValid]="mainValid.SEND_DATE"></fc-date>
+                                <fc-text [fcLabel]="'传真'" [fcAppid]="appId" fcFieldCode="SFAX" [fcValid]="mainValid.SFAX"  [(ngModel)]="mainObj.SFAX" name="SFAX"></fc-text>
+                                <!-- <fc-textarea [fcLabel]="'部门职责'" name="textareaname" [fcRow]="'2'"></fc-textarea> -->
+                            </div>
+                        </fc-layoutcol>
+                        <fc-layoutcol fcSpans="1,0" fccontent>
+                                <div fccontent1>
+                                    <fc-textarea [fcLabel]="'地址'" [fcAppid]="appId" fcFieldCode="SADDRESS" [fcValid]="mainValid.SADDRESS"  [(ngModel)]="mainObj.SADDRESS" name="SADDRESS" fccontent1 fcPlaceHolder="请输入地址" fcCol="1"></fc-textarea>
+                                    <fc-textarea [fcLabel]="'部门职责'" [fcAppid]="appId" fcFieldCode="SDUTY" [fcValid]="mainValid.SDUTY"  [(ngModel)]="mainObj.SDUTY" name="SDUTY" fccontent1 fcPlaceHolder="请输入地址" fcCol="1"></fc-textarea>
+                                </div>
+                        </fc-layoutcol>
+                        <fc-layoutcol fcSpans="1,0" fccontent class="save-button">
+                            <fc-button fcLabel="保存"  (click)="pageEvent('BASE')"  fccontent1 fcType="primary"></fc-button>
+                        </fc-layoutcol>
+                    </fc-layoutpanel>
+                    <fc-layoutpanel fccontent id="head-information">
+                        <fc-title fcLabel="负责人信息" fcBorder="bottom" fcheader fcWidth="96%"></fc-title>
+                        <fc-layoutcol fcSpans="1,1" fccontent>
+                            <!-- <fc-combo fccontent1 [fcLabel]="'负责人类型'"   name="comboname"></fc-combo> -->
+                            <fc-combo fccontent1 [fcLabel]="'负责人类型'" [fcAppid]="appId" fcFieldCode="SCHARGE_TYPE" [(ngModel)]="mainObj.SCHARGE_TYPE" fcValueCode='DICVALUE'
+                                fcLabelCode='DICDESC' fcPlaceHolder="负责人类型" name="SYSDEPARTMENT.SCHARGE_TYPE" [fcValid]="mainValid.SCHARGE_TYPE"></fc-combo>
+                            <fc-combo fccontent2 [fcLabel]="'负责人'"   name="comboname"></fc-combo>
+                        </fc-layoutcol>
+                        <fc-layoutcol fcSpans="1,0" fccontent class="save-button">
+                            <fc-button fcLabel="保存" (click)="pageEvent('principal')" fccontent1 fcType="primary"></fc-button>
+                        </fc-layoutcol>
+                    </fc-layoutpanel>
+                </form>
+            </fc-layoutpanel>
+            <div class="fastposition-content" fccontent2>
+                <div>
+                    <fc-fastposition fccontent [fcLinks]="[{href:'basic-information','label':'基本信息'},{href:'higher-unit','label':'上级单位'},{href:'head-information','label':'负责人信息'}]"></fc-fastposition>
+                </div>
+            </div>
+        </fc-layoutcol>
+    </fc-layoutrow>
+</fc-layoutpanel>

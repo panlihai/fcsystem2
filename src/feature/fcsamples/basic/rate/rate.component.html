@@ -1,0 +1,100 @@
+<!-- 评分 fc-rate -->
+<fc-layoutpanel>
+    <!-- 快速定位 -->
+    <fc-layoutcol fcSpans="9,1" fccontent>
+        <fc-title fcLabel="评分" fccontent1 fcSubtitle="评分组件"    ></fc-title>
+        <fc-title fcLabel="何时使用" fccontent1 fcSubtitle="对评价进行展示。对事物进行快速的评级操作。"    ></fc-title>
+        <fc-title fcLabel="代码演示" fcheader    ></fc-title>
+        <fc-layoutpanel fccontent1>
+        <!-- 组件内容开始 -->
+        <fc-layoutpanel fccontent>
+            <fc-title fcLabel="属性" fcheader     fcSize="small"></fc-title>
+            <fc-layoutcol fccontent fcSpans="1,1">
+                <fc-layoutgroup id="basic" fcTitle="基本" fccontent1>
+                    <div fccontent>
+                        <fc-rate fcText="评分"></fc-rate>
+                    </div>
+                    <fc-adcode fcfooter fcTitle="描述" fcRemark="基本的显示"
+                    fcview='<fc-rate fcText="评分"></fc-rate>'
+                    [fccode]="basicjs"></fc-adcode>
+                </fc-layoutgroup>
+                <fc-layoutgroup id="noText" fcTitle="文案不展示" fccontent2>
+                    <div fccontent>
+                        <fc-rate></fc-rate>
+                    </div>
+                    <fc-adcode fcfooter fcTitle="描述" fcRemark="文案不展示"
+                    fcview=' <fc-rate></fc-rate>'
+                    [fccode]="basicjs"></fc-adcode>
+                </fc-layoutgroup>
+                <fc-layoutgroup id="disabled" fcTitle="禁用" fccontent1>
+                    <div fccontent>
+                        <fc-rate fcText="评分"  fcDisabled="Y"></fc-rate>
+                    </div>
+                    <fc-adcode fcfooter fcTitle="描述" fcRemark="禁用状态"
+                    fcview='<fc-rate fcText="评分"  fcDisabled="Y"></fc-rate>'
+                    [fccode]="basicjs"></fc-adcode>
+                </fc-layoutgroup>
+                <fc-layoutgroup id="allStart" fcTitle="星星总数" fccontent2>
+                    <div fccontent>
+                        <fc-rate fcText="星星总数" fcCount="6"></fc-rate>
+                    </div>
+                    <fc-adcode fcfooter fcTitle="描述" fcRemark="星星总数"
+                    fcview='<fc-rate fcText="星星总数" fcCount="6"></fc-rate>'
+                    [fccode]="basicjs"></fc-adcode>
+                </fc-layoutgroup>
+                <fc-layoutgroup id="allowHalf" fcTitle="允许半星" fccontent1>
+                    <div fccontent>
+                        <fc-rate fcText="允许半星" fcAllowHalf="Y"></fc-rate>
+                    </div>
+                    <fc-adcode fcfooter fcTitle="描述" fcRemark="允许半星"
+                    fcview='<fc-rate fcText="星星总数" fcAllowHalf="Y"></fc-rate>'
+                    [fccode]="basicjs"></fc-adcode>
+                </fc-layoutgroup>
+                <fc-layoutgroup id="noshowlabel" fcTitle="不占位" fccontent2>
+                    <div fccontent>
+                        <fc-rate fcShowLabel="Y" fcText="评分">
+                        </fc-rate>
+                    </div>
+                    <fc-adcode fcfooter fcTitle="描述" fcRemark="不占位时显示的效果" fcview='<fc-radio fcShowLabel="Y" [(ngModel)]="radioValue" [fcOption]="radioOptions"></fc-radio>'
+                        [fccode]="basicjs">
+                    </fc-adcode>
+                </fc-layoutgroup>
+            </fc-layoutcol> 
+        </fc-layoutpanel>  
+        <!-- API -->
+        <fc-layoutpanel fccontent>
+            <fc-title id="attributesAPI" fcLabel="属性" fcheader> </fc-title>
+            <div style="height:450px;" fccontent>
+                <fc-listdata [fcAppid]="'FCFIELDS'" [fcOption]="fcOption" [fcCondition]="fcCondition"></fc-listdata>
+            </div>
+        </fc-layoutpanel>
+        <fc-layoutpanel fccontent>
+            <fc-title id="eventAPI" fcLabel="事件" fcheader> </fc-title>
+            <div style="height:450px;" fccontent>
+                <fc-listdata [fcAppid]="'FCEVENT'" [fcOption]="fcOption" [fcCondition]="fcCondition"></fc-listdata>
+            </div>
+        </fc-layoutpanel>
+        <!-- 组件内容结束 -->
+        </fc-layoutpanel>
+        <div class="fastposition-content" fccontent2>
+            <fc-fastposition [fcLinks]="
+                [
+                {href:'basic','label':'基本'},
+                {href:'noText','label':'文案不展示'},
+                {href:'disabled','label':'禁用'},
+                {href:'allStart','label':'星星总数'},
+                {href:'allowHalf','label':'允许半星'},
+                {href:'noshowlabel','label':'不占位'},
+                {href:'attributesAPI','label':'属性API'},
+                {href:'eventAPI','label':'事件API'}
+                ]">
+            </fc-fastposition>
+        </div>
+    </fc-layoutcol>
+    <!-- 快速定位结束 -->
+        
+    
+    
+    
+    
+</fc-layoutpanel>

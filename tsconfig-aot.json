@@ -1,0 +1,32 @@
+{
+    "compilerOptions": {
+      "module": "es2015",
+      "moduleResolution": "node",
+      "outDir": "./publish/fccomponent2/",
+      "declaration": true,
+      "target": "es5",
+      "noImplicitAny": false,
+      "sourceMap": true,
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "typeRoots": [ "./node_modules/@types" ],
+      "lib": [
+        "dom",
+        "es2015"
+      ]
+    },
+    "angularCompilerOptions": {   　　 //这是aot.json独有的，genDir:"." ,示意，生成的NgFactory文件放于原文件路径内。你也可以genDir:'aot'，放在aot文件内，但我建议你放在原路径里。
+      "genDir": "aot",
+      "skipMetadataEmit":true
+    },
+    "files":[
+      "src/feature/fccomponent2/index.ts",        　　 //从app.module.ts这个文件开始进行编译。
+      //"src/child/child.module.ts"  　　//这是lazy loader模块，因为是惰性加载模块，而没有在原模块中import或require它，所以需要单独编译。
+    ],
+    "compileOnSave": false,
+    "exclude": [
+      "node_modules",
+      "src/polyfill.ts"
+    ]
+  }
+  

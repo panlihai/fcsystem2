@@ -1,0 +1,35 @@
+<!-- 饼状图 fc-chartpie -->
+<fc-layoutpanel>
+  <fc-title fcLabel="饼状图" fcheader></fc-title>
+  <fc-layoutcol fccontent fcSpans="1,0">
+    <fc-layoutgroup fcTitle="基本" fccontent1>
+      <div fccontent>
+        <div style="width:100%;height:500px;">
+          <fc-chartpie [fcData]="_pieData" [fcScheme]="scheme" (fcEvent)="chartpieEvent($event)"></fc-chartpie>
+        </div>
+      </div>
+    </fc-layoutgroup>
+  </fc-layoutcol>
+  <fc-layoutcol fccontent fcSpans="1,0">
+    <fc-layoutgroup fcTitle="高级" fccontent1>
+      <div fccontent>
+        <div style="width:100%;height:500px;">
+          <!-- <fc-chartpie [fcData]="_advancedData" fcType="advanced" (fcEvent)="chartpieEvent($event)"></fc-chartpie> -->
+        </div>
+      </div>
+    </fc-layoutgroup>
+  </fc-layoutcol>
+  <!-- API -->
+  <fc-layoutpanel fccontent>
+    <fc-title fcLabel="属性" fcheader></fc-title>
+    <div style="height:450px;" fccontent>
+      <fc-listdata [fcAppid]="'FCFIELDS'" [fcOption]="fcOption" [fcCondition]="fcCondition"></fc-listdata>
+    </div>
+  </fc-layoutpanel>
+  <fc-layoutpanel fccontent>
+    <fc-title fcLabel="事件" fcheader></fc-title>
+    <div style="height:450px;" fccontent>
+      <fc-listdata [fcAppid]="'FCEVENT'" [fcOption]="fcOption" [fcCondition]="fcCondition"></fc-listdata>
+    </div>
+  </fc-layoutpanel>
+</fc-layoutpanel>

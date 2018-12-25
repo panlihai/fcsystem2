@@ -1,0 +1,19 @@
+<!-- 列表模板 -->
+<fc-layoutpanel [fcFull]="true" class="templatelist">
+    <fc-layoutrow fcSpan="77" fccontent>
+        <fc-tlblist [fcAppid]="appId" fccontent1></fc-tlblist>
+        <form fccontent1 class="list-search" name="searchForm" #searchForm >
+                <div class="list-search-every" >
+                    <fc-text [fcLabel]="'名称'" [(ngModel)]="searchObj.TASKNAME"  name="comboname"></fc-text>
+                </div>
+                <div class="list-search-every">
+                    <fc-text fcLabel="状态" [(ngModel)]="searchObj.STATUS" name="textname"></fc-text>
+                </div> 
+                <div class="list-search-every list-search-button">
+                    <fc-button fcLabel="查询" fcType="primary" name="search"></fc-button>
+                    <fc-button fcLabel="清空" fcType="default" name="reset"></fc-button>
+                </div>
+            </form>  
+            <fc-listdata fccontent2 [fcAppid]="appId"  fcViewActionStrategy='[{"FIELDCODE":"SBIZCODE_RULE_NAME","FIELDVALUE":"张三","BUTTONS":["listEdit","listView"]},{"FIELDCODE":"SBIZCODE_RULE_NAME","FIELDVALUE":"刘六","BUTTONS":["listOneDelete","listView"]}]' [fcCondition]="condition"></fc-listdata>
+    </fc-layoutrow>
+</fc-layoutpanel>
