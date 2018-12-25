@@ -11,7 +11,7 @@ import { SysmessagedetailComponent } from './sysmessagedetail.component';
 import { SystelsmsComponent } from './systelsms.component';
 import { SysuserComponent } from './sysuser.component';
 import { SysworkplanComponent } from './sysworkplan.component';
-import { FccomponentModule } from '../../../feature/fccomponent2';
+import { FccomponentModule } from 'fccomponent2';
  
 @NgModule({
   imports: [

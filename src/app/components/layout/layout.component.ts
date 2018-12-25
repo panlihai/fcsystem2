@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FcnavmenuComponent, FcnavtabComponent, NavsideOptions, MenuOptions } from '../../../feature/fccomponent2';
+import { FcnavmenuComponent, FcnavtabComponent, NavsideOptions, MenuOptions } from 'fccomponent2';
 import { CommonService } from 'fccore2/common/common';
 import LayoutBusiness from '../../business/layout.business';
-import { FCEVENT } from '../../../feature/fccomponent2/fc';
+import { FCEVENT } from 'fccomponent2/fc';
 import SystemBusiness from 'fccore2/classes/system.business';
 import { FCCONFIG } from 'fccore2';
 @Component({

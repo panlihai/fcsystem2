@@ -15,7 +15,7 @@ import { SigninComponent } from './components/signin/signin.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { SystemService } from './services/services.services';
-import { FccomponentModule } from '../feature/fccomponent2';
+import { FccomponentModule } from 'fccomponent2';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { IconDefinition } from '@ant-design/icons-angular';

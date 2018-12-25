@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ParentlistComponent } from '../../../feature/fccomponent2';
+import { ParentlistComponent } from 'fccomponent2';
 @Component({
   selector: 'systelsmslist',
   templateUrl: './systelsms.component.html',

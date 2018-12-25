@@ -1,9 +1,9 @@
 import { Component } from '@angular/core'; 
 import { CommonService } from 'fccore2/common/common'; 
 import SystemBusiness from 'fccore2/classes/system.business';
-import { ParentDetailComponent } from '../../../feature/fccomponent2';
+import { ParentDetailComponent } from 'fccomponent2';
 import { Sysmessage, SysmessageBusiness } from '../../business/sysmessage.business';
-import { FCEVENT } from '../../../feature/fccomponent2/fc';
+import { FCEVENT } from 'fccomponent2/fc';
 @Component({
   selector: 'sysmessagedetail',
   template: `

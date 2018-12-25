@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { FclistdataComponent, TimelineOptions } from "../../../feature/fccomponent2";
-import { FCEVENT } from "../../../feature/fccomponent2/fc";
+import { FclistdataComponent, TimelineOptions } from "fccomponent2";
+import { FCEVENT } from "fccomponent2/fc";
 import { CommonService } from "fccore2/common/common";
 import HomeBusiness from "../../../app/business/home.business";
 import SystemBusiness from "fccore2/classes/system.business"; 

@@ -1,8 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
-import { ParentlistComponent, FclistdataComponent } from '../../../feature/fccomponent2';
+import { ParentlistComponent, FclistdataComponent } from 'fccomponent2';
 import SysprofileBusiness from '../../business/sysprofile.business';
 import SystemBusiness from 'fccore2/classes/system.business';
-import { FCEVENT } from '../../../feature/fccomponent2/fc';
+import { FCEVENT } from 'fccomponent2/fc';
 import { CommonService } from 'fccore2/common/common'; 
 import { FCCONFIG } from 'fccore2';
 @Component({

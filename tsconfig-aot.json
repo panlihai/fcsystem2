@@ -2,7 +2,7 @@
     "compilerOptions": {
       "module": "es2015",
       "moduleResolution": "node",
-      "outDir": "./publish/fccomponent2/",
+      "outDir": "./publish/",
       "declaration": true,
       "target": "es5",
       "noImplicitAny": false,
@@ -20,7 +20,7 @@
       "skipMetadataEmit":true
     },
     "files":[
-      "src/feature/fccomponent2/index.ts",        　　 //从app.module.ts这个文件开始进行编译。
+      "src/feature/fcsystem2/index.ts",        　　 //从app.module.ts这个文件开始进行编译。
       //"src/child/child.module.ts"  　　//这是lazy loader模块，因为是惰性加载模块，而没有在原模块中import或require它，所以需要单独编译。
     ],
     "compileOnSave": false,
