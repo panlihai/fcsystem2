@@ -11,6 +11,7 @@ export class SysreslibthumbnailComponent extends ParentlistComponent {
     super('SYSTEM', 'SYSRESLIBTHUMBNAIL');
   }
   init(): void {
+    this.enableAutoSearch = false;
   }
   getDefaultQuery():any { 
     return {};

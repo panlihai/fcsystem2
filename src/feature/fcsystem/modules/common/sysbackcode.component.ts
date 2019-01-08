@@ -11,6 +11,8 @@ export class SysbackcodeComponent extends ParentlistComponent {
     super('SYSTEM', 'SYSBACKCODE');
   }
   init(): void {
+    this.enableAutoSearch =  false;
+
   }
   getDefaultQuery():any { 
     return {};

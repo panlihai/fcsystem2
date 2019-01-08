@@ -11,6 +11,7 @@ export class SyssessionComponent extends ParentlistComponent {
     super('SYSTEM', 'SYSSESSION');
   }
   init(): void {
+    this.enableAutoSearch = false;
   }
   getDefaultQuery():any { 
     return {};

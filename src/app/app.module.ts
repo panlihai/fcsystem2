@@ -50,7 +50,7 @@ const icons: IconDefinition[] = [ AccountBookFill, AlertOutline, AlertFill ];
     FccomponentModule
   ],
   providers: [ 
-    { provide: RouteReuseStrategy, useClass: FcRouterService },
+    // { provide: RouteReuseStrategy, useClass: FcRouterService },
     {
       provide: LocationStrategy,
       useClass: HashLocationStrategy

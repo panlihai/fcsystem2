@@ -1,3 +1,4 @@
+
 <fc-layoutpanel  class="templatefastposition samples">
      <!-- 快速定位 -->
         <fc-layoutcol fcSpans="9,1" fccontent>
@@ -117,7 +118,17 @@
                             [fccode]="basicjs">
                             </fc-adcode>
                         </fc-layoutgroup>
-                       
+                        <fc-layoutgroup id="linespace" fcTitle="首行为空1" fccontent1> 
+                            <div fccontent style="margin-bottom: 10px;">
+                                <fc-any [fcLabel]="'首行为空'"  [(ngModel)]="anyValue" fcLineOneSpace='Y' [fcOption]="anyOptions" fcOpen='Y'>
+                                </fc-any>
+                            </div>
+                            <fc-adcode fcfooter fcTitle="描述" fcRemark="首行为空1"
+                            fcview='<fc-any [fcLabel]="首行为空"  [(ngModel)]="anyValue" fcLineOneSpace="Y" [fcOption]="anyOptions" fcOpen="Y">
+                            </fc-any>'
+                            [fccode]="basicjs">
+                            </fc-adcode>
+                        </fc-layoutgroup>
                     </fc-layoutcol>     
                 </fc-layoutpanel>
                 <fc-layoutpanel fccontent>

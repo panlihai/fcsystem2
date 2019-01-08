@@ -8,6 +8,19 @@ import { ComponentService } from '../../services/component.service';
   styles: [``]
 })
 export class TextareaComponent extends ComponentParent {
+  fcOption:any[]=[{
+    APPNAME:'模型1',
+    APPID:"ID1",
+  },{
+    APPNAME:'模型2',
+    APPID:"ID2",
+  },{
+    APPNAME:'模型3',
+    APPID:"ID3",
+  },{
+    APPNAME:'模型4',
+    APPID:"ID4",
+  }];
   content: string;
   basicjs: string = `
   import { Component, OnInit } from '@angular/core';

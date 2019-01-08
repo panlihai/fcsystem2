@@ -4,7 +4,12 @@ import { ComponentParent } from '../../componentparent';
 @Component({
   selector: 'any',
   templateUrl: './any.component.html',
-  styles: [``]
+  styles: [`
+  :host ::ng-deep .ant-select-dropdown-menu-item{ 
+    height:22px!important;
+    background:red;
+}
+  `]
 })
 export class AnyComponent extends ComponentParent {
   anyValue: any = { "label": "A", "value": "a", "disabled": false };

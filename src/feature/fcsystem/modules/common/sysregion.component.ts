@@ -11,6 +11,8 @@ export class SysregionComponent extends ParentlistComponent {
     super('SYSTEM', 'SYSREGION');
   }
   init(): void {
+    this.enableAutoSearch =  false;
+
   }
   getDefaultQuery():any { 
     return {};

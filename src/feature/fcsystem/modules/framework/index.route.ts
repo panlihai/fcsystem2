@@ -1,20 +1,20 @@
 import { Routes } from '@angular/router';
-import { SysproductComponent } from './sysproduct.component';
-import { SysproducteditComponent } from './sysproductedit.component';
-import { SysmenuComponent } from './sysmenu.component';
-import { SysdatasourceComponent } from './sysdatasource.component';
-import { SysdatasourceeditComponent } from './sysdatasourceedit.component';
-import { SysserviceComponent } from './sysservice.component';
-import { SysserviceeditComponent } from './sysserviceedit.component';
-import { SysinterfaceeditComponent } from './sysinterfaceedit.component';
-import { SysfuncComponent } from './sysfunc.component';
-import { SysfunceditComponent } from './sysfuncedit.component';
-import { SysvieweditComponent } from './sysviewedit.component';
-import { SysviewelementeditComponent } from './sysviewelementedit.component';
-import { SysdicComponent } from './sysdic.component';
-import { SysappComponent } from './sysapp.component';
-import { SysappeditComponent } from './sysappedit.component';
-import { SysappmodifyComponent } from './sysappmodify.component';
+import { SysproductComponent } from './sysproduct/sysproduct.component';
+import { SysproducteditComponent } from './sysproduct/sysproductedit.component';
+import { SysmenuComponent } from './sysmenu/sysmenu.component';
+import { SysdatasourceComponent } from './sysdatabase/sysdatasource.component';
+import { SysdatasourceeditComponent } from './sysdatabase/sysdatasourceedit.component';
+import { SysserviceComponent } from './sysservice/sysservice.component';
+import { SysserviceeditComponent } from './sysservice/sysserviceedit.component';
+import { SysinterfaceeditComponent } from './sysservice/sysinterfaceedit.component';
+import { SysfuncComponent } from './sysfunc/sysfunc.component';
+import { SysfunceditComponent } from './sysfunc/sysfuncedit.component';
+import { SysvieweditComponent } from './sysfunc/sysviewedit.component';
+import { SysviewelementeditComponent } from './sysfunc/sysviewelementedit.component';
+import { SysdicComponent } from './sysdic/sysdic.component';
+import { SysappComponent } from './sysapp/sysapp.component';
+import { SysappeditComponent } from './sysapp/sysappedit.component';
+import { SysappmodifyComponent } from './sysapp/sysappmodify.component';
 export const Routers: Routes = [
     {
         path: 'sysappList',

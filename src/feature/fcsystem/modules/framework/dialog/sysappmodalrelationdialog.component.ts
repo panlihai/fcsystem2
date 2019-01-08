@@ -13,7 +13,7 @@ import { CommonService } from 'fccore2/common/common';
           <div>关系：描述模型与模型之间，数据与数据之间的联系，与属性、事件构成模型</div>
           <div class="sys-card-fast">
           <ul class="sys-fast-list">
-              <li class="sys-icon-btn"  (click)="event('closetop')">
+              <li class="sys-icon-btn"  (click)="event('closetop',$event)">
                   <fc-icon fcIcon="fc-icon-close" fcColor="#009DFF"></fc-icon>关闭
               </li>
           </ul>

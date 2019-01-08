@@ -15,7 +15,7 @@ import { CommonService } from 'fccore2/common/common';
             <div *ngIf="fromFunc">按钮事件：描述与功能的按钮事件，呈现方式体现在按钮上，与视图构成功能</div>
             <div class="sys-card-fast">
                 <ul class="sys-fast-list">
-                    <li class="sys-icon-btn"  (click)="event('closetop')">
+                    <li class="sys-icon-btn"  (click)="event('closetop',$event)">
                         <fc-icon fcIcon="fc-icon-close" fcColor="#009DFF"></fc-icon>关闭
                     </li>
                 </ul>

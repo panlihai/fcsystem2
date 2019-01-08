@@ -11,6 +11,8 @@ export class SysiconComponent extends ParentlistComponent {
     super('SYSTEM', 'SYSICON');
   }
   init(): void {
+    this.enableAutoSearch =  false;
+
   }
   getDefaultQuery():any { 
     return {};

@@ -101,7 +101,13 @@
             <fc-adcode fcfooter fcTitle="描述" fcRemark="启用自动保存" [fcview]="basicview" [fccode]="savejs"></fc-adcode>
           </fc-layoutgroup>
 
-          
+          <fc-layoutgroup id="position" fcTitle="菜单左右切换" fccontent2>
+            <div style="width:100%;height: 250px;" fccontent>
+              <fc-button fcLabel="切换位置" (click)="positionChange()"></fc-button>
+              <fc-listdata [fcAppid]="appId" [fcOption]="fcListdataOptionPosition" ></fc-listdata>
+            </div>
+            <fc-adcode fcfooter fcTitle="描述" fcRemark="启用自动保存" [fcview]="basicview" [fccode]="savejs"></fc-adcode>
+          </fc-layoutgroup>
         </fc-layoutcol>
       </fc-layoutpanel>
       <fc-layoutpanel fccontent>

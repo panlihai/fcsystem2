@@ -11,6 +11,7 @@ export class SysreslibpicComponent extends ParentlistComponent {
     super('SYSTEM', 'SYSRESLIBPIC');
   }
   init(): void {
+    this.enableAutoSearch = false;
   }
   getDefaultQuery():any { 
     return {};

@@ -11,6 +11,8 @@ export class SysparamComponent extends ParentlistComponent {
     super('SYSTEM', 'SYSPARAM');
   }
   init(): void {
+    this.enableAutoSearch =  false;
+
   }
   getDefaultQuery():any { 
     return {};

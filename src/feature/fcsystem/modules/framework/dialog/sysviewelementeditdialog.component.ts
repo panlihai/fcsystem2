@@ -14,7 +14,7 @@ import { SysviewBusiness } from '../../../business/sysview.business';
       </P>
       <div class="sys-card-fast">
           <ul class="sys-fast-list">
-              <li class="sys-icon-btn" (click)="event('closeDialog')">
+              <li class="sys-icon-btn" (click)="event('closeDialog',$event)">
                   <fc-icon fcIcon="fc-icon-close" fcColor="#009DFF"></fc-icon>关闭</li>
           </ul>
       </div>
@@ -49,8 +49,8 @@ import { SysviewBusiness } from '../../../business/sysview.business';
       </fc-layoutcol>
       <div class="sys-title-container">
           <fc-title class="sys-flex-title" fcLabel="输入配置" fcHasLine="N"></fc-title>
-          <i class="sys-title-arrow" (click)="event('inputCloseChange')" *ngIf="inputClose">∧</i>
-          <i class="sys-title-arrow" (click)="event('inputCloseChange')" *ngIf="!inputClose">∨</i>
+          <i class="sys-title-arrow" (click)="event('inputCloseChange',$event)" *ngIf="inputClose">∧</i>
+          <i class="sys-title-arrow" (click)="event('inputCloseChange',$event)" *ngIf="!inputClose">∨</i>
       </div>
       <fc-layoutcol *ngIf="inputClose">
           <fc-layoutcol fccontent1 fcSpans="9,1">
@@ -66,8 +66,8 @@ import { SysviewBusiness } from '../../../business/sysview.business';
       </fc-layoutcol>
       <div class="sys-title-container">
           <fc-title class="sys-flex-title" fcLabel="输出配置" fcHasLine="N"></fc-title>
-          <i class="sys-title-arrow" (click)="event('outputCloseChange')" *ngIf="outputClose">∧</i>
-          <i class="sys-title-arrow" (click)="event('outputCloseChange')" *ngIf="!outputClose">∨</i>
+          <i class="sys-title-arrow" (click)="event('outputCloseChange',$event)" *ngIf="outputClose">∧</i>
+          <i class="sys-title-arrow" (click)="event('outputCloseChange',$event)" *ngIf="!outputClose">∨</i>
       </div>
       <fc-layoutcol *ngIf="outputClose">
           <fc-layoutcol fccontent1 fcSpans="9,1">
@@ -88,7 +88,7 @@ import { SysviewBusiness } from '../../../business/sysview.business';
               <div class="place-div" fccontent2></div>
               <div class="place-div" fccontent2></div>
               <div class="last-btn" fccontent2>
-                  <fc-button fccontent2 fcType="primary" fcLabel="+" (click)="event('addGroupCode')"></fc-button>
+                  <fc-button fccontent2 fcType="primary" fcLabel="+" (click)="event('addGroupCode',$event)"></fc-button>
               </div>
           </fc-layoutcol>
       </fc-layoutcol>

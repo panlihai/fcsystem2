@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ComponentParent } from '../../componentparent';
 import { ComponentService } from '../../services/component.service';
 import { FCEVENT } from 'fccomponent2/fc';
+import FclistdataBusiness, { GRIDOPTIONS } from 'fccomponent2/business/fclistdata.business';
 @Component({
   selector: 'listdata',
   templateUrl: './listdata.component.html',
@@ -12,6 +13,8 @@ import { FCEVENT } from 'fccomponent2/fc';
   `]
 })
 export class ListdataComponent extends ComponentParent {
+
+  fcListdataOptionPosition:GRIDOPTIONS = Object.assign({},FclistdataBusiness.fcOption);
   //不使用平台组件
   fcPageSizeSelectorValues:number[]=[50,100,150,200];
   //基础basicview
@@ -716,5 +719,11 @@ export class ListdataComponent extends ComponentParent {
         this.mainService.providers.msgService.message("停止编辑");
         break;
     }
+  }
+  positionChange(){
+    this.fcListdataOptionPosition.fcActionPosition=(this.fcListdataOptionPosition.fcActionPosition==='left'?'right':'left');
+    this.fcListdataOptionPosition.fcFields = undefined;
+    this.fcListdataOptionPosition = Object.assign({},this.fcListdataOptionPosition);
+
   }
 }

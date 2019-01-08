@@ -11,6 +11,7 @@ export class SysreslibComponent extends ParentlistComponent {
     super('SYSTEM', 'SYSRESLIB');
   }
   init(): void {
+    this.enableAutoSearch = false;
   }
   getDefaultQuery():any { 
     return {};

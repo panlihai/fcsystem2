@@ -8,6 +8,7 @@ import { AddetailComponent } from './addetail/addetail.component';
 import { AdcarouselComponent } from './adcarousel/adcarousel.component';
 import { AdcodeComponent } from './adcode/adcode.component';
 import { FclistModule, FcbasicModule, FclayoutModule, FcadModule, FcnavModule, FctlbModule } from 'fccomponent2';
+import { AdprintComponent } from './adprint/adprint.component';
 @NgModule({
   imports: [
     FormsModule,
@@ -27,7 +28,8 @@ import { FclistModule, FcbasicModule, FclayoutModule, FcadModule, FcnavModule, F
     AdformComponent,
     AddetailComponent,
     AdcarouselComponent,
-    AdcodeComponent
+    AdcodeComponent,
+    AdprintComponent
   ],
   providers: [
 

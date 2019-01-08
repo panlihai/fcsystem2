@@ -79,8 +79,18 @@
                     </fc-layoutgroup>
                     <fc-layoutgroup id="Lenovo" fcTitle="联想输入" fccontent1>
                         <div fccontent>
-                            <fc-text fcLabel="联想输入" [fcAppid]="'SYSAPP'" fcAutoComplete='Y' [(ngModel)]="content" fcFieldCode='APPNAME' fcLabelCode="APPNAME" fcValueCode="APPID" fcAppid='SYSAPP' name="fuzzy"></fc-text>
+                            <fc-text fcLabel="联想输入" [fcAppid]="'SYSAPP'" fcAutoComplete='Y' [(ngModel)]="content" fcFieldCode='APPNAME' fcLabelCode="APPNAME" fcValueCode="APPID"   name="fuzzy"></fc-text>
                         </div>
+                        <div fccontent>
+                            <fc-text fcShowLabel="N"  fcLabel="联想输入2"  [fcOption]="fcOption" fcAutoComplete='Y'   fcFieldCode='APPNAME' fcLabelCode="APPNAME" fcValueCode="APPID"  name="fuzzy"></fc-text>
+                        </div>
+                        <fc-adcode fcfooter fcTitle="描述" fcRemark="在输入框输入文本内容会出现可能要找的内容" [fcview]='Lenovo' [fccode]="readonlyjs">
+                        </fc-adcode>
+                    </fc-layoutgroup>
+                    <fc-layoutgroup id="autofocus" fcTitle="获取焦点" fccontent2>
+                        <div fccontent>
+                            <fc-text fcLabel="获取焦点" [fcAutoFocus]="'Y'" [fcOption]="fcLineOption" fcAutoComplete='Y' [(ngModel)]="content" fcFieldCode='label' fcLabelCode="value" fcValueCode="value"   name="fuzzy"></fc-text>
+                        </div> 
                         <fc-adcode fcfooter fcTitle="描述" fcRemark="在输入框输入文本内容会出现可能要找的内容" [fcview]='Lenovo' [fccode]="readonlyjs">
                         </fc-adcode>
                     </fc-layoutgroup>
@@ -242,6 +252,7 @@
                 {href:'size','label':'大小'},
                 {href:'type','label':'类型'},
                 {href:'Lenovo','label':'联想输入'},
+                {href:'autofocus','label':'自动获取焦点'},
                 {href:'noshowlabel','label':'不占位'},
                 {href:'AddOnBefore','label':'前置标签'},
                 {href:'AddOnBeforeIcon','label':'前置图标'},

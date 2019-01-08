@@ -3,6 +3,7 @@ import { AddetailComponent } from './addetail/addetail.component';
 import { AdformComponent } from './adform/adform.component';
 import { AdcarouselComponent } from './adcarousel/adcarousel.component';
 import { AdcodeComponent } from './adcode/adcode.component';
+import { AdprintComponent } from './adprint/adprint.component';
 export const adRouters: Routes = [
     {
         path: 'system/fcaddetailList',//高级组件-详情
@@ -18,5 +19,8 @@ export const adRouters: Routes = [
     , {
         path: 'system/fcadcodeList',//高级组件-代码
         component: AdcodeComponent
+    } , {
+        path: 'system/fcadprintList',//高级组件-打印
+        component: AdprintComponent
     }
 ];

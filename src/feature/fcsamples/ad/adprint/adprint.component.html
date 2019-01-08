@@ -1,0 +1,30 @@
+<!-- 表单组件  -->
+<fc-layoutpanel>
+  <!-- 快速定位 -->
+  <fc-layoutcol fcSpans="9,1" fccontent>
+    <fc-title fcLabel="打印组件" fccontent1 fcSubtitle="高级打印组件" fcHasline="false"></fc-title>
+    <fc-layoutpanel fccontent1>
+      <!-- 组件内容开始 -->
+      <fc-layoutpanel fccontent>
+        <fc-title fcLabel="属性" fcheader fcHasLine="false" fcSize="small"></fc-title>
+        <fc-layoutcol fccontent fcSpans="1,0">
+          <fc-layoutgroup id="base" fcTitle="自定义表单-静态数据" fccontent1>
+            <fc-adprint fccontent fcLabel="打印" fcTitle="测试打印标题" fcReportlet="/eam/test.cpt" [fcParam]="{labornum:'ADMIN',id:623}"></fc-adprint>
+          </fc-layoutgroup>
+        </fc-layoutcol>
+      </fc-layoutpanel>
+      <!-- 组件内容结束 -->
+    </fc-layoutpanel>
+    <div class="fastposition-content" fccontent2>
+      <fc-fastposition [fcLinks]="
+              [
+              {href:'base','label':'基础场景'}
+              
+              ]">
+      </fc-fastposition>
+    </div>
+  </fc-layoutcol>
+  <!-- 快速定位结束 -->
+
+
+</fc-layoutpanel>

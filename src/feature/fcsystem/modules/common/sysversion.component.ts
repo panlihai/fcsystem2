@@ -11,6 +11,8 @@ export class SysversionComponent extends ParentlistComponent {
     super('SYSTEM', 'SYSVERSION');
   }
   init(): void {
+    this.enableAutoSearch =  false;
+
   }
   getDefaultQuery():any { 
     return {};

@@ -9,6 +9,24 @@ import { FCEVENT } from 'fccomponent2/fc';
   styles: [``]
 })
 export class TextComponent extends ComponentParent {
+  ishid:boolean = false;
+  fcOption: any[] = [{
+    APPNAME: '模型1',
+    APPID: "ID1",
+  }, {
+    APPNAME: '模型2',
+    APPID: "ID2",
+  }, {
+    APPNAME: '模型3',
+    APPID: "ID3",
+  }, {
+    APPNAME: '模型4',
+    APPID: "ID4",
+  }];
+
+  fcLineOption = [{ "icon": "", "label": "1221-9-1 备用金", "value": "1221-9-1 备用金" },
+   { "icon": "", "label": "1221-9-2 个人借款", "value": "1221-9-2 个人借款" }, 
+   { "icon": "", "label": "1221-9-4-50 其他应收款其他", "value": "1221-9-4-50 其他应收款其他" }]
   content: string = '文本内容';
   //只读
   readonlyjs: string = `
@@ -132,6 +150,7 @@ export class TextComponent extends ComponentParent {
     switch (event.eventName) {
       case 'click':
         this.mainService.providers.msgService.message("这是点击事件");
+        this.ishid = !this.ishid;
         break;
     }
   }

@@ -11,6 +11,8 @@ export class SyswizardComponent extends ParentlistComponent {
     super('SYSTEM', 'SYSWIZARD');
   }
   init(): void {
+    this.enableAutoSearch =  false;
+
   }
   getDefaultQuery():any { 
     return {};

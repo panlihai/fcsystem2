@@ -11,7 +11,7 @@ import SystemBusiness from 'fccore2/classes/system.business';
          <div>编辑：编辑请求参数功能，配置参数的属性：包含参数名称、类型、是否必填、数值类型等</div>
           <div class="sys-card-fast">
               <ul class="sys-fast-list">
-                  <li class="sys-icon-btn"  (click)="event('close')">
+                  <li class="sys-icon-btn"  (click)="event('close',$event)">
                       <fc-icon fcIcon="fc-icon-close" fcColor="#009DFF"></fc-icon>关闭
                   </li>
               </ul>

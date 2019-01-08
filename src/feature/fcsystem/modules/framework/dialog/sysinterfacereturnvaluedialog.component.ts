@@ -11,7 +11,7 @@ import SystemBusiness from 'fccore2/classes/system.business';
          <div>编辑：指定返回值及其类型等</div>
            <div class="sys-card-fast">
              <ul class="sys-fast-list">
-                 <li class="sys-icon-btn"  (click)="event('close')">
+                 <li class="sys-icon-btn"  (click)="event('close',$event)">
                      <fc-icon fcIcon="fc-icon-close" fcColor="#009DFF"></fc-icon>关闭
                  </li>
              </ul>

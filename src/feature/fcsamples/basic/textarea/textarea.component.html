@@ -66,6 +66,24 @@
                             fcview='<fc-textarea [fcLabel]="自适应高度" fcPlaceHolder="请输入" fcAutosize="Y"></fc-textarea>' [fccode]="basicjs">
                             </fc-adcode>
                         </fc-layoutgroup>
+                        <fc-layoutgroup id="Lenovo" fcTitle="联想输入" fccontent1>
+                                <div fccontent>
+                                    <fc-textarea fcLabel="联想输入" [fcAppid]="'SYSAPP'" fcAutoComplete='Y' [(ngModel)]="content" fcFieldCode='APPNAME' fcLabelCode="APPNAME" fcValueCode="APPID"   name="fuzzy"></fc-textarea>
+                                </div>
+                                <div fccontent>
+                                    <fc-textarea fcShowLabel="N"  fcLabel="联想输入2"  [fcOption]="fcOption" fcAutoComplete='Y'   fcFieldCode='APPNAME' fcLabelCode="APPNAME" fcValueCode="APPID"  name="fuzzy"></fc-textarea>
+                                </div>
+                                <fc-adcode fcfooter fcTitle="描述" fcRemark="在输入框输入文本内容会出现可能要找的内容">
+                                </fc-adcode>
+                            </fc-layoutgroup>
+                            <fc-layoutgroup id="autofocus" fcTitle="获取焦点" fccontent2>
+                                <div fccontent>
+                                    <fc-textarea fcLabel="获取焦点" [fcAutoFocus]="'Y'" [fcAppid]="'SYSAPP'" fcAutoComplete='Y' 
+                                    [(ngModel)]="content" fcFieldCode='APPNAME' fcLabelCode="APPNAME" fcValueCode="APPID"   name="fuzzy"></fc-textarea>
+                                </div> 
+                                <fc-adcode fcfooter fcTitle="描述" fcRemark="在输入框输入文本内容会出现可能要找的内容"  >
+                                </fc-adcode>
+                            </fc-layoutgroup>
                         <fc-layoutgroup id="noshowlabel" fcTitle="不占位" fccontent2>
                             <div fccontent>
                                 <fc-textarea  fcShowLabel="N" [(ngModel)]="content">
@@ -123,6 +141,8 @@
                     {href:'controlrow','label':'控制行数'},
                     {href:'controlcol','label':'控制列数'},
                     {href:'autosize','label':'自适应高度'},
+                    {href:'Lenovo','label':'联想输入'},
+                    {href:'autofocus','label':'自动获取焦点'},
                     {href:'noshowlabel','label':'不占位'},
                     {href:'maxlen','label':'最长输入'},
                     {href:'minlen','label':'最短输入'},

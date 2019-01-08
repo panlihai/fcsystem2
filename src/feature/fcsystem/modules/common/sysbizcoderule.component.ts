@@ -11,6 +11,8 @@ export class SysbizcoderuleComponent extends ParentlistComponent {
     super('SYSTEM', 'SYSBIZCODERULE');
   }
   init(): void {
+    this.enableAutoSearch =  false;
+
   }
   getDefaultQuery():any { 
     return {};
