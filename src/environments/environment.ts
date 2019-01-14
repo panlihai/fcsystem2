@@ -6,9 +6,9 @@ export const environment = {
   apiurl: "/server/api/",
   logurl: "/server/api/",
   authurl: "/server/api/",
-  // wsurl: "ws://10.56.23.218/server/msg",
-  // wsurl: "ws://192.168.0.253:8080/server/msg",
-  wsurl: "ws://pcorp.cn/server/msg",
-  // http://192.168.0.114:8080/
+  //报表路径无须代理，请填写全路径，
+  reporturl:"http://finance.bjysyt.club/server/ReportServer",
+  // websocket 无须代理，请填写全路径
+  wsurl: "ws://finance.bjysyt.club/server/msg",
   license:''
 }; 

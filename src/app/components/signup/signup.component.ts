@@ -76,4 +76,8 @@ export class SignupComponent implements OnInit {
   getFormControl(name) {
     return this.validateForm.controls[name];
   }
+
+  register(event){
+    
+  }
 }

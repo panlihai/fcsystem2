@@ -1,11 +1,14 @@
 export const environment = {
   production: true,
-  pid: "BACKING",
-  projectName: "FC快速开发平台",
-  systemurl: "http://pcorp.cn/server/",
-  apiurl: "http://pcorp.cn/server/api/",
-  logurl: "http://pcorp.cn/server/api/",
-  authurl: "http://pcorp.cn/server/api/",
-  wsurl: "ws://pcorp.cn/server/msg",
+  pid: "SYSTEM",
+  projectName: "基础服务平台",
+  systemurl: "http://finance.bjysyt.club/server/",
+  apiurl: "http://finance.bjysyt.club/server/api/",
+  logurl: "http://finance.bjysyt.club/server/api/",
+  authurl: "http://finance.bjysyt.club/server/api/",
+  //报表路径无须代理，请填写全路径，
+  reporturl:"http://finance.bjysyt.club/server/ReportServer", 
+  // websocket 无须代理，请填写全路径
+  wsurl: "ws://finance.bjysyt.club/server/msg",
   license:''
 };

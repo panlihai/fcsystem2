@@ -12,8 +12,11 @@ export const Routers: Routes = [
     },{
         path: '',
         loadChildren: './modules/framework/index.module#FcsystemframeworkModule'
+    },
+    {
+        path: '',
+        loadChildren: './modules/org/index.module#FcsystemorgModule'
     }
-    
     ,{
         path: '',
         loadChildren: './modules/reslib/index.module#FcsystemreslibModule'

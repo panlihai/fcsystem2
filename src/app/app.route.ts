@@ -6,6 +6,7 @@ import { ForgotComponent } from './components/forgot/forgot.component';
 import { LockscreenComponent } from './components/lockscreen/lockscreen.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { HomeComponent } from './components/home/home.component';
+import { SignupComponent } from './components/signup/signup.component';
 export const AppRoutes: Routes = [
     {
         path: '',
@@ -56,6 +57,10 @@ export const AppRoutes: Routes = [
     , {
         path: 'signin',
         component: SigninComponent
+    },
+    {
+        path: 'signup',
+        component: SignupComponent
     }, {
         path: 'forgot',//忘记密码
         component: ForgotComponent,
