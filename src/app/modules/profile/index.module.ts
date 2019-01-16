@@ -8,11 +8,10 @@ import { ProfileComponent } from './profile.component';
 import { SysassignmentComponent } from './sysassignment.component';
 import { SysmessageComponent } from './sysmessage.component';
 import { SysmessagedetailComponent } from './sysmessagedetail.component';
-import { SystelsmsComponent } from './systelsms.component';
-import { SysuserComponent } from './sysuser.component';
-import { SysworkplanComponent } from './sysworkplan.component';
+import { SystelsmsComponent } from './systelsms.component';  
 import { FccomponentModule } from 'fccomponent2';
- 
+import { SysworkplanComponent } from './sysworkplan.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -24,17 +23,15 @@ import { FccomponentModule } from 'fccomponent2';
   ],
   exports: [
 
-  ],entryComponents:[
   ],
   declarations: [
    ProfileComponent,
    SysassignmentComponent,
    SysmessageComponent,
    SysmessagedetailComponent,
-   SystelsmsComponent,
-   SysuserComponent,
+   SystelsmsComponent, 
    SysworkplanComponent,
-   
+
   ]
 })
 export class FcprofileModule {
