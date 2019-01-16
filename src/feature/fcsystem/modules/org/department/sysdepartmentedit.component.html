@@ -1,0 +1,34 @@
+<!-- 表单模板 -->
+<fc-layoutpanel class="templateform" [fcFull]="true">
+    <fc-layoutrow fcSpan="20" fccontent>
+        <fc-tlbform [fcAppid]="'SYSAPP'" fccontent1 (fcEvent)="tlbformevent($event)"></fc-tlbform>
+        <form fccontent2 class="templateform-form">
+            <fc-title fcLabel="部门基本信息" fcBorder="bottom" fccontent fcWidth="96%"></fc-title>
+            <fc-layoutcol fcSpans="1,1" fccontent>
+                <div fccontent1>
+                    <fc-text [fcLabel]="'部门代码'" name="SDEPT_CODE" [(ngModel)]="mainObj.SDEPT_CODE" fcRequire="Y"
+                        [fcValid]="mainValid.SDEPT_CODE"></fc-text>
+                    <fc-text [fcLabel]="'部门名称'" name="SDEPT_NAME" [(ngModel)]="mainObj.SDEPT_NAME" fcRequire="Y"
+                        [fcValid]="mainValid.SDEPT_NAME"></fc-text>
+                    <fc-combo fcLabel="上级部门" [(ngModel)]="mainObj.SUPERIOR" name="SUPERIOR" [fcAppid]="appId"
+                        fcFieldCode="SUPERIOR" [fcValid]="mainValid.SUPERIOR" fcValueCode="SDEPT_CODE" fcLabelCode="SDEPT_NAME"
+                        fcShowSearch="Y"></fc-combo>
+                    <fc-text [fcLabel]="'负责人'" name="SPRINCIPALVALUE" [(ngModel)]="mainObj.SPRINCIPALVALUE" fcRequire="Y"
+                        [fcValid]="mainValid.SPRINCIPALVALUE"></fc-text>
+                    <!-- <fc-text [fcLabel]="'排序码'" name="textname" fcAppid="SYSAPP" fcFieldCode="APPNAME"></fc-text> -->
+                </div>
+                <div fccontent2>
+                    <fc-date [fcLabel]="'生效日期'" [(ngModel)]="mainObj.SBEGIN_DATE" name="SBEGIN_DATE"></fc-date>
+                    <!-- <fc-text [fcLabel]="'部门简称'" name="textname" fcAppid="SYSAPP" fcFieldCode="APPNAME"></fc-text> -->
+                    <!-- <fc-text [fcLabel]="'部门性质'" ></fc-text> -->
+                    <!-- <fc-text [fcLabel]="'联系电话'" name="textname" fcAppid="SYSAPP" fcFieldCode="APPNAME"></fc-text> -->
+                </div>
+            </fc-layoutcol>
+            <fc-layoutcol fcSpans="1,0" fccontent>
+                <!-- <div fccontent1>
+                    <fc-textarea [fcLabel]="'备注说明 '" name="textareaname1" [fcCol]="'1'" [fcRow]="'2'"></fc-textarea>
+                </div> -->
+            </fc-layoutcol>
+        </form>
+    </fc-layoutrow>
+</fc-layoutpanel>

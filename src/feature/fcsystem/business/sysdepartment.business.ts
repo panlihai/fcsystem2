@@ -7,6 +7,8 @@ import SystemBusiness from "fccore2/classes/system.business";
 import { GridApi } from "ag-grid-community";
 import { RowDataTransaction } from "ag-grid-community/dist/lib/rowModels/clientSide/clientSideRowModel";
 export default class SysdepartmentBusiness extends ParentBusiness {
+  static appId="SYSDEPARTMENT";
+  static pid="SYSTEM";
   /**
    * 子表数据修改保存
    */

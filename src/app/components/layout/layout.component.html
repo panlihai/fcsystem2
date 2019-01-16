@@ -5,9 +5,9 @@
     <fc-layoutcol fccontent2 [fcSpans]="_layoutSpans" fcFull="true" class="content-wrap" [ngClass]="{'sys-content-wrap':productObj.DISPLAYMODE==='TAB','has-navsubtab':_childMenus&&_childMenus.length!==0}">
         <!-- 菜单模式开始****************************************************************************** -->
         <!-- 菜单导航 fc-navmenu-->
-        <fc-navmenu *ngIf="productObj.DISPLAYMODE==='MENU'" fccontent1 #fcnavmenu fcTheme="blue" [fcOption]="_menuOptions"
+        <!-- <fc-navmenu *ngIf="productObj.DISPLAYMODE==='MENU'" fccontent1 #fcnavmenu fcTheme="blue" [fcOption]="_menuOptions"
             [fcMenus]="_menus" [fcSelected]="_navmenuSelected" (fcEvent)="navmenuEvent($event);" fcFull="true">
-        </fc-navmenu>
+        </fc-navmenu> -->
         <!-- 子选项卡导航 -->
         <fc-navtab *ngIf="productObj.DISPLAYMODE==='MENU'" fcSize="small" class="nav-tab" #fcnavtab fccontent2
             (fcEvent)="navtabEvent($event)" fcShowPagination="true"></fc-navtab>

@@ -7,7 +7,7 @@ import { Routers } from './index.route';
 import { FccomponentModule } from 'fccomponent2';
 import { SysreslibComponent } from './sysreslib.component';
 import { SysreslibpicComponent } from './sysreslibpic.component';
-import { SysreslibthumbnailComponent } from './sysreslibthumbnail.component';
+import { SysreslibthumbnailComponent } from './sysreslibthumbnail.component'; 
  
 @NgModule({
   imports: [
@@ -17,6 +17,7 @@ import { SysreslibthumbnailComponent } from './sysreslibthumbnail.component';
     RouterModule.forChild(Routers),
     FccoreModule,
     FccomponentModule
+
   ],
   exports: [
 

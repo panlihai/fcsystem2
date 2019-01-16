@@ -3,6 +3,7 @@ import { SysreslibComponent } from './sysreslib.component';
 import { SysreslibpicComponent } from './sysreslibpic.component';
 import { SysreslibthumbnailComponent } from './sysreslibthumbnail.component';
 
+
 export const Routers: Routes = [
     {
         path: 'sysreslibList',
@@ -14,5 +15,5 @@ export const Routers: Routes = [
     },{
         path: 'sysreslibthumbnailList',
         component: SysreslibthumbnailComponent
-    }
+    },
 ];
