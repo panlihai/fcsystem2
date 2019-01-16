@@ -19,6 +19,10 @@ export const Routers: Routes = [
     }
     ,{
         path: '',
+        loadChildren: './modules/user/index.module#FcsystemuserModule'
+    }
+    ,{
+        path: '',
         loadChildren: './modules/reslib/index.module#FcsystemreslibModule'
     }
 ];

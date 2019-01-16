@@ -2,9 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { FccoreModule, DaoService, AppService } from 'fccore2';
+import { FccoreModule} from 'fccore2';
 import { Routers } from './index.route';
 import { FccomponentModule } from 'fccomponent2';
+import { SysusereditComponent } from './user/sysuseredit.component';
+import { SysuserComponent } from './user/sysuser.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -16,13 +18,11 @@ import { FccomponentModule } from 'fccomponent2';
   ],
   exports: [
 
-  ],entryComponents:[
-  ],
+  ] ,
   declarations: [
+    SysuserComponent,
+    SysusereditComponent
   ]
 })
-export class FcsystemorgModule {
-  constructor(){
-    
-  }
+export class FcsystemuserModule {v
 }
