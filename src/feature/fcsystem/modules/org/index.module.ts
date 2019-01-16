@@ -6,10 +6,11 @@ import { FccoreModule, DaoService, AppService } from 'fccore2';
 import { Routers } from './index.route';
 import { FccomponentModule } from 'fccomponent2';
 import { SyscompanydimComponent } from './companydim/syscompanydim.component';
-import { SyscompanyComponent } from './syscompany.component';
+import { SyscompanyComponent } from './company/syscompany.component';
 import { SysdepartmentComponent } from './sysdepartment.component';
 import SystemBusiness from 'fccore2/classes/system.business';
 import { SyscompanydimeditComponent } from './companydim/syscompanydimedit.component';
+import { SyscompanyeditComponent } from './company/syscompanyedit.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -27,7 +28,8 @@ import { SyscompanydimeditComponent } from './companydim/syscompanydimedit.compo
    SyscompanydimComponent,
    SyscompanydimeditComponent,
    SyscompanyComponent,
-   SysdepartmentComponent
+   SyscompanyeditComponent,
+   SysdepartmentComponent,
   ]
 })
 export class FcsystemorgModule {

@@ -5,6 +5,9 @@ import { TreeOptions } from 'fccomponent2';
 import { CommonService } from 'fccore2/common/common';
 import { compareValue, messageByValue } from '../util/common.util'; 
 export class SyscompanyBusiness extends ParentBusiness {
+  static appId="SYSCOMPANY";
+  static pid="SYSTEM";
+ 
   /**
    * 获取单位隶属关系的字段
    */
@@ -218,7 +221,12 @@ export class SyscompanyBusiness extends ParentBusiness {
   static getDataByAppID_Where(appid: string, whereStr: string): Observable<any> {
     return SyscompanyBusiness.appService.findWithQuery(appid, { WHERE: whereStr });
   }
-
+  /**
+   * 根据日期等查询条件查询单位
+   */
+   static  findWithQuery(condition):Observable<any>{ 
+     return SyscompanyBusiness.daoService.getFromApi(CommonService.getUrlBy(this.pid,this.appId,"findWithQuery"), condition);
+   }
   /**
    *获取单位隶属关系
    * @param dimCode 维度

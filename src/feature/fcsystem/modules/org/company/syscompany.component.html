@@ -1,0 +1,17 @@
+<!-- 列表模板 -->
+<fc-layoutpanel [fcFull]="true" class="templatelist">
+    <fc-layoutrow fcSpan="20" fccontent>
+        <fc-tlblist [fcAppid]="appId" fccontent1 (fcEvent)="tlblistEvent($event)"></fc-tlblist>
+        <fc-layoutrow fccontent2 fcSpan="45">
+            <form fccontent1 class="list-search" name="searchForm" #searchForm >
+                <fc-date class="list-search-every" [fcLabel]="'日期'"  [(ngModel)]="nowDate" name="NOWDATE"></fc-date>
+                <fc-any class="list-search-every" [fcLabel]="'组织维度'" [(ngModel)]="searchObj.SYSCOMPANYDIM" [fcAppid]="appId" [fcCondition]="syscompanydimCondition"
+                        fcFieldCode="DICVALUE" fcLabelCode="DICDESC" fcValueCode="DICVALUE" name="SYSCOMPANYDIM" style="width:20%;"></fc-any>
+                <div class="list-search-every list-search-button">
+                    <fc-button fcLabel="查询" fcType="primary" name="search" (click)="event('SEARCH',$event)"></fc-button>
+                </div> 
+            </form>
+            <fc-listdata fccontent2  [fcRowData]="fcRowData" [fcOption]="fcOption" (fcEvent)="listdataEvent($event)"></fc-listdata>
+        </fc-layoutrow>
+    </fc-layoutrow>
+</fc-layoutpanel>  
