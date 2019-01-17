@@ -18,7 +18,7 @@
     "less": "^3.9.0",
     "ngx-bootstrap": "^3.1.1",
     "node-sass": "^4.11.0",
-    "zone.js": "^0.8.28"
+    "zone.js": "^0.8.27"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.7.0",
