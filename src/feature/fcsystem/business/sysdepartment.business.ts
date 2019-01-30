@@ -1,14 +1,16 @@
 
 import ParentBusiness from "fccore2/classes/parent.business";
 import { Subject, Observable, ObservableInput } from "rxjs";
-import { FclistdataComponent, TreeOptions } from "fccomponent2"; 
-import { CommonService } from "fccore2/common/common"; 
+import { FclistdataComponent, TreeOptions } from "fccomponent2";
+import { CommonService } from "fccore2/common/common";
 import SystemBusiness from "fccore2/classes/system.business";
 import { GridApi } from "ag-grid-community";
 import { RowDataTransaction } from "ag-grid-community/dist/lib/rowModels/clientSide/clientSideRowModel";
-export default class SysdepartmentBusiness extends ParentBusiness {
-  static appId="SYSDEPARTMENT";
-  static pid="SYSTEM";
+
+export class SysdepartmentBusiness extends ParentBusiness {
+  static appId = "SYSDEPARTMENT";
+  static pid = "SYSTEM";
+
   /**
    * 子表数据修改保存
    */
@@ -21,6 +23,7 @@ export default class SysdepartmentBusiness extends ParentBusiness {
       }
     })
   }
+
   /**
    * 部门
    */
@@ -177,12 +180,12 @@ export default class SysdepartmentBusiness extends ParentBusiness {
       return item;
     });
   }
-    /**
-   * 保存或者修改单位信息
-   * @param mainObj 单位基本信息对象
-   * @param relationObj 单位隶属关系对象
-   */
-  static saveOrUpdateDepartment(mainObj: any,  parentCode?: string): Observable<any> {
+  /**
+ * 保存或者修改单位信息
+ * @param mainObj 单位基本信息对象
+ * @param relationObj 单位隶属关系对象
+ */
+  static saveOrUpdateDepartment(mainObj: any, parentCode?: string): Observable<any> {
     let relationObj: any = {};
     //单位是否启用
     mainObj.BSTOP_FLAG = '0';
@@ -322,11 +325,11 @@ export default class SysdepartmentBusiness extends ParentBusiness {
     // cloneObj.fcTopWhere = "{or:[{SPARENT_CODE:{is:'null'}},{SPARENT_CODE:''}],SDIM_CODE:{eq:'" + dim + "'},SBEGIN_DATE:{lte:'" + sendDate + "'},SEND_DATE:{gte:'" + sendDate + "'}}";
     cloneObj.fcTopWhere = "{or:[{SPARENT_CODE:{is:'null'}},{SPARENT_CODE:''}]}";
     cloneObj.fcExpWhere = "{SPARENT_CODE:{eq:'#{SDEPT_CODE}#'}}",
-    //展开条件
-    // cloneObj.fcExpWhere = "{SPARENT_CODE:{eq:'#{SDEPT_CODE}#'}}",
-    // cloneObj.fcExpWhere = "{SPARENT_CODE:{eq:'#{SDEPT_CODE}#'},SDIM_CODE:{eq:'XZWD'},SEND_DATE:{gte:'" + sendDate + "'}}",
+      //展开条件
+      // cloneObj.fcExpWhere = "{SPARENT_CODE:{eq:'#{SDEPT_CODE}#'}}",
+      // cloneObj.fcExpWhere = "{SPARENT_CODE:{eq:'#{SDEPT_CODE}#'},SDIM_CODE:{eq:'XZWD'},SEND_DATE:{gte:'" + sendDate + "'}}",
       SysdepartmentBusiness.departmentTreeOptions = cloneObj;
-      return CommonService.cloneObj(cloneObj);
+    return CommonService.cloneObj(cloneObj);
   }
   /** 
     * 获取组织机构视图数据
@@ -343,6 +346,42 @@ export default class SysdepartmentBusiness extends ParentBusiness {
     mainObj = SysdepartmentBusiness.buildScratorInfo(mainObj)
     return mainObj;
   }
+
+
+  /**
+* 根据日期等查询条件查询单位
+*/
+  static findDepartment(condition): Observable<any> {
+    condition.AID = this.appId;
+    condition.MAINTABLE = "SYS_DEPARTMENT";
+    return SysdepartmentBusiness.daoService.getFromApi(CommonService.getUrlBy(this.pid, this.appId, "findDepartment"), condition);
+  }
+  static getUrl = function (appId, act, pid) {
+    return CommonService.getUrlBy(pid ? pid : this.moduleId, appId, act);
+  };
+
+  //删除多条数据
+  static deleteDepartments = function (appId, ids, pid) {
+    var delObjs = [];
+    ids.forEach(function (id) {
+      delObjs.push({ WHERE: "{ID:{eq:'" + id.ID + "'}}" });
+    });
+    return SysdepartmentBusiness.daoService.postFromApi(this.getUrl("SYSDEPARTMENT", 'deleteDepartment', 'SYSTEM'), delObjs, { AID: appId, PRODUCTID: pid ? pid : 'SYSDEPARTMENT' });
+  };
+
+
+  /** 
+    * 保存
+    */
+  static createDepartments = function (appId, obj, pid) {
+    if (obj.ID && obj.ID.length !== 0) {
+      return this.updateObject(appId, obj, pid);
+    }
+    else {
+      return SysdepartmentBusiness.daoService.postFromApi(this.getUrl("SYSDEPARTMENT", 'createDepartment', 'SYSTEM'), obj, { AID: appId, PRODUCTID: pid ? pid : 'SYSDEPARTMENT' });
+    }
+  };
+
   /** 
     * 创建修改人信息
     */
@@ -353,7 +392,7 @@ export default class SysdepartmentBusiness extends ParentBusiness {
     mainObj.SMODIFY_TIME = CommonService.getDate('');
     return mainObj;
   }
-  
+
   static changeSortByAppid(beforeObj: any, afterObj: any, fieldCode: string, appId: string): Observable<any> {
     if (afterObj != null) {
       // 并行保存交换序号后的两个对象
@@ -374,14 +413,15 @@ export default class SysdepartmentBusiness extends ParentBusiness {
   static createDepartment(mainObj: any, relationObj: any): ObservableInput<any> {
     return CommonService.createObservableConcat
       (SysdepartmentBusiness.appService.saveObject("SYSDEPARTMENT", mainObj),
-      SysdepartmentBusiness.appService.saveObject("SYSDEPARTMENTRELATION", relationObj));
+        SysdepartmentBusiness.appService.saveObject("SYSDEPARTMENTRELATION", relationObj));
   }
   /**
   * 根据指定应用指定查询条件进行查询  注： 该方法仅支持单列
   */
- static getDataByAppID_Col_Val(appid: string, colName: string, colVal: string): Observable<any> {
-  return SysdepartmentBusiness.appService.findWithQuery(appid, { WHERE: "{" + colName + ":{eq:'" + colVal + "'}}" })
+  static getDataByAppID_Col_Val(appid: string, colName: string, colVal: string): Observable<any> {
+    return SysdepartmentBusiness.appService.findWithQuery(appid, { WHERE: "{" + colName + ":{eq:'" + colVal + "'}}" })
   }
+
 
   //列表
   static fclistdataOption = {
@@ -518,4 +558,5 @@ export interface Sysdepartment {
   GROUP_NAME: string;	//
   ILEVEL: number;	//
 }
+
 
