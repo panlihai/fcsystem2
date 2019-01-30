@@ -3,11 +3,11 @@ import { Observable } from 'rxjs';
 import ParentBusiness from 'fccore2/classes/parent.business';
 import { TreeOptions } from 'fccomponent2';
 import { CommonService } from 'fccore2/common/common';
-import { compareValue, messageByValue } from '../util/common.util'; 
+import { compareValue, messageByValue } from '../util/common.util';
 export class SyscompanyBusiness extends ParentBusiness {
-  static appId="SYSCOMPANY";
-  static pid="SYSTEM";
- 
+  static appId = "SYSCOMPANY";
+  static pid = "SYSTEM";
+
   /**
    * 获取单位隶属关系的字段
    */
@@ -221,12 +221,8 @@ export class SyscompanyBusiness extends ParentBusiness {
   static getDataByAppID_Where(appid: string, whereStr: string): Observable<any> {
     return SyscompanyBusiness.appService.findWithQuery(appid, { WHERE: whereStr });
   }
-  /**
-   * 根据日期等查询条件查询单位
-   */
-   static  findWithQuery(condition):Observable<any>{ 
-     return SyscompanyBusiness.daoService.getFromApi(CommonService.getUrlBy(this.pid,this.appId,"findWithQuery"), condition);
-   }
+
+
   /**
    *获取单位隶属关系
    * @param dimCode 维度
@@ -327,6 +323,70 @@ export class SyscompanyBusiness extends ParentBusiness {
       ]);
     }
   }
+  static getUrl = function (appId, act, pid) {
+    return CommonService.getUrlBy(pid ? pid : this.moduleId, appId, act);
+  };
+  /**
+  * 根据日期等查询条件查询单位
+  */
+  static findCompany(condition): Observable<any> {
+    condition.AID = this.appId;
+    condition.MAINTABLE = "SYS_COMPANY";
+    return SyscompanyBusiness.daoService.getFromApi(CommonService.getUrlBy(this.pid, this.appId, "findCompany"), condition);
+  }
+  //保存
+  static createCompany = function (appId, obj, pid) {
+    if (obj[0].COMPANY[0].ID && obj[0].COMPANY[0].ID.length !== 0) {
+      return this.updateObject(appId, obj, pid);
+    }
+    else {
+      return SyscompanyBusiness.daoService.postFromApi(this.getUrl("SYSCOMPANY", 'createCompany', 'SYSTEM'), obj, { AID: appId, PRODUCTID: pid ? pid : 'SYSCOMPANY' });
+    }
+  };
+
+  /**
+   * 更新
+   * @param appId 元数据id
+   * @param obj 当前对象
+   */
+  static updateObject = function (appId, obj, pid) {
+    console.log(1)
+    console.log(obj)
+    if (obj instanceof Array) {
+      obj.forEach(function (item) {
+        Object.keys(item).forEach(function (key) {
+          if (item[key] === undefined || item[key] === null) {
+            item[key] = '';
+          }
+        });
+      });
+
+    }
+    else if (obj instanceof Object) {
+      console.log(2)
+      console.log(this.obj)
+      Object.keys(obj).forEach(function (key) {
+        if (obj[key] === undefined || obj[key] === null) {
+          obj[key] = '';
+        }
+      });
+    }
+    return SyscompanyBusiness.daoService.postFromApi(this.getUrl("SYSCOMPANY", 'updateCompany', 'SYSTEM'), obj, { AID: appId, PRODUCTID: pid ? pid : 'SYSCOMPANY' });
+  };
+  //删除一条数据
+  static deleteComapny = function (appId, id, pid) {
+    return this.deleteComapnys(appId, [id], pid);
+  };
+  //删除多条数据
+  static deleteComapnys = function (appId, ids, pid) {
+    var delObjs = [];
+    ids.forEach(function (id) {
+      delObjs.push({ WHERE: "{ID:{eq:'" + id.ID + "'}}" });
+    });
+    return SyscompanyBusiness.daoService.postFromApi(this.getUrl("SYSCOMPANY", 'deleteCompany', 'SYSTEM'), delObjs, { AID: appId, PRODUCTID: pid ? pid : 'SYSCOMPANY' });
+  };
+
+
 
 
   //单位列表

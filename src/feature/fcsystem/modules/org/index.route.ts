@@ -1,9 +1,10 @@
 import { Routes } from '@angular/router';
 import { SyscompanydimComponent } from './companydim/syscompanydim.component'; 
-import { SyscompanyComponent } from './company/syscompany.component';
+import { SyscompanyComponent } from "./company/SyscompanyComponent";
 import { SysdepartmentComponent } from './sysdepartment.component';
 import { SyscompanydimeditComponent } from './companydim/syscompanydimedit.component';
 import { SyscompanyeditComponent } from './company/syscompanyedit.component';
+import { SyscompanydetailComponent } from './company/syscompanydetail.component';
 export const Routers: Routes = [
     {
         path: 'syscompanydimList',
@@ -22,5 +23,8 @@ export const Routers: Routes = [
     }, {
         path: 'syscompanyEdit',
         component: SyscompanyeditComponent
+    } , {
+        path: 'syscompanyDetail',
+        component: SyscompanydetailComponent
     } 
 ];

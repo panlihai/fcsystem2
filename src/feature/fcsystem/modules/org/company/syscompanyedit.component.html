@@ -2,22 +2,23 @@
 <fc-layoutpanel class="templateform" [fcFull]="true">
     <fc-title fcLabel="基本信息" fcBorder="bottom" fctitle fcWidth="96%" fcRequire="Y"></fc-title>
     <fc-tlbform [fcAppid]="'SYSAPP'" fctoolbar (fcEvent)="tlbformEvent($event)"></fc-tlbform>
-    <form fccontent class="templateform-form">
-        <fc-layoutgroup fcTitle="基本信息">
+    <form fccontent class="templateform-form" style="width:1000px;margin-left:25%;color:#C1C6CA;">
+        <fc-layoutgroup fcTitle="基本信息" class="detailTitlle">
             <fc-layoutcol fcSpans="1,1" fccontent>
                 <div fccontent1>
                     <fc-text fcLabel="单位代码" name="SCOMPANY_CODE" [(ngModel)]='mainObj.SCOMPANY_CODE' fcRequire="Y"
                         [fcValid]="mainValid.SCOMPANY_CODE"></fc-text>
                     <fc-text fcLabel="单位简码" name="SSPELLING_CODE" [(ngModel)]='mainObj.SSPELLING_CODE' fcRequire="Y"
                         [fcValid]="mainValid.SSPELLING_CODE"></fc-text>
-                    <fc-combo fcLabel="上级单位" [(ngModel)]="mainObj.SPARENT_CODE" name="SPARENT_CODE" [fcAppid]="appId"
-                        fcFieldCode="SPARENT_CODE" [fcValid]="mainValid.SPARENT_CODE" fcValueCode="SCOMPANY_CODE"
-                        fcLabelCode="SCOMPANY_NAME" fcShowSearch="Y"></fc-combo>
+                    <fc-any fcLabel="上级单位" [(ngModel)]="superiorUnit" name="SPARENT_CODE" [fcAppid]="appId" fcFieldCode="SPARENT_CODE"
+                        [fcValid]="mainValid.SPARENT_CODE" fcValueCode="SCOMPANY_CODE" fcLabelCode="SCOMPANY_NAME"
+                        fcShowSearch="Y"></fc-any>
                     <fc-date [fcLabel]="'成立日期'" [(ngModel)]="mainObj.SEST_DATE" name="SEST_DATE"></fc-date>
-                    <fc-combo fcLabel="单位性质" [(ngModel)]="mainObj.SCOMPANY_TYPE" name="SCOMPANY_TYPE" [fcAppid]="appId" fcFieldCode="SCOMPANY_TYPE" fcRequire="Y"
-                        [fcValid]="mainValid.SCOMPANY_TYPE" fcValueCode="DICVALUE" fcLabelCode="DICDESC"></fc-combo>
-                    <fc-combo fcLabel="控股方式" [(ngModel)]="mainObj.SCONTROL_TYPE" name="SCONTROL_TYPE" [fcAppid]="appId" fcFieldCode="SCONTROL_TYPE"
-                        [fcValid]="mainValid.SCONTROL_TYPE" fcValueCode="DICVALUE" fcLabelCode="DICDESC" fcShowSearch="Y"></fc-combo>
+                    <fc-combo fcLabel="单位性质" [(ngModel)]="mainObj.SCOMPANY_TYPE" name="SCOMPANY_TYPE" [fcAppid]="appId"
+                        fcFieldCode="SCOMPANY_TYPE" fcRequire="Y" fcValueCode="DICVALUE" fcLabelCode="DICDESC"></fc-combo>
+                    <fc-combo fcLabel="控股方式" [(ngModel)]="mainObj.SCONTROL_TYPE" name="SCONTROL_TYPE" [fcAppid]="appId"
+                        fcFieldCode="SCONTROL_TYPE" [fcValid]="mainValid.SCONTROL_TYPE" fcValueCode="DICVALUE"
+                        fcLabelCode="DICDESC" fcShowSearch="Y"></fc-combo>
                     <fc-text fcLabel="单位负责人" name="SREPRESENTATIVE" [(ngModel)]='mainObj.SREPRESENTATIVE' [fcValid]="mainValid.SREPRESENTATIVE"></fc-text>
                 </div>
                 <div fccontent2>
@@ -28,20 +29,21 @@
                     <fc-combo [fcLabel]="'路内层级'" [(ngModel)]="mainObj.ILEVEL" [fcAppid]="appId" fcRequire="Y"
                         fcFieldCode="ILEVEL" fcLabelCode="DICDESC" fcValueCode="DICVALUE" name="ILEVEL"></fc-combo>
                     <fc-date [fcLabel]="'生效日期'" [(ngModel)]="mainObj.SBEGIN_DATE" name="SBEGIN_DATE"></fc-date>
-                    <fc-combo fcLabel="行业属性" [(ngModel)]="mainObj.SINDUSTRY" name="SINDUSTRY" [fcAppid]="appId" fcFieldCode="SINDUSTRY"
-                        [fcValid]="mainValid.SINDUSTRY" fcValueCode="DICVALUE" fcLabelCode="DICDESC" fcShowSearch="Y"></fc-combo>
-                    <fc-text fcLabel="排序码" name="SDIM_NAME" [(ngModel)]='mainObj.SDIM_NAME' fcRequire="Y" [fcValid]="mainValid.SDIM_NAME"></fc-text>
+                    <!-- <fc-combo fcLabel="行业属性" [(ngModel)]="mainObj.SINDUSTRY" name="SINDUSTRY" [fcAppid]="appId" fcFieldCode="SINDUSTRY"
+                        [fcValid]="mainValid.SINDUSTRY" fcValueCode="DICVALUE" fcLabelCode="DICDESC" fcShowSearch="Y"></fc-combo> -->
+                    <fc-text fcLabel="排序码" name="SORDER_CODE" [(ngModel)]='mainObj.SORDER_CODE' fcRequire="Y" [fcValid]="mainValid.SORDER_CODE"></fc-text>
                     <fc-text fcLabel="联系电话" name="SCONTACT_TEL" [(ngModel)]='mainObj.SCONTACT_TEL' [fcValid]="mainValid.SCONTACT_TEL"></fc-text>
                 </div>
             </fc-layoutcol>
             <fc-layoutcol fcSpans="2,1" fccontent>
                 <fc-layoutcol fcSpans="1,1" fccontent1>
                     <div fccontent1>
-                        <fc-combo  fcLabel="单位地址" [(ngModel)]="mainObj.SPROVINCE" name="SPROVINCE" fcAppid="SYSREGION" (ngModelChange)="event('provinceChange',$event)"
-                            fcFieldCode="RGNAME" [fcValid]="mainValid.SPROVINCE" fcValueCode="RGCODE" fcLabelCode="RGNAME" fcCondition='{"ORDER":"SORT","WHERE":"{PARENT:{eq:\"000000\"}}"}'></fc-combo>
+                        <fc-combo fcLabel="单位地址" [(ngModel)]="mainObj.SPROVINCE" name="SPROVINCE" fcAppid="SYSREGION"
+                            (ngModelChange)="event('provinceChange',$event)" fcFieldCode="RGNAME" [fcValid]="mainValid.SPROVINCE"
+                            fcValueCode="RGCODE" fcLabelCode="RGNAME" fcCondition='{"ORDER":"SORT","WHERE":"{PARENT:{eq:\"000000\"}}"}'></fc-combo>
                     </div>
                     <div fccontent2>
-                        <fc-combo  [(ngModel)]="mainObj.SCITY" name="SCITY" fcAppid="SYSREGION"  fcFieldCode="RGNAME" [fcCondition]='cityConditon'
+                        <fc-combo [(ngModel)]="mainObj.SCITY" name="SCITY" fcAppid="SYSREGION" [fcCondition]='cityConditon'
                             [fcValid]="mainValid.SCITY" fcValueCode="RGCODE" fcLabelCode="RGNAME"></fc-combo>
                     </div>
                 </fc-layoutcol>
@@ -51,33 +53,93 @@
             </fc-layoutcol>
             <fc-layoutcol fcSpans="1,0" fccontent>
                 <div fccontent1>
-                    <fc-textarea [fcLabel]="'经营范围'"  [(ngModel)]='mainObj.SINVEST_TYPE' name="SINVEST_TYPE" [fcCol]="'1'" [fcRow]="'2'"></fc-textarea>
+                    <fc-textarea [fcLabel]="'经营范围'" [(ngModel)]='mainObj.SINVEST_TYPE' name="SINVEST_TYPE" [fcCol]="'1'"
+                        [fcRow]="'2'"></fc-textarea>
                 </div>
             </fc-layoutcol>
             <fc-layoutcol fcSpans="1,0" fccontent>
                 <div fccontent1>
-                    <fc-textarea [fcLabel]="'备注说明'" name="SREMARK" [fcCol]="'1'" [fcRow]="'2'"></fc-textarea>
+                    <fc-textarea [fcLabel]="'备注说明'" [(ngModel)]='mainObj.SREMARK' name="SREMARK" [fcCol]="'1'" [fcRow]="'2'"></fc-textarea>
                 </div>
             </fc-layoutcol>
             <fc-layoutcol fcSpans="1,0" fccontent>
                 <div fccontent1>
-                    <fc-check  [fcLabel]="'职能属性'" [(ngModel)]="mainObj.BIS_VIRTUAL" [fcAppid]="appId" name="BIS_VIRTUAL" fcFieldCode="BIS_VIRTUAL"
-                    [fcValid]="mainValid.BIS_VIRTUAL" fcLabelCode="DICDESC" fcValueCode="DICVALUE"></fc-check>
+                    <!-- <fc-check  [fcLabel]="'职能属性'" [(ngModel)]="mainObj.BIS_VIRTUAL" [fcAppid]="appId" name="BIS_VIRTUAL" fcFieldCode="BIS_VIRTUAL"
+                    [fcValid]="mainValid.BIS_VIRTUAL" fcLabelCode="DICDESC" fcValueCode="DICVALUE"></fc-check> -->
                 </div>
             </fc-layoutcol>
             <fc-layoutcol fcSpans="1,1" fccontent>
-                <div fccontent1>
-                    <fc-combo [fcLabel]="'状态'" [(ngModel)]="mainObj.SOPERATE_STATUS" name="SOPERATE_STATUS" [fcAppid]="appId" fcFieldCode="SOPERATE_STATUS"
-                        [fcValid]="mainValid.SOPERATE_STATUS" fcValueCode="DICVALUE" fcLabelCode="DICDESC" fcRequire="Y"></fc-combo>
+                <!-- <div fccontent1>
+                    <fc-combo [fcLabel]="'状态'" [(ngModel)]="mainObj.SOPERATE_STATUS" name="SOPERATE_STATUS" [fcAppid]="appId"
+                        fcFieldCode="SOPERATE_STATUS" [fcValid]="mainValid.SOPERATE_STATUS" fcValueCode="DICVALUE"
+                        fcLabelCode="DICDESC" fcRequire="Y"></fc-combo>
                 </div>
-                <div fccontent2> 	
+                <div fccontent2>
                     <fc-combo [fcLabel]="'审批状态'" [(ngModel)]="mainObj.SAPPROVE_STATUS" [fcAppid]="appId" fcFieldCode="SAPPROVE_STATUS"
                         fcValueCode="DICVALUE" fcLabelCode="DICDESC" fcRequire="Y" name="SAPPROVE_STATUS"></fc-combo>
-                </div>
+                </div> -->
             </fc-layoutcol>
         </fc-layoutgroup>
-        <fc-layoutgroup fcTitle="汇总关系">
-
-        </fc-layoutgroup>
+        <!-- <fc-layoutgroup fcTitle="汇总关系" class="detailTitlle">
+            <fc-layoutcol fcSpans="1,0" fccontent>
+                <div fccontent1>
+                    <nz-table #editRowTable nzBordered [nzData]="dataSet" [nzShowPagination]='false'>
+                        <thead>
+                            <tr>
+                                <th nzWidth="20%">组织维度 </th>
+                                <th>上级单位</th>
+                                <th>生效日期</th>
+                                <th>失效日期</th>
+                                <th>
+                                    <button nz-button (click)="addRow()" class="editable-add-btn">Add</button>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of editRowTable.data">
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <fc-date></fc-date>
+                                </td>
+                                <td>
+                                    <fc-date></fc-date>
+                                </td> 
+                                <td>
+                                    <nz-popconfirm [nzTitle]="'Sure to delete?'" (nzOnConfirm)="deleteRow(data.key)">
+                                        <a nz-popconfirm>删除</a>,
+                                        <a>历史</a>
+                                    </nz-popconfirm>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </nz-table>
+                </div>
+            </fc-layoutcol>
+        </fc-layoutgroup> -->
+        <!-- <fc-layoutgroup fcTitle="变更信息" *ngIf="isChange">
+            <fc-layoutcol fcSpans="1,1" fccontent>
+                <div fccontent1>
+                    <fc-date [fcLabel]="'生效日期'" [(ngModel)]="mainObj.SBEGIN_DATE" name="SBEGIN_DATE"></fc-date>
+                </div>
+                <div fccontent2>
+                    <fc-text fcLabel="变更文号" name="SORDER_CODE" [(ngModel)]='mainObj.SORDER_CODE' [fcValid]="mainValid.SORDER_CODE"></fc-text>
+                </div>
+            </fc-layoutcol>
+            <fc-layoutcol fcSpans="1,0" fccontent>
+                <div fccontent1>
+                    <fc-textarea [fcLabel]="'变更原因'" [(ngModel)]='mainObj.SINVEST_TYPE' name="SINVEST_TYPE" [fcCol]="'1'"
+                        [fcRow]="'2'" fcRequire="Y"></fc-textarea>
+                </div>
+            </fc-layoutcol>
+            <fc-layoutcol fcSpans="1,0" fccontent>
+                <div fccontent1>
+                    <fc-text fcLabel="附件" name="SORDER_CODE" [(ngModel)]='mainObj.SORDER_CODE' [fcValid]="mainValid.SORDER_CODE"></fc-text>
+                    <div>
+                        <fc-button fcLabel="上传" fcType="primary" name="search" (click)="event('SEARCH',$event)"></fc-button>
+                    </div>
+                </div>
+            </fc-layoutcol>
+        </fc-layoutgroup> -->
     </form>
 </fc-layoutpanel>

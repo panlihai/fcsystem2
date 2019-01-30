@@ -1,5 +1,6 @@
 {
-    "/server": {
-        "target":"http://finance.bjysyt.club/" 
+    "/server": { 
+        "target": "http://finance.bjysyt.club/"
     }
+    
 }
