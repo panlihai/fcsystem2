@@ -1,140 +1,90 @@
 <!-- 表单列表模板 -->
 <fc-layoutpanel class="templateformlists">
-    <fc-layoutrow fcSpan="20" fccontent>
-        <fc-tlbform [fcAppid]="'SYSAPP'" fccontent1 (fcEvent)="tlbformEvent($event)"></fc-tlbform>
-        <fc-layoutcol fcSpans="17,2" fccontent2>
-            <form fccontent1>
-                <fc-layoutpanel fccontent id="id0" >
-                    <fc-title fcLabel="用户明细信息" fcBorder="bottom" fcWidth="100%" fcheader></fc-title>
-                    <nz-tabset fccontent>
-                        <nz-tab nzTitle="基本信息">
-                            <div>
-                                <fc-layoutcol fcSpans="1,1">
-                                    <div fccontent1>
-                                        <fc-text fcLabel="用户编码" [(ngModel)]='mainObj.USERCODE' name="USERCODE"></fc-text>
-                                        <fc-combo fcLabel="所属单位" [(ngModel)]="mainObj.SCOMPANY_CODE"  name="SCOMPANY_CODE" [fcAppid]="appId" fcFieldCode="SCOMPANY_CODE" fcValueCode="DICVALUE" fcLabelCode="DICDESC"></fc-combo>
-                                        <!-- <fc-date [fcLabel]="'日期'" name="datename"></fc-date> -->
-                                        <fc-text fcLabel="生效日期" name="textname"></fc-text>
-                                        <fc-combo fcLabel="用户类型" [(ngModel)]='mainObj.SUSER_TYPE' name="SUSER_TYPE" [fcAppid]="appId" fcFieldCode="SUSER_TYPE"  fcValueCode="DICVALUE" fcLabelCode="DICDESC"></fc-combo>
-                                        <fc-text fcLabel="移动电话" [(ngModel)]='mainObj.STEL' name="STEL"></fc-text>
-                                        <fc-text fcLabel="固定电话" [(ngModel)]='mainObj.SOFFICE_PHONE' name="SOFFICE_PHONE"></fc-text>
-                                        <fc-combo fcLabel="是否默认密码" [(ngModel)]='mainObj.BIS_DEFAULT_PASSWORD' name="BIS_DEFAULT_PASSWORD" [fcAppid]="appId" fcFieldCode="BIS_DEFAULT_PASSWORD"  fcValueCode="DICVALUE" fcLabelCode="DICDESC"></fc-combo>
-                                        <fc-text fcLabel="密码错误次数" [(ngModel)]='mainObj.SERROR_NUMBER' name="SERROR_NUMBER"></fc-text>
-                                        <fc-combo fcLabel="是否锁定" [(ngModel)]='mainObj.BIS_LOCK' name="BIS_LOCK" [fcAppid]="appId" fcFieldCode="BIS_LOCK"  [fcValid]="mainValid.BIS_LOCK"  fcValueCode="DICVALUE" fcLabelCode="DICDESC"></fc-combo>
+	<fc-layoutrow fcSpan="20" fccontent>           
+		<fc-tlbform [fcAppid]="'SYSAPP'" fccontent1 (fcEvent)="tlbformEvent($event)"></fc-tlbform>
+		<fc-layoutcol fcSpans="17,2" fccontent2>
+			<form fccontent1>
+				<fc-layoutpanel fccontent id="id0">
+					<fc-title fcLabel="用户明细信息" fcBorder="bottom" fcWidth="100%" fcheader></fc-title>
+					<nz-tabset fccontent>
+						<nz-tab nzTitle="基本信息">
+							<div>
+								<fc-layoutcol>
+									<div fccontent1>
+										<fc-text fcLabel="用户编码" [(ngModel)]='mainObj.USERCODE' [fcAppid]="appId" name="USERCODE" [fcValid]="mainValid.USERCODE"></fc-text>
+										<fc-combo fcLabel="所属单位" [(ngModel)]="mainObj.SCOMPANY_CODE" name="SCOMPANY_CODE" fcAppid="SYSCOMPANY"
+										 fcFieldCode="SCOMPANY_CODE" fcValueCode="SCOMPANY_CODE" fcLabelCode="SCOMPANY_NAME"></fc-combo>
+										<!-- <fc-date [fcLabel]="'日期'" name="datename"></fc-date> -->
+										<fc-date fcLabel="生效日期" [(ngModel)]='mainObj.SBEGIN_DATE' name="SBEGIN_DATE" fcFieldCode="DICVALUE" fcValueCode="DICVALUE"></fc-date>
+										<fc-combo fcLabel="用户类型" [(ngModel)]='mainObj.SUSER_TYPE' name="SUSER_TYPE" [fcAppid]="appId" fcFieldCode="SUSER_TYPE"
+										 fcValueCode="DICVALUE" fcLabelCode="DICDESC"></fc-combo>
+										<fc-text fcLabel="移动电话" [(ngModel)]='mainObj.STEL' name="STEL"></fc-text>
+										<fc-text fcLabel="固定电话" [(ngModel)]='mainObj.SOFFICE_PHONE' name="SOFFICE_PHONE" [fcValid]="mainValid.SOFFICE_PHONE"></fc-text>
+										<fc-radio fcLabel="是否默认密码" [(ngModel)]='mainObj.BIS_DEFAULT_PASSWORD' name="BIS_DEFAULT_PASSWORD" fcAppid="SYSDICDETAIL"
+										 fcFieldCode="DICVALUE" fcValueCode="DICVALUE" fcLabelCode="DICDESC" fcCondition='{"WHERE":"{DICID:{eq:\"SYSYORNZH\"}}"}'></fc-radio>
+										<fc-text fcLabel="密码错误次数" [(ngModel)]='mainObj.SERROR_NUMBER' name="SERROR_NUMBER"></fc-text>
+										<fc-radio fcLabel="是否锁定" [(ngModel)]='mainObj.BIS_LOCK' name="BIS_LOCK" fcAppid="SYSDICDETAIL" fcFieldCode="DICVALUE"
+										 fcValueCode="DICVALUE" fcLabelCode="DICDESC" fcCondition='{"WHERE":"{DICID:{eq:\"SYSYORNZH\"}}"}'></fc-radio>
 
-                                    </div>
-                                    <div fccontent2>
-                                        <fc-text fcLabel="用户名称" [(ngModel)]='mainObj.NAME' name="NAME"></fc-text>
-                                        <fc-combo fcLabel="所属部门" [(ngModel)]="mainObj.SDEPT_CODE" name="SDEPT_CODE" fcAppid="SYSDEPARTMENT" fcFieldCode="SDEPT_CODE"  fcValueCode="SDEPT_CODE" fcLabelCode="SDEPT_NAME"></fc-combo>
-                                        <!-- <fc-date [fcLabel]="'日期'" name="datename"></fc-date> -->
-                                        <fc-text fcLabel="失效日期" [(ngModel)]='mainObj.SEND_DATE' name="SEND_DATE"></fc-text>
-                                        <fc-combo fcLabel="工号" [(ngModel)]="mainObj.SJOB_NUMBER" name="SJOB_NUMBER" [fcAppid]="appId" fcFieldCode="SJOB_NUMBER"  fcValueCode="DICVALUE" fcLabelCode="DICDESC"></fc-combo>
-                                        <fc-text fcLabel="身份证" [(ngModel)]="mainObj.SID_CARD" name="SID_CARD"></fc-text>
-                                        <fc-text fcLabel="电子邮件" [(ngModel)]="mainObj.SEMAIL" name="SEMAIL"></fc-text>
-                                        <fc-text fcLabel="修改密码时间" [(ngModel)]="mainObj.SLAST_MODIFY_TIME" 
-                                            name="SLAST_MODIFY_TIME"></fc-text>
-                                        <fc-text fcLabel="锁定时间" [(ngModel)]="mainObj.SLOCK_TIME" name="SLOCK_TIME"></fc-text>
-                                        <fc-radio [(ngModel)]="mainObj.ENABLE" name="ENABLE" fcAppid="SYSDICDETAIL" fcFieldCode="DICVALUE"  fcValueCode="DICVALUE" fcLabelCode="DICDESC" fcCondition='{"WHERE":"{DICID:{eq:\"SYSYORNZH\"}}"}'></fc-radio>
-                                    </div>
-                                </fc-layoutcol>
-                                <fc-layoutcol fcSpans="1,0" fccontent>
-                                    <div fccontent1>
-                                        <fc-textarea fcLabel="备注" name="REMARK" [fcCol]="'1'" [fcRow]="'2'"></fc-textarea>
-                                    </div>
-                                </fc-layoutcol>
-                            </div>
-                        </nz-tab>
-                        <nz-tab nzTitle="管控单位">
-                            <div>
-                                <fc-layoutcol fcSpans="1,1">
-                                    <div fccontent1>
-                                        <!-- <fc-text [fcLabel]="'文本框'" name="textname2" fcReadonly="Y"></fc-text>
-                                        <fc-combo [fcLabel]="'下拉单选'" [(ngModel)]="comboValue" [fcOption]="comboOptions"
-                                            fcReadonly="Y" name="comboname2"></fc-combo>
-                                        <fc-date [fcLabel]="'日期'" name="datename2" fcReadonly="Y"></fc-date>
-                                        <fc-double [fcLabel]="'数值'" [(ngModel)]="doubleValue" fcReadonly="Y" name="doublename2"></fc-double>
-                                        <fc-text [fcLabel]="'后置标签'" [(ngModel)]="addonbefore" [fcAddOnAfterIcon]="'icon iconfont fc-icon-unit'"
-                                            name="textoutright1" fcMode="icon" fcReadonly="Y"></fc-text>
-                                        <fc-text [fcLabel]="'内部前缀'" [(ngModel)]="addonbefore" [fcPrefixIcon]="'icon iconfont fc-icon-revocation'"
-                                            name="textinner" fcReadonly="Y"></fc-text>
-                                        <fc-text [fcLabel]="'内部后缀'" [(ngModel)]="addonbefore" [fcSuffixIcon]="'icon iconfont fc-icon-revocation'"
-                                            name="textout2" fcReadonly="Y"></fc-text>
-                                        <fc-long [fcLabel]="'整数'" [(ngModel)]="longValue" name="longname2" fcReadonly="Y"></fc-long>
-                                        <fc-textarea [fcLabel]="'大文本框'" name="textareaname2" [fcRow]="'2'" fcReadonly="Y"></fc-textarea> -->
-                                    </div>
-                                    <div fccontent2>
-                                        <!-- <fc-any [fcLabel]="'自定义下拉单选'" [(ngModel)]="anyValue" [fcOption]="anyOptions"
-                                            name="anyname2" fcReadonly="Y"></fc-any>
-                                        <fc-many [fcLabel]="'自定义下拉多选'" [(ngModel)]="manyValue" [fcOption]="manyOptions"
-                                            name="manyname2" fcReadonly="Y"></fc-many>
-                                        <fc-chosen [fcLabel]="'下拉多选'" [fcLabel]="'下拉多选'" [(ngModel)]="chosenValue"
-                                            [fcOption]="chosenOptions" name="chosename2" fcReadonly="Y"></fc-chosen>
-                                        <fc-datetime [fcLabel]="'日期时间'" name="datetimename2" fcReadonly="Y"></fc-datetime>
-                                        <fc-text [fcLabel]="'后置标签文本'" [(ngModel)]="addonbefore" [fcAddOnAfter]="'万元'"
-                                            name="textoutright01" fcReadonly="Y"></fc-text>
-                                        <fc-check [fcLabel]="'多选'" [(ngModel)]="checkValue" [fcOption]="checkOptions"
-                                            name="checkname2" fcReadonly="Y"></fc-check>
-                                        <fc-radio [fcLabel]="'单选'" [(ngModel)]="radioValue" [fcOption]="radioOptions"
-                                            name="radioname2" fcReadonly="Y"></fc-radio>
-                                        <fc-switch [fcLabel]="'开关'" fcCheckValue="Y" fcOption='[{"label":"是","value":"Y"},{"label":"否","value":"N"}]'
-                                            name="switchname2" fcReadonly="Y"></fc-switch> -->
-                                    </div>
-                                </fc-layoutcol>
-                                <fc-layoutcol fcSpans="1,0">
-                                    <div fccontent1>
-                                        <!-- <fc-textarea [fcLabel]="'大文本框'" name="textareaname2" [fcCol]="'1'" [fcRow]="'2'"
-                                            fcReadonly="Y"></fc-textarea> -->
-                                    </div>
-                                </fc-layoutcol>
-                            </div>
-                        </nz-tab>
-                        <nz-tab nzTitle="选择角色">
-                            <div>
-                                <fc-layoutcol fcSpans="1,1">
-                                    <div fccontent1>
-                                        <!-- <fc-text [fcLabel]="'文本框'" name="textname2" [fcDisabled]="'Y'"></fc-text>
-                                        <fc-combo [fcLabel]="'下拉单选'" [(ngModel)]="comboValue" [fcOption]="comboOptions"
-                                            [fcDisabled]="'Y'" name="comboname2"></fc-combo>
-                                        <fc-date [fcLabel]="'日期'" name="datename2" [fcDisabled]="'Y'"></fc-date>
-                                        <fc-double [fcLabel]="'数值'" [(ngModel)]="doubleValue" [fcDisabled]="'Y'" name="doublename2"></fc-double>
-                                        <fc-text [fcLabel]="'后置标签'" [(ngModel)]="addonbefore" [fcAddOnAfterIcon]="'icon iconfont fc-icon-unit'"
-                                            name="textoutright2" [fcDisabled]="'Y'"></fc-text>
-                                        <fc-text [fcLabel]="'内部前缀'" [(ngModel)]="addonbefore" [fcPrefixIcon]="'icon iconfont fc-icon-revocation'"
-                                            name="textinner2" [fcDisabled]="'Y'"></fc-text>
-                                        <fc-text [fcLabel]="'内部后缀'" [(ngModel)]="addonbefore" [fcSuffixIcon]="'icon iconfont fc-icon-revocation'"
-                                            name="textout2" [fcDisabled]="'Y'"></fc-text>
-                                        <fc-long [fcLabel]="'整数'" [(ngModel)]="longValue" name="longname2" [fcDisabled]="'Y'"></fc-long>
-                                        <fc-textarea [fcLabel]="'大文本框'" name="textareaname2" [fcRow]="'2'" [fcDisabled]="'Y'"></fc-textarea> -->
-                                    </div>
-                                    <div fccontent2>
-                                        <!-- <fc-any [fcLabel]="'自定义下拉单选'" [(ngModel)]="anyValue" [fcOption]="anyOptions"
-                                            name="anyname2" [fcDisabled]="'Y'"></fc-any>
-                                        <fc-many [fcLabel]="'自定义下拉多选'" [(ngModel)]="manyValue" [fcOption]="manyOptions"
-                                            name="manyname2" [fcDisabled]="'Y'"></fc-many>
-                                        <fc-chosen [fcLabel]="'下拉多选'" [fcLabel]="'下拉多选'" [(ngModel)]="chosenValue"
-                                            [fcOption]="chosenOptions" name="chosename2" [fcDisabled]="'Y'"></fc-chosen>
-                                        <fc-datetime [fcLabel]="'日期时间'" name="datetimename2" [fcDisabled]="'Y'"></fc-datetime>
-                                        <fc-text [fcLabel]="'后置标签文本'" [(ngModel)]="addonbefore" [fcAddOnAfter]="'万元'"
-                                            name="textoutright02" [fcDisabled]="'Y'"></fc-text>
-                                        <fc-check [fcLabel]="'多选'" [(ngModel)]="checkValue" [fcOption]="checkOptions"
-                                            name="checkname2" [fcDisabled]="'Y'"></fc-check>
-                                        <fc-radio [fcLabel]="'单选'" [(ngModel)]="radioValue" [fcOption]="radioOptions"
-                                            name="radioname2" [fcDisabled]="'Y'"></fc-radio>
-                                        <fc-switch [fcLabel]="'开关'" fcCheckValue="Y" fcOption='[{"label":"是","value":"Y"},{"label":"否","value":"N"}]'
-                                            name="switchname2" [fcDisabled]="'Y'"></fc-switch> -->
-                                    </div>
-                                </fc-layoutcol>
-                                <fc-layoutcol fcSpans="1,0">
-                                    <div fccontent1>
-                                        <!-- <fc-textarea [fcLabel]="'大文本框'" name="textareaname3" [fcRow]="'2'" [fcCol]="'1'"
-                                            [fcDisabled]="'Y'"></fc-textarea> -->
-                                    </div>
-                                </fc-layoutcol>
-                            </div>
-                        </nz-tab>
-                    </nz-tabset>
-                </fc-layoutpanel>
-            </form>
-        </fc-layoutcol>
-    </fc-layoutrow>
+									</div>
+									<div fccontent2>
+										<fc-text fcLabel="用户名称" [(ngModel)]='mainObj.NAME' name="NAME" [fcValid]="mainValid.NAME"></fc-text>
+										<fc-combo fcLabel="所属部门" [(ngModel)]="mainObj.SDEPT_CODE" name="SDEPT_CODE" fcAppid="SYSDEPARTMENT"
+										 fcFieldCode="SDEPT_CODE" fcValueCode="SDEPT_CODE" fcLabelCode="SDEPT_NAME"></fc-combo>
+										<!-- <fc-date [fcLabel]="'日期'" name="datename"></fc-date> -->
+										<fc-date fcLabel="失效日期" [(ngModel)]='mainObj.SEND_DATE' name="SEND_DATE" fcFieldCode="DICVALUE" fcValueCode="DICVALUE"></fc-date>
+										<fc-text fcLabel="工号" [(ngModel)]="mainObj.SJOB_NUMBER" name="SJOB_NUMBER" [fcAppid]="appId" fcFieldCode="SJOB_NUMBER"
+										 fcValueCode="DICVALUE" fcLabelCode="DICDESC"></fc-text>
+										<fc-text fcLabel="身份证" [(ngModel)]="mainObj.SID_CARD" name="SID_CARD" [fcValid]="mainValid.SID_CARD"></fc-text>
+										<fc-text fcLabel="电子邮件" [(ngModel)]="mainObj.SEMAIL" name="SEMAIL" [fcValid]="mainValid.SEMAIL"></fc-text>
+										<fc-text fcLabel="修改密码时间" [(ngModel)]="mainObj.SLAST_MODIFY_TIME" name="SLAST_MODIFY_TIME"></fc-text>
+										<fc-text fcLabel="锁定时间" [(ngModel)]="mainObj.SLOCK_TIME" name="SLOCK_TIME" fcFieldCode="DICVALUE" fcValueCode="DICVALUE"></fc-text>
+										<fc-radio fcLabel="启用" [(ngModel)]="mainObj.ENABLE" name="ENABLE" fcAppid="SYSDICDETAIL" fcFieldCode="DICVALUE"
+										 fcValueCode="DICVALUE" fcLabelCode="DICDESC" fcCondition='{"WHERE":"{DICID:{eq:\"SYSYORNZH\"}}"}'></fc-radio>
+									</div>
+								</fc-layoutcol>
+								<fc-layoutcol fcSpans="1,0" fccontent>
+									<div fccontent1>
+										<fc-textarea fcLabel="备注" [(ngModel)]="mainObj.REMARK" name="REMARK" [fcCol]="'1'" [fcRow]="'2'"></fc-textarea>
+									</div>
+								</fc-layoutcol>
+							</div>
+						</nz-tab>
+						<nz-tab nzTitle="管控单位">
+							<nz-table #editRowTable nzBordered [nzData]="dataSet">
+								<thead>
+									<tr>
+										<th nzWidth="30%">管控单位</th>
+										<!-- <th (click)="addRow()" class="editable-add-btn">添加</th> -->
+										<th  class="editable-add-btn">
+											<fc-button [fcType]="'primary'" (click)="modalMullist1.showModal()" fcLabel="添加"></fc-button>
+										</th>
+										<fc-modallist #modalMullist1 fcTitle="单位" fcAppid="SYSCOMPANY" [fcType]="'multiple'" (fcEvent)="modalClose($event)"></fc-modallist>
+									</tr>
+								</thead>
+								<tbody>
+									<tr *ngFor="let data of editRowTable.data">
+										<td>{{data.name}}</td>
+										<td>
+											<nz-popconfirm [nzTitle]="'确定删除该条数据吗?'" (nzOnConfirm)="deleteRow(data.key)">
+												<a nz-popconfirm>删除</a>
+											</nz-popconfirm>
+										</td>
+									</tr>
+								</tbody>
+							</nz-table>
+						</nz-tab>
+						<nz-tab nzTitle="选择角色" (click)="getProject()">
+							<nz-transfer [nzDataSource]="list" [nzTitles]="['待选角色','已选角色']" [nzListStyle]="{'width.px': 300, 'height.px': 300}"
+							 [nzRender]="render"   (nzSelectChange)="select($event)" (nzChange)="change($event)">
+								<ng-template #render let-item>
+									{{ item.title }}
+								</ng-template>
+							</nz-transfer>
+						</nz-tab>
+					</nz-tabset>
+				</fc-layoutpanel>
+			</form>
+		</fc-layoutcol>
+	</fc-layoutrow>
 </fc-layoutpanel>
