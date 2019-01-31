@@ -5,7 +5,7 @@ import { CommonService } from 'fccore2/common/common';
 import { FcModalConfig } from 'fccomponent2/business/fcmodel.business';
 import FccomponentEvent from 'fccomponent2/business/fccomponet.event';
 import SystemBusiness from "fccore2/classes/system.business";
-import { AnyComponent } from 'src/feature/fcsamples/basic/any/any.component';
+// import { AnyComponent } from 'src/feature/fcsamples/basic/any/any.component';
 // import { Modalcard } from '';
 @Component({
     selector: 'sysuserlist',

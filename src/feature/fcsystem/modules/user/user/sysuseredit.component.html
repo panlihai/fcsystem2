@@ -12,8 +12,8 @@
 								<fc-layoutcol>
 									<div fccontent1>
 										<fc-text fcLabel="用户编码" [(ngModel)]='mainObj.USERCODE' [fcAppid]="appId" name="USERCODE" [fcValid]="mainValid.USERCODE"></fc-text>
-										<fc-combo fcLabel="所属单位" [(ngModel)]="mainObj.SCOMPANY_CODE" name="SCOMPANY_CODE" fcAppid="SYSCOMPANY"
-										 fcFieldCode="SCOMPANY_CODE" fcValueCode="SCOMPANY_CODE" fcLabelCode="SCOMPANY_NAME"></fc-combo>
+										<fc-combo fcLabel="所属单位" [(ngModel)]="mainObj.SCOMPANY_NAME" name="SCOMPANY_NAME" fcAppid="SYSCOMPANY"
+										 fcFieldCode="SCOMPANY_NAME" fcValueCode="SCOMPANY_NAME" fcLabelCode="SCOMPANY_NAME"></fc-combo>
 										<!-- <fc-date [fcLabel]="'日期'" name="datename"></fc-date> -->
 										<fc-date fcLabel="生效日期" [(ngModel)]='mainObj.SBEGIN_DATE' name="SBEGIN_DATE" fcFieldCode="DICVALUE" fcValueCode="DICVALUE"></fc-date>
 										<fc-combo fcLabel="用户类型" [(ngModel)]='mainObj.SUSER_TYPE' name="SUSER_TYPE" [fcAppid]="appId" fcFieldCode="SUSER_TYPE"
@@ -29,8 +29,8 @@
 									</div>
 									<div fccontent2>
 										<fc-text fcLabel="用户名称" [(ngModel)]='mainObj.NAME' name="NAME" [fcValid]="mainValid.NAME"></fc-text>
-										<fc-combo fcLabel="所属部门" [(ngModel)]="mainObj.SDEPT_CODE" name="SDEPT_CODE" fcAppid="SYSDEPARTMENT"
-										 fcFieldCode="SDEPT_CODE" fcValueCode="SDEPT_CODE" fcLabelCode="SDEPT_NAME"></fc-combo>
+										<fc-combo fcLabel="所属部门" [(ngModel)]="mainObj.SDEPT_NAME" name="SDEPT_NAME" fcAppid="SYSDEPARTMENT"
+										 fcFieldCode="SDEPT_NAME" fcValueCode="SDEPT_NAME" fcLabelCode="SDEPT_NAME"></fc-combo>
 										<!-- <fc-date [fcLabel]="'日期'" name="datename"></fc-date> -->
 										<fc-date fcLabel="失效日期" [(ngModel)]='mainObj.SEND_DATE' name="SEND_DATE" fcFieldCode="DICVALUE" fcValueCode="DICVALUE"></fc-date>
 										<fc-text fcLabel="工号" [(ngModel)]="mainObj.SJOB_NUMBER" name="SJOB_NUMBER" [fcAppid]="appId" fcFieldCode="SJOB_NUMBER"

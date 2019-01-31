@@ -6,27 +6,27 @@
             <fc-title fcLabel="组织维度信息" fcBorder="bottom" fccontent fcWidth="96%"></fc-title>
             <fc-layoutcol fcSpans="1,1" fccontent>
                 <div fccontent1>
-                    <fc-text fcLabel="组织维度代码" fcPlaceHolder="" [(ngModel)]='mainObj.SDIM_CODE'  fcReadonly="Y"
-                        name="SDIM_CODE"></fc-text>
-                    <fc-radio fcLabel="默认维度" [(ngModel)]="mainObj.BIS_DEFAULT" [fcAppid]="appId" fcFieldCode="BIS_DEFAULT" [fcValid]="mainValid.BIS_DEFAULT"
-                        fcValueCode="DICVALUE" fcLabelCode="DICDESC" name="BIS_DEFAULT"  fcReadonly="Y">
-                    </fc-radio>
-                    <!-- <fc-combo fcLabel="创建单位" [(ngModel)]="mainObj.CREATEDEPT" name="CREATEDEPT" [fcAppid]="appId"
-                    fcFieldCode="CREATEDEPT" fcValueCode="SCOMPANY_CODE" fcLabelCode="SCOMPANY_NAME"></fc-combo> -->
-                    <fc-radio fcLabel="是否启用" [(ngModel)]="mainObj.BIS_USE" name="BIS_USE" [fcAppid]="appId" fcFieldCode="BIS_USE" [fcValid]="mainValid.BIS_USE"
-                        fcValueCode="DICVALUE" fcLabelCode="DICDESC" name="BIS_USE"></fc-radio>
+                    <fc-text fcLabel="组织维度代码" fcPlaceHolder="" [(ngModel)]='mainObj.SDIM_CODE' fcReadonly="Y" name="SDIM_CODE"></fc-text>
+                    <fc-radio fcLabel="默认维度" [(ngModel)]="mainObj.BIS_DEFAULT" [fcAppid]="appId" fcFieldCode="BIS_DEFAULT" 
+                    fcValueCode="DICVALUE" fcLabelCode="DICDESC" name="BIS_DEFAULT">
+                </fc-radio>
+                    <!-- <fc-text fcLabel="创建单位" ></fc-text> -->
+                    <fc-radio fcLabel="是否启用" [(ngModel)]="mainObj.BIS_USE" name="BIS_USE" [fcAppid]="appId" fcFieldCode="BIS_USE"
+                        fcValueCode="DICVALUE" fcLabelCode="DICDESC" ></fc-radio>
+                        <!-- 关联应用数据未确定 -->
+                    <fc-chosen fcLabel="关联应用" [(ngModel)]="mainObj.BIS_USE" name="BIS_USE" [fcAppid]="appId" fcFieldCode="BIS_USE" 
+                        fcValueCode="DICVALUE" fcLabelCode="DICDESC" ></fc-chosen>
 
                 </div>
                 <div fccontent2>
-                    <fc-text fcLabel="组织维度名称" name="SDIM_NAME" [(ngModel)]='mainObj.SDIM_NAME' fcRequire="Y" [fcValid]="mainValid.SDIM_NAME" ></fc-text>
-                    <fc-combo fcLabel="是否内置" [(ngModel)]="mainObj.BIS_SYS" name="BIS_SYS" [fcAppid]="appId" fcFieldCode="BIS_SYS"  [fcValid]="mainValid.BIS_SYS"
-                        fcValueCode="DICVALUE" fcLabelCode="DICDESC" fcShowSearch="Y"   fcReadonly="Y"></fc-combo>
-
+                    <fc-text fcLabel="组织维度名称" name="SDIM_NAME" [(ngModel)]='mainObj.SDIM_NAME' fcRequire="Y" ></fc-text>
+                    <fc-radio fcLabel="是否内置" [(ngModel)]="mainObj.BIS_SYS" name="BIS_SYS" [fcAppid]="appId" fcFieldCode="BIS_SYS" 
+                        fcValueCode="DICVALUE" fcLabelCode="DICDESC" fcShowSearch="Y" ></fc-radio>
+                    <fc-radio fcLabel="是否向下" [(ngModel)]="mainObj.BIS_SHOW" name="BIS_SHOW" [fcAppid]="appId" fcFieldCode="BIS_SHOW"
+                        fcValueCode="DICVALUE" fcLabelCode="DICDESC"></fc-radio>
+                    <fc-text fcLabel="排序码" name="SORDER_CODE" [(ngModel)]='mainObj.SORDER_CODE' fcRequire="Y" [fcValid]="mainValid.SORDER_CODE"></fc-text>
                 </div>
             </fc-layoutcol>
-        </form>
-<!-- 
-        <fc-adform fccontent2 [fcAppid]="appId" [fcId]="mainObj.ID" [fcAppid]="appId" [fcOption]="formConfig"
-        ></fc-adform> -->
+        </form>>
     </fc-layoutrow>
 </fc-layoutpanel>
