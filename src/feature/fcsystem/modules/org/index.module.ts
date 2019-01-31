@@ -12,7 +12,6 @@ import SystemBusiness from 'fccore2/classes/system.business';
 import { SyscompanydimeditComponent } from './companydim/syscompanydimedit.component';
 import { SyscompanyeditComponent } from './company/syscompanyedit.component';
 import { SyscompanydetailComponent } from './company/syscompanydetail.component';
-@NgModule({
   imports: [
     CommonModule,
     FormsModule,
@@ -30,8 +29,9 @@ import { SyscompanydetailComponent } from './company/syscompanydetail.component'
    SyscompanydimeditComponent,
    SyscompanyComponent,
    SyscompanyeditComponent,
-   SysdepartmentComponent,
    SyscompanydetailComponent,
+   SysdepartmenteditComponent,
+   SysdepartmentComponent,
   ]
 })
 export class FcsystemorgModule {

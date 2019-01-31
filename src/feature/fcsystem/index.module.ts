@@ -6,7 +6,7 @@ import { Routers } from './index.route';
 import { FccoreModule } from 'fccore2';
 import { FccomponentModule } from 'fccomponent2';
 import { HomeComponent } from './home/home.component';
-
+import SystemBusiness from 'fccore2/classes/system.business';
 @NgModule({
   imports: [
     CommonModule,
@@ -25,4 +25,8 @@ import { HomeComponent } from './home/home.component';
   ]
 })
 export class FcsystemModule {
+  constructor(){
+    
+  }
 }
+
