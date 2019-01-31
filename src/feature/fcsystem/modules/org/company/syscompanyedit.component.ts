@@ -120,9 +120,9 @@ export class SyscompanyeditComponent extends ParentEditComponent {
       return;
     }
     if (this.beforeSave()) {
-      let companyObj: any = {};
-      companyObj.COMPANY = this.mainObj;
-      SyscompanyBusiness.createCompany(this.appId, this.mainObj, 'SYSCOMPANY').subscribe(result => {
+      let companyObj: any = [{ COMPANY: [], RELATION: [] }];
+      companyObj[0].COMPANY[0] = this.mainObj;
+      SyscompanyBusiness.createCompany(this.appId, companyObj, 'SYSCOMPANY').subscribe(result => {
         if (result.CODE === '0') {
           SystemBusiness.msgService.message('保存成功！');
           this.afterSave();
@@ -143,9 +143,9 @@ export class SyscompanyeditComponent extends ParentEditComponent {
       return;
     }
     if (this.beforeSave()) {
-      let companyObj: any = {};
-      companyObj.COMPANY = this.mainObj;
-      SyscompanyBusiness.createCompany(this.appId, this.mainObj, 'SYSCOMPANY').subscribe(result => {
+      let companyObj: any = [{ COMPANY: [], RELATION: [] }];
+      companyObj[0].COMPANY[0] = this.mainObj;
+      SyscompanyBusiness.createCompany(this.appId, companyObj, 'SYSCOMPANY').subscribe(result => {
         if (result.CODE === '0') {
           SystemBusiness.msgService.message('保存成功！');
           this.afterSave();
@@ -161,28 +161,51 @@ export class SyscompanyeditComponent extends ParentEditComponent {
    * 保存返回
    * @param action 事件名称
    */
+  // cardSaveBack(action: string): void {
+  //   console.log(36)
+  //   if (!this.validator()) {
+  //     return;
+  //   }
+  //   if (this.beforeSave()) {
+  //     let companyObj: any = [{ COMPANY: [], RELATION: [] }];
+  //     companyObj[0].COMPANY[0] = this.mainObj;
+  //     SyscompanyBusiness.createCompany(this.appId, companyObj, 'SYSCOMPANY').subscribe(result => {
+  //       if (result.CODE === '0') {
+  //         SystemBusiness.msgService.message('保存成功！');
+  //         this.afterSave();
+  //         this.objStatus = ObjStatus.ADDED;
+  //         this.mainObj = SystemBusiness.appService.initObjDefaultValue(this.mainApp);
+  //       } else {
+  //         SystemBusiness.msgService.message('保存失败！');
+  //       }
+  //     });
+  //   }
+  // }
+
   cardSaveBack(action: string): void {
+    console.log(36)
     if (!this.validator()) {
       return;
     }
     if (this.beforeSave()) {
-      let companyObj: any = {};
-      companyObj.COMPANY = this.mainObj;
-      SyscompanyBusiness.createCompany(this.appId, this.mainObj, 'SYSCOMPANY').subscribe(result => {
+      let companyObj: any = [{ COMPANY: [], RELATION: [] }];
+      companyObj[0].COMPANY[0] = this.mainObj;
+      SyscompanyBusiness.createCompany(this.appId, companyObj, 'SYSCOMPANY').subscribe(result => {
         if (result.CODE === '0') {
           SystemBusiness.msgService.message('保存成功！');
           this.afterSave();
-          this.objStatus = ObjStatus.ADDED;
+          this.objStatus = ObjStatus.SAVED;
           this.cardBack('');
-        } else {
+        }
+        else {
           SystemBusiness.msgService.message('保存失败！');
         }
       });
     }
-  }
+  };
 
-  cardBack(event):void{
-  this.navigateList();
+  cardBack(event): void {
+    this.navigateList();
   };
 
   deleteRow(i: string): void {
