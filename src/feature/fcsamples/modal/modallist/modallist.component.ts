@@ -37,5 +37,6 @@ export class ModallistComponent extends ComponentParent {
   }
   modalClose(event) {
     this.selectObj = event;
+    console.log(this.selectObj)
   }
 }
