@@ -173,13 +173,17 @@ export class SyscompanyeditComponent extends ParentEditComponent {
           SystemBusiness.msgService.message('保存成功！');
           this.afterSave();
           this.objStatus = ObjStatus.ADDED;
-          this.mainObj = SystemBusiness.appService.initObjDefaultValue(this.mainApp);
+          this.cardBack('');
         } else {
           SystemBusiness.msgService.message('保存失败！');
         }
       });
     }
   }
+
+  cardBack(event):void{
+  this.navigateList();
+  };
 
   deleteRow(i: string): void {
     const dataSet = this.dataSet.filter(d => d.key !== i);
