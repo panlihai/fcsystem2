@@ -6,12 +6,12 @@ import { FccoreModule, DaoService, AppService } from 'fccore2';
 import { Routers } from './index.route';
 import { FccomponentModule } from 'fccomponent2';
 import { SyscompanydimComponent } from './companydim/syscompanydim.component';
-import { SyscompanyComponent } from './syscompany.component';
-import { SysdepartmentComponent } from './department/sysdepartment.component';
+import { SyscompanyComponent } from "./company/SyscompanyComponent";
+import { SysdepartmentComponent } from './sysdepartment.component';
+import SystemBusiness from 'fccore2/classes/system.business';
 import { SyscompanydimeditComponent } from './companydim/syscompanydimedit.component';
-import { SysdepartmenteditComponent } from './department/sysdepartmentedit.component';
-
-@NgModule({
+import { SyscompanyeditComponent } from './company/syscompanyedit.component';
+import { SyscompanydetailComponent } from './company/syscompanydetail.component';
   imports: [
     CommonModule,
     FormsModule,
@@ -28,10 +28,10 @@ import { SysdepartmenteditComponent } from './department/sysdepartmentedit.compo
    SyscompanydimComponent,
    SyscompanydimeditComponent,
    SyscompanyComponent,
+   SyscompanyeditComponent,
+   SyscompanydetailComponent,
    SysdepartmenteditComponent,
    SysdepartmentComponent,
-  
-
   ]
 })
 export class FcsystemorgModule {
