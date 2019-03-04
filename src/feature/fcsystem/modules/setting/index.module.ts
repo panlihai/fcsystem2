@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { FccoreModule, DaoService, AppService } from 'fccore2';
 import { Routers } from './index.route';
 import { FccomponentModule } from 'fccomponent2';
-import SystemBusiness from 'fccore2/classes/system.business';
+import SystemBusiness from 'fccore2/classes/system.business'; 
 @NgModule({
   imports: [
     CommonModule,

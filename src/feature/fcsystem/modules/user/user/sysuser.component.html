@@ -1,0 +1,24 @@
+<!-- 列表模板 -->
+<fc-layoutpanel [fcFull]="true" class="templatelist">
+    <fc-layoutrow fcSpan="20" fccontent>
+        <fc-tlblist [fcAppid]="appId" fccontent1 (fcEvent)="tlblistEvent($event)"></fc-tlblist>
+        <fc-layoutrow fccontent2 fcSpan="45">
+            <form fccontent1 class="list-search" name="searchForm" #searchForm >
+                <div class="list-search-every">
+                    <fc-text [fcLabel]="'用户名'" fcAppid="SYSUSER" [(ngModel)]="keyworldname"  name="keyworldname"></fc-text>
+                </div>
+                <div class="list-search-every">
+                    <fc-text [fcLabel]="'部门'"  fcAppid="SYSUSER" [(ngModel)]="keyworlddepartment"  name="keyworlddepartment"></fc-text>
+                </div>
+                <div class="list-search-every">
+                    <fc-text fcLabel="单位"  fcAppid="SYSUSER" [(ngModel)]="keyworldunit" name="keyworldunit"></fc-text>
+                </div> 
+                <div class="list-search-every list-search-button">
+                    <fc-button fcLabel="查询" fcType="primary" name="search" (click)="event('SEARCH',$event)"></fc-button>
+                    <fc-button fcLabel="重置" fcType="default" name="reset" (click)="event('RESET',$event)"></fc-button>
+                </div> 
+            </form>
+            <fc-listdata fccontent2 [fcAppid]="appId"  [fcCondition]="condition" (fcEvent)="listdataEvent($event)"></fc-listdata>
+        </fc-layoutrow>
+    </fc-layoutrow>
+</fc-layoutpanel>

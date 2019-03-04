@@ -5,10 +5,7 @@
         <fc-layoutrow fccontent2 fcSpan="45">
             <form fccontent1 class="list-search" name="searchForm" #searchForm >
                 <div class="list-search-every">
-                    <fc-text [fcLabel]="'名称'" [(ngModel)]="searchObj.TASKNAME"  name="comboname"></fc-text>
-                </div>
-                <div class="list-search-every">
-                    <fc-text fcLabel="状态" [(ngModel)]="searchObj.STATUS" name="textname"></fc-text>
+                    <fc-text [fcLabel]="'单位名称'" [(ngModel)]="searchObj.SCOMPANY_NAME"  name="comboname"></fc-text>
                 </div> 
                 <div class="list-search-every list-search-button">
                     <fc-button fcLabel="查询" fcType="primary" name="search" (click)="event('search',$event)"></fc-button>
