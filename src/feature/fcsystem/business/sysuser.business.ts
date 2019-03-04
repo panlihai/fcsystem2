@@ -71,7 +71,7 @@ export class SysuserBusiness extends ParentBusiness {
         ids.forEach(function (id) {
             unlockObjs.push( id.ID );
         });
-        return this.daoService.postFromApi(this.getUrl("SYSROLE", "unlockObjs",'SYSTEM'), unlockObjs, { AID: appId, PRODUCTID: pid ? pid : FCCONFIG.pid });
+        return this.daoService.postFromApi(this.getUrl("SYSROLE", "unlockUser",'SYSTEM'), unlockObjs, { AID: appId, PRODUCTID: pid ? pid : FCCONFIG.pid });
     };
     static findUser(condition): Observable<any> {
         condition.AID = this.appId;

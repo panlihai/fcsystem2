@@ -4,12 +4,15 @@ import { FCEVENT } from 'fccomponent2/fc';
 import { ParentEditComponent, FcadformOption } from 'fccomponent2';
 import { SyscompanydimBusiness } from '../../../business/syscompanydim.business';
 import { CommonService } from 'fccore2/common/common';
+import { UserService } from 'fccore2/services/user.service';
+import CacheService from "fccore2/common/cache";
 @Component({
     selector: 'syscompanydimedit',
     templateUrl: './syscompanydimedit.component.html',
     styles: [``]
 })
 export class SyscompanydimeditComponent extends ParentEditComponent {
+    // cacheparment:any
     constructor() {
         super(SyscompanydimBusiness.pid, SyscompanydimBusiness.appId);
     }
@@ -18,12 +21,18 @@ export class SyscompanydimeditComponent extends ParentEditComponent {
         this.mainObj.SCREATOR =  this.userInfo.USERCODE;
         this.mainObj.SCREATE_TIME =  CommonService.getTimestamp();
     }
-
+     /**
+     * @description 获取登录用户数据内容
+     */
+    getUserInfo = function () {
+        return CacheService.getS("userinfo");
+    }
     beforeSave():boolean{
         if(this.mainObj.ID){
             this.mainObj.SMODIFIER =  this.userInfo.USERCODE;
             this.mainObj.SMODIFY_TIME =  CommonService.getTimestamp();
         }
+        this.mainObj.CACHEPARMENT=this.getUserInfo
         return true;
     }
     addNew(mainObj: any): boolean {

@@ -19,7 +19,7 @@ export class SysusereditComponent extends ParentEditComponent {
 	fcListdata: any[];
 	selectdata: any[];
 	list :any= [];
-	selectdatas:any=[];
+	selectdatas:any=[{}];
 	addNew(mainObj: any): boolean {
 		return true;
 	}
@@ -30,7 +30,6 @@ export class SysusereditComponent extends ParentEditComponent {
 		this.mainObj.PID = FCCONFIG.pid;
 		this.getData();
 		this.mainObj.Department=this.dataSet; //
-
 	}
 	// 角色选择
 	getData(): void {
@@ -46,24 +45,22 @@ export class SysusereditComponent extends ParentEditComponent {
 					});
 				}
 				this.list = ret;
-			this.list.filter(item=>{
-				 if(item.direction!=''){
-					 let comtemtdata:any=[];
-					this.selectdatas=comtemtdata.push(item)
-				 }
-			})
+				let datas=this.list.filter(item=>{
+					if(item.direction!=''){
+						return item
+					}
+				})
+         this.selectdatas=datas
 			}
 		})
-	}
-	select(ret: {}): void {
-		console.log(ret);
-		
-	}
-
-	change(ret: {}): void {
-		console.log('nzChange', ret);
 	
-	}	
+	}
+	// select(ret: {}): void {
+	// 	console.log(ret);	
+	// }
+	// change(ret: {}): void {
+	// 	console.log('nzChange', ret);
+	// }	
 	getDefaultQuery(): any {
 		return {};
 	}
@@ -71,14 +68,7 @@ export class SysusereditComponent extends ParentEditComponent {
 	i = 1;
 	editCache = {};
 	dataSet = [
-	  {
-		key    : '0',
-		name   : '哈尔滨集团公司',
-	  },
-	  {
-		key    : '1',
-		name   : '哈尔滨铁路局合资',
-	  }
+	  {key    : '0',	name   : '哈尔滨集团公司', },{key    : '1',name   : '哈尔滨铁路局合资',}
 	];
   
 	addRow(): void {
@@ -105,11 +95,11 @@ export class SysusereditComponent extends ParentEditComponent {
 				} ];		
 			}
 	}
+	// 新增保存之前的操作
 	beforeSave(): boolean {
 		if (this.mainObj.SBEGIN_DATE || this.mainObj.SEND_DATE ) {
 		this.mainObj.SBEGIN_DATE = CommonService.dateFormat(this.mainObj.SBEGIN_DATE, "yyyy-MM-dd");
-		this.mainObj.SEND_DATE = CommonService.dateFormat(this.mainObj.SEND_DATE, "yyyy-MM-dd");
-		
+		this.mainObj.SEND_DATE = CommonService.dateFormat(this.mainObj.SEND_DATE, "yyyy-MM-dd");		
 		}
 		return true;
 		}
@@ -126,8 +116,8 @@ export class SysusereditComponent extends ParentEditComponent {
 				console.log('dghjj')
 				let userobj:any=[{USER:[{}],COMPANYEMPLOYEE:[{}],USERROLE:[{}]}]
 						userobj[0].USER[0]=this.mainObj;
-						userobj[0].COMPANYEMPLOYEE[0]=this.selectdatas;
-						userobj[0].USERROLE[0]=this.dataSet;
+						userobj[0].COMPANYEMPLOYEE[0]=this.dataSet;
+						userobj[0].USERROLE[0]=this.selectdatas;
 						console.log(userobj)
 				SysuserBusiness.createUser(this.appId, userobj,'SYSROLE').subscribe(function (result) {
 							if (result.CODE === '0') {
