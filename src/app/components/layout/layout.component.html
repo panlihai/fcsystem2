@@ -33,6 +33,7 @@
         <!-- 选项卡模式结束****************************************************************************** -->
         <!-- 路由入口 -->
         <div class="content-main" fccontent2>
+            <fc-button  fcLabel="加载" fcIcon="fc-icon-leave" fcLoading="Y" fcToolTip="提示"></fc-button>
             <router-outlet [ngStyle]="{'height':'100%'}"></router-outlet>
         </div>
     </fc-layoutcol>
@@ -48,4 +49,5 @@
 <div class="layout-progress-out" *ngIf="isLoading==='Y'">
     <fc-progresscircle class="layout-progress-inner" fcModel="50" [fcSize]="'large'"></fc-progresscircle>
 </div>
+
 <!-- <div [ngClass]="{'body-mask':_providers.msgService.loadingid!==''}"></div> -->
